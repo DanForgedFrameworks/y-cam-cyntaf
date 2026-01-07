@@ -1,139 +1,165 @@
 (function () {
-  function getPrefixFromCurrentPage() {
-    const parts = location.pathname.split("/").filter(Boolean);
-    const afterRepo = parts.slice(1);
-    const depth = afterRepo.length;
-    return "../".repeat(depth);
+  const SITE_ROOT = "/y-cam-cyntaf/";
+
+  function normalisePath(p) {
+    return (p || "/").replace(/\/index\.html$/i, "/").replace(/\/+$/, "/");
   }
 
-  const prefix = getPrefixFromCurrentPage();
-  const path = location.pathname;
+  const path = normalisePath(window.location.pathname);
 
-  // Sidebar on these pages (NOT home)
-  const showSidebar =
-    path.includes("/sessions/") ||
-    path.includes("/downloads/") ||
-    path.includes("/support/") ||
-    path.includes("/orientation/");
+  const isHome = path === SITE_ROOT || path === "/y-cam-cyntaf/" || path === "/y-cam-cyntaf/index.html";
+
+  const navItems = [
+    { href: SITE_ROOT, label: "Home", key: "home" },
+    { href: SITE_ROOT + "orientation/", label: "Orientation", key: "orientation" },
+    { href: SITE_ROOT + "sessions/session-1/", label: "Session 1", key: "s1" },
+    { href: SITE_ROOT + "sessions/session-2/", label: "Session 2", key: "s2" },
+    { href: SITE_ROOT + "sessions/session-3/", label: "Session 3", key: "s3" },
+    { href: SITE_ROOT + "sessions/session-4/", label: "Session 4", key: "s4" },
+    { href: SITE_ROOT + "sessions/session-5/", label: "Session 5", key: "s5" },
+    { href: SITE_ROOT + "sessions/session-6/", label: "Session 6", key: "s6" },
+    { href: SITE_ROOT + "downloads/", label: "Downloads", key: "downloads" },
+    { href: SITE_ROOT + "support/", label: "Support and contact", key: "support" },
+  ];
 
   function getActiveKey() {
-    const p = path;
-    if (p.includes("/orientation/")) return "orientation";
-    if (p.includes("/downloads/")) return "downloads";
-    if (p.includes("/support/")) return "support";
-    if (p.includes("/sessions/session-1/")) return "session-1";
-    if (p.includes("/sessions/session-2/")) return "session-2";
-    if (p.includes("/sessions/session-3/")) return "session-3";
-    if (p.includes("/sessions/session-4/")) return "session-4";
-    if (p.includes("/sessions/session-5/")) return "session-5";
-    if (p.includes("/sessions/session-6/")) return "session-6";
+    if (path.includes("/orientation/")) return "orientation";
+    if (path.includes("/downloads/")) return "downloads";
+    if (path.includes("/support/")) return "support";
+    if (path.includes("/sessions/session-1/")) return "s1";
+    if (path.includes("/sessions/session-2/")) return "s2";
+    if (path.includes("/sessions/session-3/")) return "s3";
+    if (path.includes("/sessions/session-4/")) return "s4";
+    if (path.includes("/sessions/session-5/")) return "s5";
+    if (path.includes("/sessions/session-6/")) return "s6";
     return "home";
   }
 
   const activeKey = getActiveKey();
 
-  const navItems = [
-    { href: `${prefix}`, label: "Home", key: "home" },
-    { href: `${prefix}orientation/`, label: "Orientation", key: "orientation" },
-    { href: `${prefix}sessions/session-1/`, label: "Session 1", key: "session-1" },
-    { href: `${prefix}sessions/session-2/`, label: "Session 2", key: "session-2" },
-    { href: `${prefix}sessions/session-3/`, label: "Session 3", key: "session-3" },
-    { href: `${prefix}sessions/session-4/`, label: "Session 4", key: "session-4" },
-    { href: `${prefix}sessions/session-5/`, label: "Session 5", key: "session-5" },
-    { href: `${prefix}sessions/session-6/`, label: "Session 6", key: "session-6" },
-    { href: `${prefix}downloads/`, label: "Downloads", key: "downloads" },
-    { href: `${prefix}support/`, label: "Support and contact", key: "support" },
-  ];
+  const pageContentEl = document.querySelector("[data-page-content]");
+  if (!pageContentEl) return;
 
-  const navHtml = navItems
-    .map((n) => {
-      const current = n.key === activeKey ? ` aria-current="page"` : "";
-      return `<li><a href="${n.href}"${current}>${n.label}</a></li>`;
-    })
-    .join("");
+  const wantsSidebar = pageContentEl.getAttribute("data-sidebar") === "true";
 
-  const shell = document.getElementById("site-shell");
-  if (!shell) return;
+  const sidebarHtml = wantsSidebar
+    ? `
+      <aside class="coursehub" aria-label="Course hub navigation">
+        <div class="coursehub-inner">
+          <p class="coursehub-title">Course hub</p>
+          <nav aria-label="Primary">
+            <ul class="coursehub-list">
+              ${navItems
+                .filter((n) => n.key !== "home") // home is still available via top bar logo
+                .map((n) => {
+                  const isActive = n.key === activeKey;
+                  return `<li>
+                    <a class="coursehub-link ${isActive ? "is-active" : ""}" href="${n.href}" ${isActive ? 'aria-current="page"' : ""}>
+                      ${n.label}
+                    </a>
+                  </li>`;
+                })
+                .join("")}
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    `
+    : "";
 
-  shell.innerHTML = `
+  const headerHtml = `
     <a class="skip-link" href="#main">Skip to main content</a>
 
-    <div class="topbar" role="region" aria-label="Course support strip">
-      <div class="container topbar-inner">
-        <span class="topbar-label">Course support</span>
-        <span aria-hidden="true" class="topbar-dot">•</span>
-        <a class="topbar-link" href="${prefix}support/">Support and contact</a>
+    <div class="topstrip" role="region" aria-label="Course support strip">
+      <div class="topstrip-inner">
+        <span>Course support</span>
+        <span aria-hidden="true">•</span>
+        <a href="${SITE_ROOT}support/">Support and contact</a>
       </div>
     </div>
 
-    <header class="site-header" aria-label="Site header">
-      <div class="container header-inner">
-        <div class="brand">
-          <img src="${prefix}assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
+    <header class="siteheader" aria-label="Site header">
+      <div class="siteheader-inner">
+        <a class="brand" href="${SITE_ROOT}">
+          <img class="brand-logo" src="${SITE_ROOT}assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
           <div class="brand-text">
-            <p class="brand-title">Y Cam Cyntaf</p>
-            <p class="brand-subtitle">First steps in Welsh</p>
+            <div class="brand-title">Y Cam Cyntaf</div>
+            <div class="brand-subtitle">First steps in Welsh</div>
           </div>
-        </div>
+        </a>
+
+        ${
+          isHome
+            ? ""
+            : `
+          <nav class="topnav" aria-label="Top navigation">
+            <a class="topnav-pill ${activeKey === "home" ? "is-active" : ""}" href="${SITE_ROOT}">Home</a>
+            <a class="topnav-pill ${activeKey === "downloads" ? "is-active" : ""}" href="${SITE_ROOT}downloads/">Downloads</a>
+            <a class="topnav-pill ${activeKey === "support" ? "is-active" : ""}" href="${SITE_ROOT}support/">Support and contact</a>
+          </nav>
+        `
+        }
       </div>
     </header>
+  `;
 
-    ${showSidebar ? `
-      <div class="container layout-shell">
-        <aside class="sidebar" aria-label="Course navigation">
-          <nav aria-label="Primary">
-            <ul class="side-nav">
-              ${navHtml}
-            </ul>
-          </nav>
-        </aside>
-
-        <main id="main" class="main main--with-sidebar">
-          <div id="page-content"></div>
-        </main>
-      </div>
-    ` : `
-      <main id="main" class="main">
-        <div id="page-content"></div>
-      </main>
-    `}
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <img src="${prefix}assets/img/tidybutt-logo.png" alt="Tidy Butt logo" class="footer-logo" />
+  const footerHtml = `
+    <footer class="sitefooter" aria-label="Site footer">
+      <div class="sitefooter-inner">
+        <div class="footergrid">
+          <div class="footercol">
+            <img class="footerlogo" src="${SITE_ROOT}assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
             <p class="small">Registered Charity 1195392</p>
           </div>
 
-          <div>
-            <p class="footer-heading">Navigation</p>
-            <ul class="footer-links">
-              <li><a href="${prefix}orientation/">Orientation</a></li>
-              <li><a href="${prefix}downloads/">Downloads</a></li>
-              <li><a href="${prefix}support/">Support and contact</a></li>
+          <div class="footercol">
+            <p><strong>Navigation</strong></p>
+            <ul class="footerlinks">
+              <li><a href="${SITE_ROOT}orientation/">Orientation</a></li>
+              <li><a href="${SITE_ROOT}downloads/">Downloads</a></li>
+              <li><a href="${SITE_ROOT}support/">Support and contact</a></li>
             </ul>
           </div>
 
-          <div>
-            <p class="footer-heading">Socials</p>
-            <ul class="footer-links">
+          <div class="footercol">
+            <p><strong>Socials</strong></p>
+            <ul class="footerlinks">
               <li><a href="https://www.facebook.com/tidybuttmat">Facebook</a></li>
               <li><a href="https://www.instagram.com/tidy_butt">Instagram</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="footer-divider">
+        <div class="footerfineprint">
           <p class="small">© Tidy Butt. If you notice anything incorrect, please contact Tidy Butt.</p>
         </div>
       </div>
     </footer>
   `;
 
-  const existing = document.querySelector("[data-page-content]");
-  const target = document.getElementById("page-content");
-  if (existing && target) target.appendChild(existing);
+  const shell = document.createElement("div");
+  shell.className = "pageshell";
+  shell.innerHTML = `
+    ${headerHtml}
+    <main id="main" class="pagemain">
+      <div class="pagelayout ${wantsSidebar ? "has-sidebar" : "no-sidebar"}">
+        ${sidebarHtml}
+        <section class="pagepanel" aria-label="Page content">
+          <div class="pagepanel-inner" id="pagepanel-inner"></div>
+        </section>
+      </div>
+    </main>
+    ${footerHtml}
+  `;
 
+  // Move page content into shell
+  const target = shell.querySelector("#pagepanel-inner");
+  target.appendChild(pageContentEl);
+
+  // Replace body
+  document.body.innerHTML = "";
+  document.body.appendChild(shell);
+
+  // Signal ready for other scripts (carousel)
   window.dispatchEvent(new Event("layout:ready"));
 })();
