@@ -1,8 +1,13 @@
 (function () {
+  const base = window.__BASE_PATH__ || "";
   const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
 
-  // Show sidebar on sessions + support + downloads
-  const showSidebar = path.includes("/sessions/") || path.includes("/support") || path.includes("/downloads");
+  function href(p) {
+    return `${base}${p}`;
+  }
+
+  const showSidebar =
+    path.includes("/sessions/") || path.includes("/support") || path.includes("/downloads");
 
   function getActiveKey() {
     if (path.includes("/orientation")) return "orientation";
@@ -20,16 +25,16 @@
   const activeKey = getActiveKey();
 
   const navItems = [
-    { href: "/", label: "Home", key: "home" },
-    { href: "/orientation/", label: "Orientation", key: "orientation" },
-    { href: "/downloads/", label: "Downloads", key: "downloads" },
-    { href: "/sessions/session-1/", label: "Session 1", key: "session-1" },
-    { href: "/sessions/session-2/", label: "Session 2", key: "session-2" },
-    { href: "/sessions/session-3/", label: "Session 3", key: "session-3" },
-    { href: "/sessions/session-4/", label: "Session 4", key: "session-4" },
-    { href: "/sessions/session-5/", label: "Session 5", key: "session-5" },
-    { href: "/sessions/session-6/", label: "Session 6", key: "session-6" },
-    { href: "/support/", label: "Support and contact", key: "support" },
+    { href: href("/"), label: "Home", key: "home" },
+    { href: href("/orientation/"), label: "Orientation", key: "orientation" },
+    { href: href("/downloads/"), label: "Downloads", key: "downloads" },
+    { href: href("/sessions/session-1/"), label: "Session 1", key: "session-1" },
+    { href: href("/sessions/session-2/"), label: "Session 2", key: "session-2" },
+    { href: href("/sessions/session-3/"), label: "Session 3", key: "session-3" },
+    { href: href("/sessions/session-4/"), label: "Session 4", key: "session-4" },
+    { href: href("/sessions/session-5/"), label: "Session 5", key: "session-5" },
+    { href: href("/sessions/session-6/"), label: "Session 6", key: "session-6" },
+    { href: href("/support/"), label: "Support and contact", key: "support" },
   ];
 
   const navHtml = navItems
@@ -49,14 +54,14 @@
       <div class="container">
         <span>Course support</span>
         <span aria-hidden="true">•</span>
-        <a href="/support/">Support and contact</a>
+        <a href="${href("/support/")}">Support and contact</a>
       </div>
     </div>
 
     <header class="site-header" aria-label="Site header">
       <div class="container" style="padding: 0.85rem 0;">
         <div class="brand">
-          <img src="/assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
+          <img src="${href("/assets/img/tidybutt-logo.png")}" alt="Tidy Butt logo" />
           <div>
             <p class="brand-title">Y Cam Cyntaf</p>
             <p class="brand-subtitle">First steps in Welsh</p>
@@ -87,16 +92,16 @@
       <div class="container footer-inner">
         <div class="footer-grid">
           <div>
-            <img src="/assets/img/tidybutt-logo.png" alt="Tidy Butt logo" style="width:140px;height:auto;border-radius:14px;" />
+            <img src="${href("/assets/img/tidybutt-logo.png")}" alt="Tidy Butt logo" style="width:140px;height:auto;border-radius:14px;" />
             <p class="small">Registered Charity 1195392</p>
           </div>
 
           <div>
             <p><strong>Navigation</strong></p>
             <ul class="footer-links">
-              <li><a href="/orientation/">Orientation</a></li>
-              <li><a href="/downloads/">Downloads</a></li>
-              <li><a href="/support/">Support and contact</a></li>
+              <li><a href="${href("/orientation/")}">Orientation</a></li>
+              <li><a href="${href("/downloads/")}">Downloads</a></li>
+              <li><a href="${href("/support/")}">Support and contact</a></li>
             </ul>
           </div>
 
