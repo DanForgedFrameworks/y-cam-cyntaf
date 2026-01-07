@@ -505,3 +505,9 @@ li{margin:0 0 6px 0}
     padding-right:16px;
   }
 }
+
+/* Hide bottom-page "Need help now?" CTA everywhere */
+.cta-row .cta.help{
+  display:none !important;
+}
+
