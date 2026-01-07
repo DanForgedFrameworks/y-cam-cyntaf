@@ -734,139 +734,6 @@ li{margin:0 0 6px 0}
   display:none !important;
 }
 
-/* =========================================================
-   Orientation: hover-reveal cards
-   ========================================================= */
-
-.lead{
-  max-width: 980px;
-  margin: 0 0 14px 0;
-  color: rgba(255,255,255,0.78);
-  line-height: 1.6;
-}
-
-.section-title{
-  margin: 18px 0 10px 0;
-}
-
-.video-block{
-  margin-top: 10px;
-}
-
-.video-placeholder{
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.03);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.video-placeholder-inner{
-  padding: 18px;
-}
-
-.video-placeholder-title{
-  margin: 0 0 8px 0;
-  font-weight: 900;
-  color: #fff;
-}
-
-.video-placeholder-text{
-  margin: 0;
-  color: rgba(255,255,255,0.78);
-}
-
-.orientation-intro{
-  max-width: 1100px;
-}
-
-.reveal-grid{
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  align-items: stretch;
-}
-
-.reveal-card{
-  position: relative;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(16,26,53,0.55);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  min-height: 190px;
-  cursor: pointer;
-  outline: none;
-}
-
-.reveal-front,
-.reveal-back{
-  padding: 16px;
-  transition: opacity 160ms ease, transform 160ms ease;
-}
-
-.reveal-front h3{
-  margin: 0 0 8px 0;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.reveal-front .hint{
-  margin: 0;
-  color: rgba(255,255,255,0.70);
-  font-size: 14px;
-}
-
-.reveal-back{
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.reveal-back ul{
-  margin: 0;
-  padding-left: 18px;
-  color: rgba(255,255,255,0.78);
-  line-height: 1.5;
-}
-
-.reveal-card:hover .reveal-front,
-.reveal-card:focus .reveal-front,
-.reveal-card:focus-within .reveal-front{
-  opacity: 0;
-}
-
-.reveal-card:hover .reveal-back,
-.reveal-card:focus .reveal-back,
-.reveal-card:focus-within .reveal-back{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Mobile: make cards 1 column and tap-friendly */
-@media (max-width: 980px){
-  .reveal-grid{
-    grid-template-columns: 1fr;
-  }
-  .reveal-card{
-    min-height: 0;
-  }
-  .reveal-back{
-    position: relative;
-    opacity: 1;
-    transform: none;
-    border-top: 1px solid rgba(255,255,255,0.10);
-  }
-  .reveal-front{
-    opacity: 1 !important;
-  }
-  .reveal-front .hint{
-    display: none;
-  }
-}
 
 /* =========================================================
    Mobile carousel: stop absolute cards overlapping content below
@@ -930,49 +797,167 @@ li{margin:0 0 6px 0}
     justify-content: center;
   }
 }
+
 /* =========================================================
-   Orientation reveal cards: horizontal centring only
+   Orientation: hover / tap reveal cards (single source of truth)
+   Requirements:
+   - Front: horizontally + vertically centred
+   - Back: vertically centred (not justified), horizontally centred
+   - No clipping: back scrolls if content is long
+   - Mobile: tap toggles via focus (hover not required)
    ========================================================= */
 
+.reveal-grid{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.reveal-card{
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(16,26,53,0.55);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 190px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Make both faces fill the card */
 .reveal-front,
 .reveal-back{
+  position: absolute;
+  inset: 0;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  align-items: center;     /* horizontal centring */
-  justify-content: flex-start; /* IMPORTANT: do NOT vertically centre */
+  align-items: center;   /* horizontal centring */
   text-align: center;
-  padding: 20px 18px;
+  transition: opacity 160ms ease, transform 160ms ease;
 }
 
-/* Headings stay visually balanced */
-.reveal-front h3,
-.reveal-back h3{
-  margin-top: 0;
-  margin-bottom: 10px;
+/* FRONT: centre it fully */
+.reveal-front{
+  justify-content: center;   /* vertical centring */
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Body text can flow naturally without clipping */
+.reveal-front h3{
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.reveal-front .hint{
+  margin: 0;
+  color: rgba(255,255,255,0.70);
+  font-size: 14px;
+}
+
+/* BACK: vertically centred but NOT justified */
+.reveal-back{
+  justify-content: center;   /* vertical centring */
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+/* Make long back content scroll rather than clip */
+.reveal-back-inner{
+  width: 100%;
+  max-width: 44ch;
+  max-height: 100%;
+  overflow: auto;
+  padding-right: 6px; /* gives scrollbar space */
+}
+
+/* Bullet list: natural spacing (not justified) */
 .reveal-back ul{
   margin: 0;
-  padding-left: 0;
-  list-style-position: inside;
-  max-width: 36ch; /* readable line length */
+  padding: 0;
+  list-style: none;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
 }
 
-/* Comfortable spacing between bullets */
 .reveal-back li{
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
 }
 
-/* Small screens: add a touch more breathing room */
-@media (max-width: 600px){
+.reveal-back li:last-child{
+  margin-bottom: 0;
+}
+
+/* Reveal on hover OR keyboard focus */
+.reveal-card:hover .reveal-front,
+.reveal-card:focus .reveal-front,
+.reveal-card:focus-within .reveal-front{
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.reveal-card:hover .reveal-back,
+.reveal-card:focus .reveal-back,
+.reveal-card:focus-within .reveal-back{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Strong focus ring */
+.reveal-card:focus{
+  box-shadow: 0 0 0 3px rgba(245,154,35,0.35), var(--shadow);
+  border-color: rgba(245,154,35,0.45);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .reveal-front, .reveal-back{ transition: none; }
+}
+
+/* Mobile: 1 column, and show BOTH states without hover dependency
+   (front stays visible, back shown beneath it)
+*/
+@media (max-width: 980px){
+  .reveal-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .reveal-card{
+    min-height: 0;
+    cursor: default;
+  }
+
   .reveal-front,
   .reveal-back{
-    padding: 22px 16px;
+    position: relative;
+    inset: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .reveal-front{
+    padding-bottom: 10px;
+  }
+
+  .reveal-back{
+    padding-top: 0;
+  }
+
+  .reveal-front .hint{
+    display: none;
+  }
+
+  .reveal-back-inner{
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 }
-
-.reveal-front{
-  justify-content: center;
-}
-
