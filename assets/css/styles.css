@@ -1,10 +1,10 @@
 /* =========================================================
-   Y Cam Cyntaf | Tidy Butt theme (FULL FILE)
+   Y Cam Cyntaf | Tidy Butt theme (FULL FILE REPLACEMENT)
    - Left sidebar nav (desktop), wrapped nav (mobile)
    - Aptos font stack (uses Aptos if installed)
    - Strong hover + pressed states
-   - Full-width footer (no overlay)
-   - Clean, readable cards
+   - Full-width footer background AND full-width footer container
+   - No footer column overflow (Socials stays inside coloured area)
    ========================================================= */
 
 /* -----------------------------
@@ -51,7 +51,7 @@ html, body{
   color: var(--text);
   line-height: 1.6;
 
-  /* Background gradient similar to Tidy Butt style */
+  /* Background gradient */
   background:
     radial-gradient(1200px 650px at 18% 0%, rgba(96,56,208,0.48), transparent 55%),
     radial-gradient(900px 520px at 82% 8%, rgba(80,104,216,0.38), transparent 60%),
@@ -89,7 +89,6 @@ a:focus-visible, button:focus-visible{
   height: 1px;
   overflow: hidden;
 }
-
 .skip-link:focus{
   position: static;
   width: auto;
@@ -106,7 +105,7 @@ a:focus-visible, button:focus-visible{
 }
 
 /* -----------------------------
-   Container
+   Container (default)
 ------------------------------ */
 .container{
   width: min(var(--max), 92vw);
@@ -123,7 +122,6 @@ a:focus-visible, button:focus-visible{
   font-weight: 900;
   font-size: .95rem;
 }
-
 .topbar .container{
   display: flex;
   flex-wrap: wrap;
@@ -132,7 +130,6 @@ a:focus-visible, button:focus-visible{
   justify-content: center;
   padding: .55rem 0;
 }
-
 .topbar a{
   color: #000;
   text-decoration: underline;
@@ -140,8 +137,6 @@ a:focus-visible, button:focus-visible{
 
 /* -----------------------------
    Optional header bar (logo bar)
-   Used if your pages include:
-   <header class="site-header">...</header>
 ------------------------------ */
 .site-header{
   background: linear-gradient(90deg, rgba(96,56,208,0.65), rgba(88,128,216,0.45));
@@ -233,14 +228,14 @@ a:focus-visible, button:focus-visible{
   font-weight: 900;
 }
 
-/* Optional active state for current page */
+/* Active page state */
 .side-nav a[aria-current="page"]{
   background: rgba(248,152,24,0.18);
   border-color: rgba(248,152,24,0.55);
 }
 
 /* -----------------------------
-   Buttons (links styled as buttons)
+   Buttons
 ------------------------------ */
 .button{
   display: inline-block;
@@ -260,7 +255,6 @@ a:focus-visible, button:focus-visible{
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-
   transition:
     transform 0.08s ease,
     filter 0.15s ease,
@@ -275,7 +269,6 @@ a:focus-visible, button:focus-visible{
   box-shadow: 0 14px 30px rgba(0,0,0,0.28);
   text-decoration: none;
 }
-
 .side-nav a:hover{
   background: rgba(255,255,255,0.10);
   border-color: rgba(255,255,255,0.35);
@@ -289,7 +282,6 @@ a:focus-visible, button:focus-visible{
   filter: brightness(0.98);
   box-shadow: 0 8px 18px rgba(0,0,0,0.24);
 }
-
 .side-nav a:active{
   transform: translateY(2px);
   background: rgba(255,255,255,0.14);
@@ -307,14 +299,12 @@ a:focus-visible, button:focus-visible{
   margin: 1rem 0 1.1rem 0;
   box-shadow: var(--shadow);
 }
-
 .callout h1{
   margin: 0 0 .45rem 0;
   font-family: var(--font-heading);
   font-weight: 950;
   font-size: 1.8rem;
 }
-
 .small{
   color: var(--muted);
   font-size: .95rem;
@@ -327,7 +317,6 @@ a:focus-visible, button:focus-visible{
   gap: 1rem;
   margin-top: 1rem;
 }
-
 .card{
   background: var(--panel);
   border: 1px solid var(--border);
@@ -335,20 +324,18 @@ a:focus-visible, button:focus-visible{
   padding: 1.1rem;
   box-shadow: var(--shadow);
 }
-
 .card h2{
   margin: 0 0 .5rem 0;
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: 1.2rem;
 }
-
 .card p{ margin: .4rem 0; }
 .card ul, .card ol{ margin: .5rem 0; padding-left: 1.2rem; }
 
 /* -----------------------------
-   Footer: FULL WIDTH
-   IMPORTANT: footer must be outside .container.layout in HTML
+   Footer: FULL WIDTH + FULL WIDTH CONTAINER
+   This ensures the coloured footer area contains Socials.
 ------------------------------ */
 .site-footer{
   width: 100%;
@@ -357,13 +344,25 @@ a:focus-visible, button:focus-visible{
   background: linear-gradient(90deg, rgba(96,56,208,0.40), rgba(88,128,216,0.28));
 }
 
-.footer-inner{
-  padding: 1.25rem 0;
+/* Override the standard .container sizing only inside the footer */
+.site-footer .container{
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
+.footer-inner{
+  padding: 0;
+}
+
+/* Prevent footer columns from overflowing */
 .footer-grid{
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
+  grid-template-columns: minmax(220px, 1.3fr) minmax(180px, 1fr) minmax(180px, 1fr);
   gap: 1rem;
   align-items: start;
 }
@@ -375,11 +374,9 @@ a:focus-visible, button:focus-visible{
   display: grid;
   gap: .35rem;
 }
-
 .footer-links a{
   text-decoration: none;
 }
-
 .footer-links a:hover{
   text-decoration: underline;
 }
