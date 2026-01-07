@@ -1,10 +1,11 @@
 /* =========================================================
    Y Cam Cyntaf | Tidy Butt theme (FULL FILE REPLACEMENT)
-   - Left sidebar nav (desktop), wrapped nav (mobile)
-   - Aptos font stack (uses Aptos if installed)
-   - Strong hover + pressed states
-   - Full-width footer background AND full-width footer container
-   - No footer column overflow (Socials stays inside coloured area)
+   Updates in this version:
+   - Main page: white buttons option (.button--light)
+   - Carousel styles for session pages
+   - Active page highlight supported with aria-current="page"
+   - Footer full width and safe grid
+   - Sidebar brand removed (layout still works)
    ========================================================= */
 
 /* -----------------------------
@@ -37,10 +38,13 @@
 
   /* Focus */
   --focus: var(--tb-orange);
+
+  /* Carousel */
+  --carousel-gap: 14px;
 }
 
 /* -----------------------------
-   Resets / base
+   Base
 ------------------------------ */
 *{ box-sizing: border-box; }
 
@@ -51,7 +55,6 @@ html, body{
   color: var(--text);
   line-height: 1.6;
 
-  /* Background gradient */
   background:
     radial-gradient(1200px 650px at 18% 0%, rgba(96,56,208,0.48), transparent 55%),
     radial-gradient(900px 520px at 82% 8%, rgba(80,104,216,0.38), transparent 60%),
@@ -136,11 +139,34 @@ a:focus-visible, button:focus-visible{
 }
 
 /* -----------------------------
-   Optional header bar (logo bar)
+   Header bar
 ------------------------------ */
 .site-header{
   background: linear-gradient(90deg, rgba(96,56,208,0.65), rgba(88,128,216,0.45));
   border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+
+/* Brand block (used in header/footer only now) */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.brand img{
+  width: 62px;
+  height: auto;
+}
+.brand-title{
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 950;
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+.brand-subtitle{
+  margin: .15rem 0 0 0;
+  font-size: .95rem;
+  color: rgba(255,255,255,0.92);
 }
 
 /* -----------------------------
@@ -175,35 +201,6 @@ a:focus-visible, button:focus-visible{
 .main{
   flex: 1 1 auto;
   min-width: 0;
-}
-
-/* -----------------------------
-   Brand block
------------------------------- */
-.brand{
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  margin-bottom: 1rem;
-}
-
-.brand img{
-  width: 62px;
-  height: auto;
-}
-
-.brand-title{
-  margin: 0;
-  font-family: var(--font-heading);
-  font-weight: 950;
-  font-size: 1.15rem;
-  line-height: 1.1;
-}
-
-.brand-subtitle{
-  margin: .15rem 0 0 0;
-  font-size: .95rem;
-  color: rgba(255,255,255,0.92);
 }
 
 /* -----------------------------
@@ -246,6 +243,15 @@ a:focus-visible, button:focus-visible{
   text-decoration: none;
   font-weight: 950;
   margin-top: .25rem;
+}
+
+/* Main page friendly button: white with dark blue text */
+.button--light{
+  background: #ffffff;
+  color: #1a2a5a;
+}
+.button--light:hover{
+  filter: brightness(0.98);
 }
 
 /* -----------------------------
@@ -334,8 +340,111 @@ a:focus-visible, button:focus-visible{
 .card ul, .card ol{ margin: .5rem 0; padding-left: 1.2rem; }
 
 /* -----------------------------
+   Carousel (session pages)
+------------------------------ */
+.carousel{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.carousel-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .75rem;
+}
+.carousel-top h2{
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+
+.carousel-controls{
+  display: flex;
+  gap: .5rem;
+}
+
+.carousel-btn{
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  padding: .55rem .75rem;
+  border-radius: 12px;
+  font-weight: 900;
+}
+.carousel-btn:hover{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.35);
+}
+.carousel-btn:active{
+  transform: translateY(2px);
+}
+
+.carousel-stage{
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.carousel-track{
+  display: flex;
+  gap: var(--carousel-gap);
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.carousel-slide{
+  flex: 0 0 100%;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  padding: 1rem;
+  min-height: 220px;
+}
+
+.carousel-slide h3{
+  margin: 0 0 .4rem 0;
+  font-family: var(--font-heading);
+  font-weight: 950;
+  font-size: 1.15rem;
+}
+
+/* Mini previews */
+.carousel-previews{
+  margin-top: .75rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .6rem;
+}
+
+.preview{
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: .65rem .75rem;
+  text-align: left;
+}
+.preview strong{
+  display: block;
+  font-size: .95rem;
+}
+.preview span{
+  display: block;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.preview[aria-current="true"]{
+  border-color: rgba(248,152,24,0.65);
+  background: rgba(248,152,24,0.12);
+}
+
+/* -----------------------------
    Footer: FULL WIDTH + FULL WIDTH CONTAINER
-   This ensures the coloured footer area contains Socials.
 ------------------------------ */
 .site-footer{
   width: 100%;
@@ -344,7 +453,6 @@ a:focus-visible, button:focus-visible{
   background: linear-gradient(90deg, rgba(96,56,208,0.40), rgba(88,128,216,0.28));
 }
 
-/* Override the standard .container sizing only inside the footer */
 .site-footer .container{
   width: 100%;
   max-width: none;
@@ -355,11 +463,8 @@ a:focus-visible, button:focus-visible{
   padding-bottom: 1.25rem;
 }
 
-.footer-inner{
-  padding: 0;
-}
+.footer-inner{ padding: 0; }
 
-/* Prevent footer columns from overflowing */
 .footer-grid{
   display: grid;
   grid-template-columns: minmax(220px, 1.3fr) minmax(180px, 1fr) minmax(180px, 1fr);
@@ -374,12 +479,8 @@ a:focus-visible, button:focus-visible{
   display: grid;
   gap: .35rem;
 }
-.footer-links a{
-  text-decoration: none;
-}
-.footer-links a:hover{
-  text-decoration: underline;
-}
+.footer-links a{ text-decoration: none; }
+.footer-links a:hover{ text-decoration: underline; }
 
 .footer-divider{
   margin-top: 1rem;
@@ -401,9 +502,7 @@ a:focus-visible, button:focus-visible{
     padding: .75rem 0 0 0;
   }
 
-  .sidebar-inner{
-    height: auto;
-  }
+  .sidebar-inner{ height: auto; }
 
   .side-nav{
     flex-direction: row;
@@ -414,6 +513,10 @@ a:focus-visible, button:focus-visible{
 
   .side-nav a{
     text-align: center;
+  }
+
+  .carousel-previews{
+    grid-template-columns: 1fr 1fr;
   }
 
   .footer-grid{
