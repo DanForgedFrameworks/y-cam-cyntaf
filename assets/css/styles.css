@@ -23,11 +23,17 @@ html,body{height:100%}
 body{
   margin:0;
   color:var(--text);
-  background: radial-gradient(1100px 700px at 12% 25%, rgba(91,43,214,0.55) 0%, rgba(7,10,20,0.2) 60%, rgba(7,10,20,1) 100%),
-              radial-gradient(900px 700px at 85% 70%, rgba(245,154,35,0.18) 0%, rgba(7,10,20,0.2) 55%, rgba(7,10,20,1) 100%),
-              linear-gradient(180deg, var(--bg1), var(--bg0));
+  background:
+    radial-gradient(1100px 700px at 12% 25%, rgba(91,43,214,0.55) 0%, rgba(7,10,20,0.2) 60%, rgba(7,10,20,1) 100%),
+    radial-gradient(900px 700px at 85% 70%, rgba(245,154,35,0.18) 0%, rgba(7,10,20,0.2) 55%, rgba(7,10,20,1) 100%),
+    linear-gradient(180deg, var(--bg1), var(--bg0));
   font-family: Aptos, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
+
+/* Links in content */
+a{color:rgba(255,255,255,0.92)}
+a:hover{color:#ffffff}
+a:focus{outline:2px solid rgba(245,154,35,0.75); outline-offset:3px}
 
 /* Accessibility */
 .skip-link{
@@ -59,9 +65,10 @@ body{
   color:#ffffff;
 }
 .topstrip-inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:10px 18px;
+  max-width:none;
+  width:100%;
+  margin:0;
+  padding:10px 32px;
   display:flex;
   justify-content:center;
   gap:10px;
@@ -76,7 +83,6 @@ body{
 .topstrip a:hover{
   border-bottom-color:#ffffff;
 }
-.topstrip a:hover{border-bottom-color:#1b1205}
 
 /* Header */
 .siteheader{
@@ -84,9 +90,10 @@ body{
   box-shadow: 0 12px 35px rgba(0,0,0,0.35);
 }
 .siteheader-inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:16px 18px;
+  max-width:none;
+  width:100%;
+  margin:0;
+  padding:16px 32px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -134,16 +141,21 @@ body{
 /* Main layout */
 .pagemain{flex:1}
 .pagelayout{
-  max-width:1200px;
-  margin:0 auto;
-  padding:22px 18px 40px;
+  max-width:none;
+  width:100%;
+  margin:0;
+  padding:22px 32px 40px;
   display:grid;
-  gap:18px;
+  gap:22px;
 }
 .pagelayout.no-sidebar{grid-template-columns: 1fr}
-.pagelayout.has-sidebar{grid-template-columns: 260px 1fr}
+.pagelayout.has-sidebar{
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items:start;
+}
 
 .pagepanel{
+  width:100%;
   background: rgba(16,26,53,0.65);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
@@ -220,6 +232,8 @@ li{margin:0 0 6px 0}
 }
 .hero .intro strong{color:#fff}
 .hero .tip{max-width:980px; margin:0 auto; color:rgba(255,255,255,0.75)}
+.hero a{color:#ffffff; text-decoration:underline; text-underline-offset:3px}
+.hero a:hover{opacity:0.95}
 
 /* Big tiles (Orientation / Downloads / Support) */
 .tilegrid{
@@ -265,7 +279,7 @@ li{margin:0 0 6px 0}
   bottom:14px;
   z-index:2;
 }
-.tiletext .title{font-size:18px; font-weight:900; margin:0 0 4px}
+.tiletext .title{font-size:18px; font-weight:900; margin:0 0 4px; color:#fff}
 .tiletext .desc{margin:0; color:rgba(255,255,255,0.85); line-height:1.35}
 
 /* Sessions links */
@@ -376,6 +390,7 @@ li{margin:0 0 6px 0}
 .carousel-card h3{
   margin:0 0 8px 0;
   font-size:16px;
+  color:#fff;
 }
 .carousel-card p{margin:0; color:rgba(255,255,255,0.80)}
 
@@ -441,9 +456,10 @@ li{margin:0 0 6px 0}
   border-top:1px solid rgba(255,255,255,0.10);
 }
 .sitefooter-inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:18px 18px 22px;
+  max-width:none;
+  width:100%;
+  margin:0;
+  padding:18px 32px 22px;
 }
 .footergrid{
   display:grid;
@@ -480,134 +496,12 @@ li{margin:0 0 6px 0}
   .footergrid{grid-template-columns: 1fr}
   .siteheader-inner{flex-direction:column; align-items:flex-start}
   .topnav{align-self:stretch; justify-content:flex-start; flex-wrap:wrap}
-}
 
-/* =========================================================
-   Home page: unbox the central block (match older full-width feel)
-   ========================================================= */
-
-/* If your layout wrapper uses .layout--home, this will only affect the homepage */
-.layout--home .main {
-  width: 100%;
-}
-
-/* Remove the boxed "card" feel on the homepage only */
-.layout--home .page-card,
-.layout--home .content-card,
-.layout--home .panel,
-.layout--home .container-card {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
-/* Let the home content breathe wider */
-.layout--home #page-content,
-.layout--home [data-page-content] {
-  width: 100%;
-  max-width: 1400px;      /* increase if you want even wider */
-  margin: 0 auto;
-  padding: 0 24px;        /* keeps nice edges on big screens */
-}
-
-/* Give the hero section more “full width” presence */
-.layout--home .hero,
-.layout--home .home-hero,
-.layout--home .welcome-hero {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto 24px auto;
-  padding: 28px 24px;
-  border-radius: 20px;
-}
-
-/* Make the 3 main tiles feel like they flow out, not trapped */
-.layout--home .tiles,
-.layout--home .tile-grid,
-.layout--home .home-tiles {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 22px;
-}
-
-/* Responsive */
-@media (max-width: 980px) {
-  .layout--home .tiles,
-  .layout--home .tile-grid,
-  .layout--home .home-tiles {
-    grid-template-columns: 1fr;
-  }
-
-  .layout--home #page-content,
-  .layout--home [data-page-content] {
-    padding: 0 16px;
-  }
-}
-
-/* =========================================================
-   Home page: unbox the central block (match older full-width feel)
-   ========================================================= */
-
-/* If your layout wrapper uses .layout--home, this will only affect the homepage */
-.layout--home .main {
-  width: 100%;
-}
-
-/* Remove the boxed "card" feel on the homepage only */
-.layout--home .page-card,
-.layout--home .content-card,
-.layout--home .panel,
-.layout--home .container-card {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
-/* Let the home content breathe wider */
-.layout--home #page-content,
-.layout--home [data-page-content] {
-  width: 100%;
-  max-width: 1400px;      /* increase if you want even wider */
-  margin: 0 auto;
-  padding: 0 24px;        /* keeps nice edges on big screens */
-}
-
-/* Give the hero section more “full width” presence */
-.layout--home .hero,
-.layout--home .home-hero,
-.layout--home .welcome-hero {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto 24px auto;
-  padding: 28px 24px;
-  border-radius: 20px;
-}
-
-/* Make the 3 main tiles feel like they flow out, not trapped */
-.layout--home .tiles,
-.layout--home .tile-grid,
-.layout--home .home-tiles {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 22px;
-}
-
-/* Responsive */
-@media (max-width: 980px) {
-  .layout--home .tiles,
-  .layout--home .tile-grid,
-  .layout--home .home-tiles {
-    grid-template-columns: 1fr;
-  }
-
-  .layout--home #page-content,
-  .layout--home [data-page-content] {
-    padding: 0 16px;
+  .topstrip-inner,
+  .siteheader-inner,
+  .pagelayout,
+  .sitefooter-inner{
+    padding-left:16px;
+    padding-right:16px;
   }
 }
