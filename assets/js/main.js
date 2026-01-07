@@ -6,40 +6,70 @@
     carousels.forEach((carousel) => {
       if (carousel.dataset.initialised === "true") return;
 
+      const viewport = carousel.querySelector(".carousel-viewport");
       const track = carousel.querySelector(".carousel-track");
       const slides = Array.from(carousel.querySelectorAll(".carousel-slide"));
       const prevBtn = carousel.querySelector("[data-prev]");
       const nextBtn = carousel.querySelector("[data-next]");
-      const previews = Array.from(carousel.querySelectorAll(".preview"));
+      const steps = Array.from(carousel.querySelectorAll("[data-step]"));
 
-      if (!track || slides.length === 0) return;
+      if (!viewport || !track || slides.length === 0) return;
 
       carousel.dataset.initialised = "true";
+
       let index = 0;
+      const GAP = 18; // px gap between slides
+      const SLIDE_RATIO = 0.88; // 88% width so neighbours "peek"
 
-      const render = () => {
-        track.style.transform = `translateX(${index * -100}%)`;
-        previews.forEach((p, i) => p.setAttribute("aria-current", i === index ? "true" : "false"));
-      };
+      // Make slides a fixed pixel width so we can do the "shuffle/peek" effect reliably.
+      function sizeSlides() {
+        const vw = viewport.clientWidth;
+        const slideW = Math.round(vw * SLIDE_RATIO);
 
-      const normalise = (i) => {
+        track.style.gap = `${GAP}px`;
+        slides.forEach((s) => {
+          s.style.flex = `0 0 ${slideW}px`;
+        });
+
+        render();
+      }
+
+      function normalise(i) {
         const n = slides.length;
         return ((i % n) + n) % n;
-      };
+      }
 
-      const goTo = (i) => {
+      function render() {
+        const vw = viewport.clientWidth;
+        const slideW = Math.round(vw * SLIDE_RATIO);
+        const offset = index * (slideW + GAP);
+
+        track.style.transform = `translateX(${-offset}px)`;
+
+        // Shuffle styling: active, previous, next
+        slides.forEach((s, i) => {
+          s.classList.toggle("is-active", i === index);
+          s.classList.toggle("is-prev", i === normalise(index - 1));
+          s.classList.toggle("is-next", i === normalise(index + 1));
+        });
+
+        steps.forEach((b, i) => {
+          b.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+      }
+
+      function goTo(i) {
         index = normalise(i);
         render();
-      };
+      }
 
       prevBtn?.addEventListener("click", () => goTo(index - 1));
       nextBtn?.addEventListener("click", () => goTo(index + 1));
 
-      previews.forEach((p, i) => {
-        p.setAttribute("role", "button");
-        p.setAttribute("tabindex", "0");
-        p.addEventListener("click", () => goTo(i));
-        p.addEventListener("keydown", (e) => {
+      // Step buttons
+      steps.forEach((b, i) => {
+        b.addEventListener("click", () => goTo(i));
+        b.addEventListener("keydown", (e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             goTo(i);
@@ -47,12 +77,22 @@
         });
       });
 
+      // Keyboard on carousel
       carousel.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") goTo(index - 1);
         if (e.key === "ArrowRight") goTo(index + 1);
       });
 
-      render();
+      // Resize handling
+      window.addEventListener("resize", () => {
+        sizeSlides();
+      });
+
+      // Init
+      // Ensure the track is flex
+      track.style.display = "flex";
+      track.style.willChange = "transform";
+      sizeSlides();
     });
 
     return true;
