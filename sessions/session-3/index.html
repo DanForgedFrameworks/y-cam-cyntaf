@@ -2,67 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Session 3 | Y Cam Cyntaf</title>
-  <link rel="stylesheet" href="../../assets/css/styles.css" />
-  <script src="../../assets/js/layout.js" defer></script>
-  <script src="../../assets/js/main.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Y Cam Cyntaf | Session 3</title>
+  <link rel="stylesheet" href="/y-cam-cyntaf/assets/css/styles.css" />
 </head>
 <body>
-  <div id="site-shell"></div>
+  <div data-page-content data-sidebar="true">
+    <h1>Session 3: Talking about yourself, how you are doing, wellbeing</h1>
 
-  <div data-page-content>
-    <div style="padding: 1.2rem 0 2.2rem 0;">
-      <h1 style="margin:0 0 .5rem 0; font-weight: 950;">Session 3: Talking about yourself and wellbeing</h1>
+    <div class="session-summary">
+      <p><strong>Session aim:</strong> Build simple language for checking in and sharing how you are feeling.</p>
+      <p><strong>How we will achieve this:</strong> Gentle, supportive practice with short phrases and optional sharing activities.</p>
+      <p><strong>What we will cover:</strong> Simple feelings words, “I am ok”, “a bit tired”, and friendly check-in responses.</p>
+      <p><strong>Outcome:</strong> You will have a small set of Welsh phrases you can use to check in with others and express yourself safely.</p>
 
-      <p style="margin:0 0 1rem 0; color: rgba(233,237,255,.78); max-width: 85ch; line-height:1.55;">
-        <strong>How to use this page:</strong> Use the arrows to move through the steps. If your time or energy is low,
-        do <strong>Get Ready</strong> only. That is enough.
+      <p class="small" style="margin-top:10px;">
+        <strong>How to use this page:</strong> Use the arrows or step buttons. If your time or energy is low, do <strong>Get Ready</strong> only.
       </p>
+    </div>
 
-      <div style="display:grid; gap:.85rem; max-width: 900px; margin-bottom: 1.2rem;">
-        <div class="card"><div class="card-body"><strong>Session aim:</strong> Talk about how you are doing and share simple personal details in Welsh.</div></div>
-        <div class="card"><div class="card-body"><strong>How we will achieve this:</strong> Friendly prompts, small chunks of language, and supportive practice with others.</div></div>
-        <div class="card"><div class="card-body"><strong>What we will cover:</strong> Talking about yourself, how you are feeling, and wellbeing-related phrases.</div></div>
-        <div class="card"><div class="card-body"><strong>Outcome:</strong> You will be able to share simple “about me” information and how you are doing, in a comfortable way.</div></div>
+    <div class="carousel" data-carousel>
+      <div class="carousel-top">
+        <button class="carousel-btn" type="button" data-carousel-prev>◀ Previous</button>
+        <button class="carousel-btn" type="button" data-carousel-next>Next ▶</button>
       </div>
 
-      <div class="carousel" data-carousel>
-        <div class="carousel-controls">
-          <button class="carousel-btn" type="button" data-prev>◀ Back</button>
-          <div class="carousel-status" data-status>Step</div>
-          <button class="carousel-btn" type="button" data-next>Next ▶</button>
+      <div class="carousel-track" data-carousel-track>
+        <div class="carousel-card" data-carousel-card>
+          <h3>Step 1: Get Ready</h3>
+          <p>Choose one “how are you” phrase from the list your facilitator shares. That is all you need for prep.</p>
         </div>
 
-        <div class="carousel-slide" data-slide>
-          <h2 style="margin:.1rem 0 .35rem 0;">Get Ready</h2>
-          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
-            Pick two phrases you like and practise saying them once or twice. That is enough.
-          </p>
+        <div class="carousel-card" data-carousel-card>
+          <h3>Step 2: More Get Ready</h3>
+          <p>Pick one feelings word you like. Write it down. If you want, add an emoji next to it to help you remember.</p>
         </div>
 
-        <div class="carousel-slide" data-slide hidden>
-          <h2 style="margin:.1rem 0 .35rem 0;">Live session</h2>
-          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
-            You will practise talking about yourself and how you are feeling, using supportive prompts.
-          </p>
+        <div class="carousel-card" data-carousel-card>
+          <h3>Step 3: Live session</h3>
+          <p>We will practise check-ins together. You can join in out loud, quietly, or just listen and follow along.</p>
         </div>
 
-        <div class="carousel-slide" data-slide hidden>
-          <h2 style="margin:.1rem 0 .35rem 0;">After the session</h2>
-          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
-            Do one tiny recap. If you want, share a phrase in the WhatsApp group.
-          </p>
+        <div class="carousel-card" data-carousel-card>
+          <h3>Step 4: After the session</h3>
+          <p>Post a short check-in in WhatsApp. It can be one word. It can be an emoji. It still counts.</p>
         </div>
 
-        <div class="carousel-slide" data-slide hidden>
-          <h2 style="margin:.1rem 0 .35rem 0;">Curiosity thread</h2>
-          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
-            Optional: a wellbeing-friendly Welsh word or phrase to explore and share.
-          </p>
+        <div class="carousel-card" data-carousel-card>
+          <h3>Step 5: Curiosity thread</h3>
+          <p>Find a Welsh saying or proverb about wellbeing or nature. Bring it back even if you only remember one word.</p>
         </div>
+      </div>
+
+      <div class="stepbar">
+        <button class="stepchip" type="button" data-carousel-step="0">Get Ready</button>
+        <button class="stepchip" type="button" data-carousel-step="1">More Get Ready</button>
+        <button class="stepchip" type="button" data-carousel-step="2">Live session</button>
+        <button class="stepchip" type="button" data-carousel-step="3">After the session</button>
+        <button class="stepchip" type="button" data-carousel-step="4">Curiosity thread</button>
+      </div>
+
+      <div class="cta-row">
+        <a class="cta" href="/y-cam-cyntaf/downloads/">Session downloads</a>
+        <a class="cta help" href="https://www.tidybutt.co.uk/pages/get-help">Need help now?</a>
       </div>
     </div>
   </div>
+
+  <script src="/y-cam-cyntaf/assets/js/layout.js"></script>
+  <script src="/y-cam-cyntaf/assets/js/main.js"></script>
 </body>
 </html>
