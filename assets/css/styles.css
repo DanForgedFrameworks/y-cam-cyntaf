@@ -623,6 +623,113 @@ li{margin:0 0 6px 0}
     transform:none;
   }
 }
+/* =========================================================
+   Mobile fix: carousel + chips overlapping
+   Make carousel single-card (no overlap) on small screens
+   ========================================================= */
+
+@media (max-width: 700px){
+
+  /* Give the whole carousel some breathing room */
+  .carousel{
+    padding: 14px;
+  }
+
+  /* Ensure the top controls always sit above anything */
+  .carousel-top{
+    position: relative;
+    z-index: 10;
+    gap: 10px;
+  }
+
+  /* Buttons: full clarity on mobile */
+  .carousel-btn{
+    padding: 12px 14px;
+    min-width: 120px;
+  }
+
+  /* Stop the absolute-position “stack” on mobile */
+  .carousel-track{
+    position: relative;
+    min-height: 0;          /* important: stop reserving weird space */
+    margin-top: 12px;
+  }
+
+  /* Convert cards to normal document flow */
+  .carousel-card{
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 0;
+    z-index: auto;
+  }
+
+  /* Only show the active card on mobile */
+  .carousel-card.is-left,
+  .carousel-card.is-right,
+  .carousel-card.is-hidden{
+    display: none;
+  }
+
+  .carousel-card.is-active{
+    display: block;
+  }
+
+  /* Make sure long card content doesn’t visually spill */
+  .carousel-card{
+    overflow: hidden;
+  }
+
+  /* Chips: keep them below the card, and make them readable */
+  .stepbar{
+    position: relative;
+    z-index: 5;
+    margin-top: 14px;
+    gap: 10px;
+
+    /* optional but helps: a neat 2-column layout */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stepchip{
+    width: 100%;
+    text-align: center;
+    padding: 10px 12px;
+    border-radius: 999px;
+
+    /* more solid background so they do not look “ghosted” */
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.18);
+  }
+
+  .stepchip.is-active{
+    background: rgba(245,154,35,0.22);
+    border-color: rgba(245,154,35,0.70);
+  }
+
+  /* Bottom CTAs on mobile: stack nicely */
+  .cta-row{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Smaller phones: chips become 1 column */
+@media (max-width: 420px){
+  .stepbar{
+    grid-template-columns: 1fr;
+  }
+}
 
   display:none !important;
 }
