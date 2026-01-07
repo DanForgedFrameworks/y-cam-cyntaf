@@ -931,29 +931,48 @@ li{margin:0 0 6px 0}
   }
 }
 /* =========================================================
-   Orientation reveal cards: centre content
+   Orientation reveal cards: horizontal centring only
    ========================================================= */
 
 .reveal-front,
 .reveal-back{
   display: flex;
   flex-direction: column;
-  align-items: center;     /* horizontal centre */
-  justify-content: center; /* vertical centre */
+  align-items: center;     /* horizontal centring */
+  justify-content: flex-start; /* IMPORTANT: do NOT vertically centre */
   text-align: center;
-  min-height: 190px;       /* ensures proper vertical centring */
+  padding: 20px 18px;
 }
 
-/* Keep the list readable while centred */
+/* Headings stay visually balanced */
+.reveal-front h3,
+.reveal-back h3{
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Body text can flow naturally without clipping */
 .reveal-back ul{
   margin: 0;
   padding-left: 0;
   list-style-position: inside;
-  max-width: 34ch;
+  max-width: 36ch; /* readable line length */
 }
 
-/* Slightly nicer spacing for list items in centred view */
+/* Comfortable spacing between bullets */
 .reveal-back li{
   margin: 0 0 8px 0;
+}
+
+/* Small screens: add a touch more breathing room */
+@media (max-width: 600px){
+  .reveal-front,
+  .reveal-back{
+    padding: 22px 16px;
+  }
+}
+
+.reveal-front{
+  justify-content: center;
 }
 
