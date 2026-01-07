@@ -4,23 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Y Cam Cyntaf | Tidy Butt</title>
-  <meta name="description" content="Y Cam Cyntaf: First steps in Welsh. A simple online hub for sessions, downloads, and optional curiosity threads." />
+  <meta name="description" content="Y Cam Cyntaf: First steps in Welsh. A simple online hub for sessions, downloads, and course support." />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-<body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Top help strip -->
-  <div class="topbar" role="region" aria-label="Help strip">
+  <!-- Top help strip (renamed to course support) -->
+  <div class="topbar" role="region" aria-label="Course support strip">
     <div class="container">
-      <span>Get help now</span>
+      <span>Course support</span>
       <span aria-hidden="true">•</span>
-      <a href="https://www.tidybutt.co.uk/pages/get-help">Tidy Butt support</a>
+      <a href="support/">Support and contact</a>
     </div>
   </div>
 
-  <!-- Header (logo appears at top as well as sidebar and footer) -->
+  <!-- Header -->
   <header class="site-header" aria-label="Site header">
     <div class="container" style="padding: 0.75rem 0;">
       <div class="brand">
@@ -33,17 +32,11 @@
     </div>
   </header>
 
-  <!-- Page layout: sidebar + main content -->
+  <!-- Layout -->
   <div class="container layout">
     <aside class="sidebar" aria-label="Course navigation">
       <div class="sidebar-inner">
-        <div class="brand">
-          <img src="assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
-          <div>
-            <p class="brand-title">Y Cam Cyntaf</p>
-            <p class="brand-subtitle">First steps in Welsh</p>
-          </div>
-        </div>
+        <!-- Logo and tagline removed from navigation bar -->
 
         <nav aria-label="Primary">
           <ul class="side-nav">
@@ -60,7 +53,7 @@
           </ul>
         </nav>
 
-        <a class="button" href="https://www.tidybutt.co.uk/pages/get-help">Get help now</a>
+        <a class="button" href="support/">Course support</a>
       </div>
     </aside>
 
@@ -68,28 +61,29 @@
       <section class="callout" aria-label="Navigation help">
         <h1>Welcome</h1>
         <p><strong>How to use this hub:</strong> Start with <a href="orientation/">Orientation</a>. Then open the session you are attending next.</p>
-        <p>Each session page includes: <strong>pre-work</strong>, <strong>live session focus</strong>, <strong>after session</strong>, and an optional <strong>Curiosity Thread</strong>.</p>
+        <p>Each session includes pre-work, a live focus, a short follow-up, and an optional Curiosity Thread.</p>
         <p class="small">Tip: You can print any page using your browser menu (Print → Save as PDF).</p>
       </section>
 
       <section class="grid">
         <article class="card">
           <h2>Orientation</h2>
-          <p>What the course is, how sessions work, and how to use the resources.</p>
+          <p>A quick, friendly guide to how the course works and how to get the most from it.</p>
           <a class="button" href="orientation/">Go to Orientation</a>
         </article>
 
         <article class="card">
           <h2>Sessions</h2>
-          <p>Open the session you are attending next.</p>
-          <p class="small">If you are short on time, do the first step only. That is enough to join in.</p>
+          <p>Pick your next session. The steps are small on purpose, so it feels achievable.</p>
+          <p class="small">If you only do one thing, do the pre-work. It makes the live session feel so much easier.</p>
+
           <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .6rem;">
-            <a class="button" href="sessions/session-1/">Session 1</a>
-            <a class="button" href="sessions/session-2/">Session 2</a>
-            <a class="button" href="sessions/session-3/">Session 3</a>
-            <a class="button" href="sessions/session-4/">Session 4</a>
-            <a class="button" href="sessions/session-5/">Session 5</a>
-            <a class="button" href="sessions/session-6/">Session 6</a>
+            <a class="button button--light" href="sessions/session-1/">Session 1</a>
+            <a class="button button--light" href="sessions/session-2/">Session 2</a>
+            <a class="button button--light" href="sessions/session-3/">Session 3</a>
+            <a class="button button--light" href="sessions/session-4/">Session 4</a>
+            <a class="button button--light" href="sessions/session-5/">Session 5</a>
+            <a class="button button--light" href="sessions/session-6/">Session 6</a>
           </div>
         </article>
 
@@ -101,14 +95,14 @@
 
         <article class="card">
           <h2>Support and contact</h2>
-          <p>Urgent help lines and support routes, plus links to Tidy Butt resources.</p>
+          <p>Course support first. If you are properly stuck, we will point you to Tidy Butt contact options.</p>
           <a class="button" href="support/">Open support</a>
         </article>
       </section>
     </main>
   </div>
 
-  <!-- IMPORTANT: Full-width footer must be OUTSIDE .container.layout -->
+  <!-- Footer (same style everywhere) -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-grid">
@@ -123,7 +117,6 @@
             <li><a href="orientation/">Orientation</a></li>
             <li><a href="downloads/">Downloads</a></li>
             <li><a href="support/">Support and contact</a></li>
-            <li><a href="https://www.tidybutt.co.uk/pages/get-help">Get help</a></li>
           </ul>
         </div>
 
@@ -144,6 +137,4 @@
 
   <script src="assets/js/main.js" defer></script>
 </body>
-</html>
-
 </html>
