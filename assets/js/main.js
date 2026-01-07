@@ -1,56 +1,46 @@
-(function () {
-  function initCarousel(root) {
-    const track = root.querySelector("[data-track]");
-    const prev = root.querySelector("[data-prev]");
-    const next = root.querySelector("[data-next]");
-    const status = root.querySelector("[data-status]");
-    const cards = Array.from(root.querySelectorAll("[data-card]"));
+// Simple carousel + step button logic for session pages
 
-    if (!track || !prev || !next || cards.length === 0) return;
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-carousel]").forEach(setupCarousel);
+});
 
-    let index = 0;
+function setupCarousel(root) {
+  const cards = Array.from(root.querySelectorAll("[data-carousel-card]"));
+  const prevBtn = root.querySelector("[data-carousel-prev]");
+  const nextBtn = root.querySelector("[data-carousel-next]");
 
-    function cardStepWidth() {
-      const first = cards[0];
-      const styles = window.getComputedStyle(track);
-      const gap = parseFloat(styles.columnGap || styles.gap || "14") || 14;
-      return first.getBoundingClientRect().width + gap;
-    }
+  if (!cards.length) return;
 
-    function render() {
-      const step = cardStepWidth();
-      track.style.transform = `translateX(${-index * step}px)`;
+  const sessionRoot = root.closest("[data-session-page]");
+  const stepButtons = sessionRoot
+    ? Array.from(sessionRoot.querySelectorAll("[data-step-btn]"))
+    : [];
 
-      prev.disabled = index === 0;
-      next.disabled = index === cards.length - 1;
+  let index = 0;
 
-      if (status) status.textContent = `Step ${index + 1} of ${cards.length}`;
-    }
-
-    prev.addEventListener("click", () => {
-      if (index > 0) index -= 1;
-      render();
+  function update() {
+    cards.forEach((card, i) => {
+      card.classList.toggle("is-active", i === index);
     });
-
-    next.addEventListener("click", () => {
-      if (index < cards.length - 1) index += 1;
-      render();
+    stepButtons.forEach((btn, i) => {
+      btn.classList.toggle("is-active", i === index);
     });
-
-    window.addEventListener("resize", render);
-
-    render();
   }
 
-  function initAll() {
-    document.querySelectorAll("[data-carousel]").forEach(initCarousel);
+  function go(delta) {
+    index = (index + delta + cards.length) % cards.length;
+    update();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAll);
-  } else {
-    initAll();
-  }
+  prevBtn && prevBtn.addEventListener("click", () => go(-1));
+  nextBtn && nextBtn.addEventListener("click", () => go(1));
 
-  window.addEventListener("layout:ready", initAll);
-})();
+  stepButtons.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      index = i;
+      update();
+    });
+  });
+
+  update();
+}
