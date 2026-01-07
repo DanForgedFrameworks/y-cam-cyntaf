@@ -809,3 +809,56 @@ a:focus-visible, button:focus-visible{
   transform: translateY(2px);
   background: rgba(248,152,24,0.26);
 }
+
+/* =========================================================
+   Full-width main (unboxed layout)
+   ========================================================= */
+
+.main--full{
+  width: 100%;
+}
+
+/* Give the moved page content breathing room */
+.main--full #page-content{
+  width: 100%;
+  padding: 0; /* your hero/cards already have spacing */
+}
+
+/* If your sections rely on a max-width container, we reintroduce it only for text blocks */
+.hero{
+  width: 100%;
+}
+
+/* Make the hero text wider and a touch larger */
+.hero-lead{
+  max-width: 96ch;      /* wider than before */
+  font-size: 1.15rem;
+  line-height: 1.75;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-subtitle{
+  font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 96ch;
+}
+
+/* Ensure the tiles and session grid can expand nicely */
+.tile-grid,
+.session-grid{
+  width: 100%;
+  max-width: none;
+}
+
+/* Optional: add a little horizontal breathing room on very large screens */
+@media (min-width: 1100px){
+  .hero,
+  .tile-grid,
+  .card{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
