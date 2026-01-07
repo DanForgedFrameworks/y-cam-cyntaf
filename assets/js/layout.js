@@ -1,8 +1,4 @@
 (function () {
-  function stripTrailingSlash(s) {
-    return s.endsWith("/") && s.length > 1 ? s.slice(0, -1) : s;
-  }
-
   function getPrefixFromCurrentPage() {
     const parts = location.pathname.split("/").filter(Boolean);
     const depth = Math.max(0, parts.length - 1);
@@ -10,7 +6,6 @@
   }
 
   const prefix = getPrefixFromCurrentPage();
-  const path = stripTrailingSlash(location.pathname);
 
   const shell = document.getElementById("site-shell");
   if (!shell) return;
@@ -77,13 +72,11 @@
     </footer>
   `;
 
-  // Move page content into the injected layout
   const existing = document.querySelector("[data-page-content]");
   const target = document.getElementById("page-content");
   if (existing && target) {
     target.appendChild(existing);
   }
 
-  // Signal that injection is complete (used for carousels etc.)
   window.dispatchEvent(new Event("layout:ready"));
 })();
