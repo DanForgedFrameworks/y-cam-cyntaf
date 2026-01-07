@@ -18,10 +18,14 @@
       carousel.dataset.initialised = "true";
 
       let index = 0;
-      const GAP = 18; // px gap between slides
-      const SLIDE_RATIO = 0.88; // 88% width so neighbours "peek"
+      const GAP = 18;
+      const SLIDE_RATIO = 0.88;
 
-      // Make slides a fixed pixel width so we can do the "shuffle/peek" effect reliably.
+      function normalise(i) {
+        const n = slides.length;
+        return ((i % n) + n) % n;
+      }
+
       function sizeSlides() {
         const vw = viewport.clientWidth;
         const slideW = Math.round(vw * SLIDE_RATIO);
@@ -34,11 +38,6 @@
         render();
       }
 
-      function normalise(i) {
-        const n = slides.length;
-        return ((i % n) + n) % n;
-      }
-
       function render() {
         const vw = viewport.clientWidth;
         const slideW = Math.round(vw * SLIDE_RATIO);
@@ -46,7 +45,6 @@
 
         track.style.transform = `translateX(${-offset}px)`;
 
-        // Shuffle styling: active, previous, next
         slides.forEach((s, i) => {
           s.classList.toggle("is-active", i === index);
           s.classList.toggle("is-prev", i === normalise(index - 1));
@@ -66,7 +64,6 @@
       prevBtn?.addEventListener("click", () => goTo(index - 1));
       nextBtn?.addEventListener("click", () => goTo(index + 1));
 
-      // Step buttons
       steps.forEach((b, i) => {
         b.addEventListener("click", () => goTo(i));
         b.addEventListener("keydown", (e) => {
@@ -77,19 +74,13 @@
         });
       });
 
-      // Keyboard on carousel
       carousel.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") goTo(index - 1);
         if (e.key === "ArrowRight") goTo(index + 1);
       });
 
-      // Resize handling
-      window.addEventListener("resize", () => {
-        sizeSlides();
-      });
+      window.addEventListener("resize", sizeSlides);
 
-      // Init
-      // Ensure the track is flex
       track.style.display = "flex";
       track.style.willChange = "transform";
       sizeSlides();
