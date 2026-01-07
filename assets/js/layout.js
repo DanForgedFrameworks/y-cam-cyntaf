@@ -1,4 +1,8 @@
 (function () {
+  function stripTrailingSlash(s) {
+    return s.endsWith("/") && s.length > 1 ? s.slice(0, -1) : s;
+  }
+
   function getPrefixFromCurrentPage() {
     const parts = location.pathname.split("/").filter(Boolean);
     const depth = Math.max(0, parts.length - 1);
@@ -6,6 +10,45 @@
   }
 
   const prefix = getPrefixFromCurrentPage();
+  const path = stripTrailingSlash(location.pathname);
+
+  // Sidebar only on sessions + support
+  const showSidebar = path.includes("/sessions/") || path.includes("/support");
+
+  function getActiveKey() {
+    if (path.includes("/support")) return "support";
+    if (path.includes("/orientation")) return "orientation";
+    if (path.includes("/downloads")) return "downloads";
+    if (path.includes("/sessions/session-1")) return "session-1";
+    if (path.includes("/sessions/session-2")) return "session-2";
+    if (path.includes("/sessions/session-3")) return "session-3";
+    if (path.includes("/sessions/session-4")) return "session-4";
+    if (path.includes("/sessions/session-5")) return "session-5";
+    if (path.includes("/sessions/session-6")) return "session-6";
+    return "home";
+  }
+
+  const activeKey = getActiveKey();
+
+  const navItems = [
+    { href: `${prefix}`, label: "Home", key: "home" },
+    { href: `${prefix}orientation/`, label: "Orientation", key: "orientation" },
+    { href: `${prefix}downloads/`, label: "Downloads", key: "downloads" },
+    { href: `${prefix}sessions/session-1/`, label: "Session 1", key: "session-1" },
+    { href: `${prefix}sessions/session-2/`, label: "Session 2", key: "session-2" },
+    { href: `${prefix}sessions/session-3/`, label: "Session 3", key: "session-3" },
+    { href: `${prefix}sessions/session-4/`, label: "Session 4", key: "session-4" },
+    { href: `${prefix}sessions/session-5/`, label: "Session 5", key: "session-5" },
+    { href: `${prefix}sessions/session-6/`, label: "Session 6", key: "session-6" },
+    { href: `${prefix}support/`, label: "Support and contact", key: "support" },
+  ];
+
+  const navHtml = navItems
+    .map((n) => {
+      const current = n.key === activeKey ? ` aria-current="page"` : "";
+      return `<li><a href="${n.href}"${current}>${n.label}</a></li>`;
+    })
+    .join("");
 
   const shell = document.getElementById("site-shell");
   if (!shell) return;
@@ -33,10 +76,25 @@
       </div>
     </header>
 
-    <main id="main" class="main">
-      <div id="page-content"></div>
+    ${showSidebar ? `
+      <div class="layout-shell">
+        <aside class="sidebar" aria-label="Course navigation">
+          <nav aria-label="Primary">
+            <ul class="side-nav">
+              ${navHtml}
+            </ul>
+          </nav>
+        </aside>
+
+        <main id="main" class="main main--full main--with-sidebar">
+          <div id="page-content"></div>
+        </main>
       </div>
-    </main>
+    ` : `
+      <main id="main" class="main main--full">
+        <div id="page-content"></div>
+      </main>
+    `}
 
     <footer class="site-footer">
       <div class="container footer-inner">
