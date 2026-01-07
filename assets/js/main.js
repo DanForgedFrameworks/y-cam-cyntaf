@@ -1,4 +1,4 @@
-// Y Cam Cyntaf: lightweight carousel for session pages
+// Y Cam Cyntaf: lightweight carousel for session pages/
 document.addEventListener("DOMContentLoaded", () => {
   const carousels = document.querySelectorAll("[data-carousel]");
 
