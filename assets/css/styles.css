@@ -531,34 +531,44 @@ a:focus-visible, button:focus-visible{
   box-shadow: 0 12px 26px rgba(0,0,0,0.28);
 }
 
-/* Ensure all .button links show clear hover / active states */
+/* =========================================================
+   EXTRA: Stronger button visuals and active nav highlight
+   Paste at end of styles.css
+   ========================================================= */
+
+/* Make current page highlight very obvious */
+.side-nav a[aria-current="page"]{
+  background: rgba(248,152,24,0.22);
+  border-color: rgba(248,152,24,0.75);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.28);
+}
+
+/* Stronger button visuals on all pages */
 .button{
-  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
 }
 
 .button:hover{
-  filter: brightness(1.04);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.26);
 }
 
 .button:active{
   transform: translateY(2px);
-  filter: brightness(0.98);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.22);
 }
 
-/* Make light buttons (white) feel clickable too */
+/* White buttons also feel clickable */
 .button--light{
-  border: 1px solid rgba(255,255,255,0.45);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+  background: #ffffff;
+  color: #1a2a5a;
+  border: 1px solid rgba(255,255,255,0.35);
 }
 
 .button--light:hover{
-  box-shadow: 0 14px 30px rgba(0,0,0,0.24);
+  background: rgba(255,255,255,0.92);
 }
 
 .button--light:active{
-  transform: translateY(2px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.20);
+  background: rgba(255,255,255,0.88);
 }
-
