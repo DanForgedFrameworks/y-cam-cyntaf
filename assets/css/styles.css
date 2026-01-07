@@ -930,4 +930,30 @@ li{margin:0 0 6px 0}
     justify-content: center;
   }
 }
+/* =========================================================
+   Orientation reveal cards: centre content
+   ========================================================= */
+
+.reveal-front,
+.reveal-back{
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* horizontal centre */
+  justify-content: center; /* vertical centre */
+  text-align: center;
+  min-height: 190px;       /* ensures proper vertical centring */
+}
+
+/* Keep the list readable while centred */
+.reveal-back ul{
+  margin: 0;
+  padding-left: 0;
+  list-style-position: inside;
+  max-width: 34ch;
+}
+
+/* Slightly nicer spacing for list items in centred view */
+.reveal-back li{
+  margin: 0 0 8px 0;
+}
 
