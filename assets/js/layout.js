@@ -1,23 +1,20 @@
 (function () {
-  // --- Robust prefix for GitHub Pages PROJECT sites ---
-  // Example paths:
-  // /y-cam-cyntaf/                         -> prefix ""
-  // /y-cam-cyntaf/orientation/             -> prefix "../"
-  // /y-cam-cyntaf/sessions/session-1/      -> prefix "../../"
   function getPrefixFromCurrentPage() {
-    const parts = location.pathname.split("/").filter(Boolean); // ["y-cam-cyntaf","sessions","session-1"]
-    const repo = parts[0] || ""; // "y-cam-cyntaf"
-    const afterRepo = parts.slice(1); // ["sessions","session-1"]
-    const depth = afterRepo.length; // 2 -> "../../"
+    const parts = location.pathname.split("/").filter(Boolean);
+    const afterRepo = parts.slice(1);
+    const depth = afterRepo.length;
     return "../".repeat(depth);
   }
 
   const prefix = getPrefixFromCurrentPage();
   const path = location.pathname;
 
-  // Show sidebar ONLY on these sections
+  // Sidebar on these pages (NOT home)
   const showSidebar =
-    path.includes("/sessions/") || path.includes("/downloads/") || path.includes("/support/");
+    path.includes("/sessions/") ||
+    path.includes("/downloads/") ||
+    path.includes("/support/") ||
+    path.includes("/orientation/");
 
   function getActiveKey() {
     const p = path;
@@ -134,7 +131,6 @@
     </footer>
   `;
 
-  // Move the page content into the layout
   const existing = document.querySelector("[data-page-content]");
   const target = document.getElementById("page-content");
   if (existing && target) target.appendChild(existing);
