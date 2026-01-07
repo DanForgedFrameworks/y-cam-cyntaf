@@ -961,3 +961,10 @@ li{margin:0 0 6px 0}
     padding-right: 0;
   }
 }
+<div class="reveal-back">
+  <div class="reveal-back-inner">
+    <ul>
+      <li>...</li>
+    </ul>
+  </div>
+</div>
