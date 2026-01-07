@@ -29,7 +29,19 @@
     { href: `${prefix}support/`, label: "Support and contact", match: /\/support(\/|$)/ },
   ];
 
-  const activeIndex = navItems.findIndex(n => n.match.test(path));
+  let activeIndex = navItems.findIndex(n => n.match.test(path));
+
+// If nothing matched (common on GitHub Pages root), force Home active
+if (activeIndex === -1) {
+  activeIndex = 0;
+}
+
+// Also force Home active when you're on the repo root (very common)
+const parts = location.pathname.split("/").filter(Boolean);
+if (parts.length === 1 || /\/index\.html$/.test(path)) {
+  activeIndex = 0;
+}
+
   const navHtml = navItems.map((n, i) => {
     const current = i === activeIndex ? ` aria-current="page"` : "";
     return `<li><a href="${n.href}"${current}>${n.label}</a></li>`;
