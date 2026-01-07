@@ -34,8 +34,7 @@
     </header>
 
     <main id="main" class="main">
-      <div class="container">
-        <div id="page-content"></div>
+      <div id="page-content"></div>
       </div>
     </main>
 
