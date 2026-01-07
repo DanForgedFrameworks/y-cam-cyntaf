@@ -1,115 +1,162 @@
-/* Y Cam Cyntaf | Tidy Butt theme
-   Goals:
-   - Aptos font stack (with safe fallbacks)
-   - Left sidebar navigation on desktop, wrapped nav on mobile
-   - Hover + pressed states for buttons
-   - Responsive cards and footer mirroring Tidy Butt style
-*/
+/* =========================================================
+   Y Cam Cyntaf | Tidy Butt theme (FULL FILE)
+   - Left sidebar nav (desktop), wrapped nav (mobile)
+   - Aptos font stack (uses Aptos if installed)
+   - Strong hover + pressed states
+   - Full-width footer (no overlay)
+   - Clean, readable cards
+   ========================================================= */
 
+/* -----------------------------
+   Variables
+------------------------------ */
 :root{
-  /* Brand colours sampled from Tidy Butt site imagery */
+  /* Brand */
   --tb-purple:#6038D0;
   --tb-orange:#F89818;
   --tb-blue-1:#5068D8;
   --tb-blue-2:#5880D8;
 
-  /* Base */
-  --bg:#0b1020;
-  --panel: rgba(17,26,51,0.78);
-  --panel-2: rgba(0,0,0,0.18);
+  /* Surfaces */
+  --bg:#070B18;
+  --panel: rgba(17, 26, 51, 0.78);
+  --panel-2: rgba(0, 0, 0, 0.18);
   --text:#ffffff;
-  --muted:rgba(255,255,255,0.78);
-  --border:rgba(255,255,255,0.14);
+  --muted: rgba(255,255,255,0.78);
+  --border: rgba(255,255,255,0.14);
   --shadow: 0 10px 30px rgba(0,0,0,0.25);
-  --radius:18px;
 
   /* Layout */
+  --radius: 18px;
   --max: 1180px;
   --sidebar-w: 290px;
 
-  /* Font: Aptos if available */
+  /* Typography */
   --font-body: Aptos, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-heading: Aptos, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   /* Focus */
-  --focus: #ffffff;
+  --focus: var(--tb-orange);
 }
 
-*{ box-sizing:border-box; }
+/* -----------------------------
+   Resets / base
+------------------------------ */
+*{ box-sizing: border-box; }
 
 html, body{
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   font-family: var(--font-body);
-  background:
-    radial-gradient(1200px 600px at 20% 0%, rgba(96,56,208,0.45), transparent 55%),
-    radial-gradient(900px 500px at 80% 10%, rgba(80,104,216,0.35), transparent 60%),
-    var(--bg);
   color: var(--text);
   line-height: 1.6;
+
+  /* Background gradient similar to Tidy Butt style */
+  background:
+    radial-gradient(1200px 650px at 18% 0%, rgba(96,56,208,0.48), transparent 55%),
+    radial-gradient(900px 520px at 82% 8%, rgba(80,104,216,0.38), transparent 60%),
+    var(--bg);
 }
+
+img{ max-width: 100%; height: auto; display: block; }
 
 a{ color: var(--text); }
-a:focus, button:focus{
+a:hover{ text-decoration: underline; }
+
+code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  background: rgba(255,255,255,0.10);
+  padding: .05rem .35rem;
+  border-radius: .4rem;
+}
+
+/* Keyboard focus */
+a:focus-visible, button:focus-visible{
   outline: 3px solid var(--focus);
   outline-offset: 3px;
+  border-radius: 10px;
 }
 
-/* Skip link */
+/* -----------------------------
+   Skip link
+------------------------------ */
 .skip-link{
-  position:absolute;
-  left:-999px;
-  top:auto;
-  width:1px;
-  height:1px;
-  overflow:hidden;
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
+
 .skip-link:focus{
   position: static;
-  width:auto;
-  height:auto;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  display: inline-block;
+  margin: .75rem;
   padding: .75rem 1rem;
+  border-radius: 14px;
   background: var(--tb-orange);
   color: #000;
-  display:inline-block;
-  margin: .75rem;
-  border-radius: .75rem;
-  font-weight: 800;
+  font-weight: 900;
+  text-decoration: none;
 }
 
-/* Container */
+/* -----------------------------
+   Container
+------------------------------ */
 .container{
   width: min(var(--max), 92vw);
   margin: 0 auto;
   padding: 1.25rem 0;
 }
 
-/* Top help strip */
+/* -----------------------------
+   Top help strip
+------------------------------ */
 .topbar{
   background: var(--tb-orange);
-  color:#000;
-  font-weight: 800;
+  color: #000;
+  font-weight: 900;
   font-size: .95rem;
 }
+
 .topbar .container{
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
-  align-items:center;
-  justify-content:center;
-  gap:.75rem;
-  padding:.55rem 0;
+  gap: .75rem;
+  align-items: center;
+  justify-content: center;
+  padding: .55rem 0;
 }
+
 .topbar a{
-  color:#000;
+  color: #000;
   text-decoration: underline;
 }
 
-/* Layout: sidebar + main */
+/* -----------------------------
+   Optional header bar (logo bar)
+   Used if your pages include:
+   <header class="site-header">...</header>
+------------------------------ */
+.site-header{
+  background: linear-gradient(90deg, rgba(96,56,208,0.65), rgba(88,128,216,0.45));
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+
+/* -----------------------------
+   Layout: sidebar + main
+------------------------------ */
 .layout{
-  display:flex;
+  display: flex;
   gap: 1rem;
   align-items: stretch;
 }
+
 .sidebar{
   width: var(--sidebar-w);
   flex: 0 0 var(--sidebar-w);
@@ -119,6 +166,7 @@ a:focus, button:focus{
   height: 100vh;
   padding: 1rem 0;
 }
+
 .sidebar-inner{
   background: var(--panel-2);
   border: 1px solid var(--border);
@@ -126,84 +174,131 @@ a:focus, button:focus{
   box-shadow: var(--shadow);
   padding: 1rem;
   height: calc(100vh - 2rem);
-  overflow:auto;
+  overflow: auto;
 }
+
 .main{
   flex: 1 1 auto;
   min-width: 0;
 }
 
-/* Brand block */
+/* -----------------------------
+   Brand block
+------------------------------ */
 .brand{
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: .8rem;
   margin-bottom: 1rem;
 }
+
 .brand img{
   width: 62px;
   height: auto;
-  display:block;
 }
+
 .brand-title{
-  margin:0;
+  margin: 0;
   font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: 1.1rem;
+  font-weight: 950;
+  font-size: 1.15rem;
   line-height: 1.1;
 }
+
 .brand-subtitle{
-  margin:.15rem 0 0 0;
+  margin: .15rem 0 0 0;
   font-size: .95rem;
   color: rgba(255,255,255,0.92);
 }
 
-/* Sidebar nav */
+/* -----------------------------
+   Navigation list
+------------------------------ */
 .side-nav{
-  list-style:none;
-  padding:0;
+  list-style: none;
+  padding: 0;
   margin: 0 0 1rem 0;
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: .55rem;
 }
+
 .side-nav a{
-  display:block;
-  padding: .7rem .9rem;
+  display: block;
+  padding: .72rem .92rem;
   border: 1px solid rgba(255,255,255,0.22);
   border-radius: 14px;
-  text-decoration:none;
   background: rgba(255,255,255,0.06);
-  font-weight: 800;
+  text-decoration: none;
+  font-weight: 900;
 }
 
-/* Primary button */
+/* Optional active state for current page */
+.side-nav a[aria-current="page"]{
+  background: rgba(248,152,24,0.18);
+  border-color: rgba(248,152,24,0.55);
+}
+
+/* -----------------------------
+   Buttons (links styled as buttons)
+------------------------------ */
 .button{
-  display:inline-block;
+  display: inline-block;
   background: var(--tb-orange);
-  color:#000;
-  padding: .75rem 1rem;
+  color: #000;
+  padding: .78rem 1rem;
   border-radius: 14px;
-  text-decoration:none;
-  font-weight: 900;
+  text-decoration: none;
+  font-weight: 950;
   margin-top: .25rem;
 }
 
-/* Button hover + pressed states */
+/* -----------------------------
+   Hover / pressed (strong + obvious)
+------------------------------ */
 .button, .side-nav a{
-  transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-.button:hover, .side-nav a:hover{
-  filter: brightness(1.05);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-}
-.button:active, .side-nav a:active{
-  transform: translateY(1px);
-  filter: brightness(0.98);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+
+  transition:
+    transform 0.08s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
-/* Page sections */
+/* Hover */
+.button:hover{
+  filter: brightness(1.04);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+  text-decoration: none;
+}
+
+.side-nav a:hover{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+  text-decoration: none;
+}
+
+/* Pressed */
+.button:active{
+  transform: translateY(2px);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+}
+
+.side-nav a:active{
+  transform: translateY(2px);
+  background: rgba(255,255,255,0.14);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.20);
+}
+
+/* -----------------------------
+   Content blocks
+------------------------------ */
 .callout{
   background: var(--panel);
   border: 1px solid var(--border);
@@ -212,11 +307,12 @@ a:focus, button:focus{
   margin: 1rem 0 1.1rem 0;
   box-shadow: var(--shadow);
 }
+
 .callout h1{
-  margin:0 0 .45rem 0;
+  margin: 0 0 .45rem 0;
   font-family: var(--font-heading);
   font-weight: 950;
-  font-size: 1.75rem;
+  font-size: 1.8rem;
 }
 
 .small{
@@ -224,13 +320,14 @@ a:focus, button:focus{
   font-size: .95rem;
 }
 
-/* Cards grid */
+/* Cards */
 .grid{
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
+
 .card{
   background: var(--panel);
   border: 1px solid var(--border);
@@ -238,69 +335,90 @@ a:focus, button:focus{
   padding: 1.1rem;
   box-shadow: var(--shadow);
 }
+
 .card h2{
-  margin:0 0 .5rem 0;
+  margin: 0 0 .5rem 0;
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: 1.2rem;
 }
-.card p{ margin: .4rem 0; }
 
-/* Footer (Tidy Butt-style columns) */
+.card p{ margin: .4rem 0; }
+.card ul, .card ol{ margin: .5rem 0; padding-left: 1.2rem; }
+
+/* -----------------------------
+   Footer: FULL WIDTH
+   IMPORTANT: footer must be outside .container.layout in HTML
+------------------------------ */
 .site-footer{
+  width: 100%;
   margin-top: 2rem;
   border-top: 1px solid var(--border);
-  background: linear-gradient(90deg, rgba(96,56,208,0.35), rgba(88,128,216,0.25));
+  background: linear-gradient(90deg, rgba(96,56,208,0.40), rgba(88,128,216,0.28));
 }
+
 .footer-inner{
   padding: 1.25rem 0;
 }
+
 .footer-grid{
-  display:grid;
+  display: grid;
   grid-template-columns: 1.3fr 1fr 1fr;
   gap: 1rem;
-  align-items:start;
+  align-items: start;
 }
+
 .footer-links{
-  list-style:none;
-  padding:0;
-  margin:0;
-  display:grid;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
   gap: .35rem;
 }
+
 .footer-links a{
-  text-decoration:none;
+  text-decoration: none;
 }
+
 .footer-links a:hover{
   text-decoration: underline;
 }
+
 .footer-divider{
   margin-top: 1rem;
   border-top: 1px solid var(--border);
   padding-top: 1rem;
 }
 
-/* Mobile */
+/* -----------------------------
+   Mobile responsiveness
+------------------------------ */
 @media (max-width: 900px){
   .layout{ flex-direction: column; }
+
   .sidebar{
     width: auto;
     flex: 0 0 auto;
     height: auto;
     position: static;
-    padding: 0.75rem 0 0 0;
+    padding: .75rem 0 0 0;
   }
+
   .sidebar-inner{
-    height:auto;
+    height: auto;
   }
+
   .side-nav{
     flex-direction: row;
     flex-wrap: wrap;
   }
+
   .side-nav li{ flex: 1 1 auto; }
+
   .side-nav a{
-    text-align:center;
+    text-align: center;
   }
+
   .footer-grid{
     grid-template-columns: 1fr;
   }
