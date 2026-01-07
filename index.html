@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+<body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
+  <!-- Top help strip -->
   <div class="topbar" role="region" aria-label="Help strip">
     <div class="container">
       <span>Get help now</span>
@@ -18,6 +20,20 @@
     </div>
   </div>
 
+  <!-- Header (logo appears at top as well as sidebar and footer) -->
+  <header class="site-header" aria-label="Site header">
+    <div class="container" style="padding: 0.75rem 0;">
+      <div class="brand">
+        <img src="assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
+        <div>
+          <p class="brand-title">Y Cam Cyntaf</p>
+          <p class="brand-subtitle">First steps in Welsh</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page layout: sidebar + main content -->
   <div class="container layout">
     <aside class="sidebar" aria-label="Course navigation">
       <div class="sidebar-inner">
@@ -31,7 +47,7 @@
 
         <nav aria-label="Primary">
           <ul class="side-nav">
-            <li><a href="./">Home</a></li>
+            <li><a href="./" aria-current="page">Home</a></li>
             <li><a href="orientation/">Orientation</a></li>
             <li><a href="sessions/session-1/">Session 1</a></li>
             <li><a href="sessions/session-2/">Session 2</a></li>
@@ -52,7 +68,7 @@
       <section class="callout" aria-label="Navigation help">
         <h1>Welcome</h1>
         <p><strong>How to use this hub:</strong> Start with <a href="orientation/">Orientation</a>. Then open the session you are attending next.</p>
-        <p>Each session page includes: <strong>pre-work</strong>, <strong>live session focus</strong>, <strong>homework/social task</strong>, and an optional <strong>Curiosity Thread</strong>.</p>
+        <p>Each session page includes: <strong>pre-work</strong>, <strong>live session focus</strong>, <strong>after session</strong>, and an optional <strong>Curiosity Thread</strong>.</p>
         <p class="small">Tip: You can print any page using your browser menu (Print → Save as PDF).</p>
       </section>
 
@@ -67,7 +83,7 @@
           <h2>Sessions</h2>
           <p>Open the session you are attending next.</p>
           <p class="small">If you are short on time, do the first step only. That is enough to join in.</p>
-          <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:.6rem;">
+          <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .6rem;">
             <a class="button" href="sessions/session-1/">Session 1</a>
             <a class="button" href="sessions/session-2/">Session 2</a>
             <a class="button" href="sessions/session-3/">Session 3</a>
@@ -89,42 +105,45 @@
           <a class="button" href="support/">Open support</a>
         </article>
       </section>
-
-      <footer class="site-footer">
-        <div class="container footer-inner">
-          <div class="footer-grid">
-            <div>
-              <img src="assets/img/tidybutt-logo.png" alt="Tidy Butt logo" style="width:140px;height:auto;" />
-              <p class="small">Registered Charity 1195392</p>
-            </div>
-
-            <div>
-              <p><strong>Navigation</strong></p>
-              <ul class="footer-links">
-                <li><a href="orientation/">Orientation</a></li>
-                <li><a href="downloads/">Downloads</a></li>
-                <li><a href="support/">Support and contact</a></li>
-                <li><a href="https://www.tidybutt.co.uk/pages/get-help">Get help</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <p><strong>Socials</strong></p>
-              <ul class="footer-links">
-                <li><a href="https://www.facebook.com/tidybuttmat">Facebook</a></li>
-                <li><a href="https://www.instagram.com/tidy_butt">Instagram</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="footer-divider">
-            <p class="small">© Tidy Butt. If you notice anything incorrect, please contact Tidy Butt.</p>
-          </div>
-        </div>
-      </footer>
     </main>
   </div>
 
+  <!-- IMPORTANT: Full-width footer must be OUTSIDE .container.layout -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div>
+          <img src="assets/img/tidybutt-logo.png" alt="Tidy Butt logo" style="width:140px;height:auto;" />
+          <p class="small">Registered Charity 1195392</p>
+        </div>
+
+        <div>
+          <p><strong>Navigation</strong></p>
+          <ul class="footer-links">
+            <li><a href="orientation/">Orientation</a></li>
+            <li><a href="downloads/">Downloads</a></li>
+            <li><a href="support/">Support and contact</a></li>
+            <li><a href="https://www.tidybutt.co.uk/pages/get-help">Get help</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p><strong>Socials</strong></p>
+          <ul class="footer-links">
+            <li><a href="https://www.facebook.com/tidybuttmat">Facebook</a></li>
+            <li><a href="https://www.instagram.com/tidy_butt">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider">
+        <p class="small">© Tidy Butt. If you notice anything incorrect, please contact Tidy Butt.</p>
+      </div>
+    </div>
+  </footer>
+
   <script src="assets/js/main.js" defer></script>
 </body>
+</html>
+
 </html>
