@@ -867,3 +867,67 @@ li{margin:0 0 6px 0}
     display: none;
   }
 }
+
+/* =========================================================
+   Mobile carousel: stop absolute cards overlapping content below
+   ========================================================= */
+@media (max-width: 980px){
+
+  /* Let carousel content take up real height in the page flow */
+  .carousel-track{
+    position: relative;
+    min-height: 0;
+    height: auto;
+    margin-top: 12px;
+    padding-bottom: 8px;
+  }
+
+  /* Turn the stacked/absolute cards into a normal card that doesn't overlap other UI */
+  .carousel-card{
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+    margin: 0;
+  }
+
+  /* Hide non-active cards in mobile (simple, readable carousel) */
+  .carousel-card.is-left,
+  .carousel-card.is-right,
+  .carousel-card.is-hidden{
+    display: none !important;
+  }
+
+  /* Keep the active card visible */
+  .carousel-card.is-active{
+    display: block !important;
+  }
+
+  /* Ensure the step chips row sits above any card visuals */
+  .stepbar{
+    position: relative;
+    z-index: 5;
+    margin-top: 14px;
+  }
+
+  /* If you have CTAs directly under the carousel, keep them on top too */
+  .cta-row{
+    position: relative;
+    z-index: 5;
+  }
+
+  /* Make the top buttons a bit more stable on small screens */
+  .carousel-top{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .carousel-btn{
+    width: 48%;
+    min-width: 140px;
+    justify-content: center;
+  }
+}
+
