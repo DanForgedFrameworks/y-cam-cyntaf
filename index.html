@@ -12,17 +12,23 @@
 
   <div data-page-content>
 
-    <section class="hero" aria-label="Welcome hero">
-      <div class="kicker">A calm, supportive introduction to Welsh</div>
+    <section class="hero hero--centre" aria-label="Welcome hero">
+      <div class="kicker">Welcome</div>
+
       <h1>Welcome to Y Cam Cyntaf</h1>
-      <p>
-        Small steps. Friendly practice. No pressure to be perfect.
-        This course is designed to help you feel more confident with Welsh, while supporting wellbeing and connection.
+
+      <p class="hero-subtitle"><em>A calm, low-pressure introduction to Welsh.</em></p>
+
+      <p class="hero-lead">
+        Use this hub to find what you need for your next session.
+        You can start with <a href="orientation/">Orientation</a>, download print-friendly materials in <a href="downloads/">Downloads</a>,
+        or head to <a href="support/">Support and contact</a> if something is not working.
       </p>
-      <div class="hero-actions">
-        <a class="button" href="orientation/">Start with Orientation</a>
-        <a class="button button--light" href="sessions/session-1/">Go to Session 1</a>
+
+      <div class="hero-actions hero-actions--centre">
+        <a class="button" href="sessions/session-1/">Go to Session 1</a>
       </div>
+
       <p class="small" style="margin-top: .85rem;">Tip: You can print any page using your browser menu (Print → Save as PDF).</p>
     </section>
 
@@ -35,7 +41,7 @@
           </div>
           <div class="tile-body">
             <p class="tile-title">Orientation</p>
-            <p class="tile-desc">A quick guide to how the course works and what to expect.</p>
+            <p class="tile-desc">How the course works and what to expect.</p>
           </div>
         </a>
 
@@ -54,19 +60,19 @@
             <img src="assets/img/tile-support.png" alt="Illustration for Course support" />
           </div>
           <div class="tile-body">
-            <p class="tile-title">Course support</p>
-            <p class="tile-desc">Help with the course, plus signposting if you are properly stuck.</p>
+            <p class="tile-title">Support and contact</p>
+            <p class="tile-desc">Course support, plus signposting if you are properly stuck.</p>
           </div>
         </a>
       </div>
     </section>
 
     <!-- Sessions -->
-    <section class="card" aria-label="Sessions" style="margin-top: 1rem;">
+    <section class="card" aria-label="Sessions" style="margin-top: 1rem; text-align:center;">
       <h2>Sessions</h2>
       <p>Pick your next session. If time or energy is low, just do <strong>Get Ready</strong>. That is enough.</p>
 
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .6rem;">
+      <div class="session-grid">
         <a class="button button--light" href="sessions/session-1/">Session 1</a>
         <a class="button button--light" href="sessions/session-2/">Session 2</a>
         <a class="button button--light" href="sessions/session-3/">Session 3</a>
@@ -78,7 +84,7 @@
 
   </div>
 
-  <script src="assets/js/main.js" defer></script>
   <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
