@@ -356,7 +356,7 @@ li{margin:0 0 6px 0}
   position:absolute;
   top:0;
   left:50%;
-  width: min(520px, 92%);
+  width: min(720px, 96%);
   transform: translateX(-50%) scale(0.92);
   opacity:0;
   pointer-events:none;
@@ -364,7 +364,7 @@ li{margin:0 0 6px 0}
   background: rgba(16,26,53,0.75);
   border:1px solid rgba(255,255,255,0.10);
   border-radius: 18px;
-  padding:16px;
+  padding:20px;
 }
 .carousel-card.is-active{
   opacity:1;
@@ -374,12 +374,12 @@ li{margin:0 0 6px 0}
 }
 .carousel-card.is-left{
   opacity:0.35;
-  transform: translateX(calc(-50% - 190px)) scale(0.90);
+  transform: translateX(calc(-50% - 260px)) scale(0.90);
   z-index:2;
 }
 .carousel-card.is-right{
   opacity:0.35;
-  transform: translateX(calc(-50% + 190px)) scale(0.90);
+  transform: translateX(calc(-50% + 260px)) scale(0.90);
   z-index:2;
 }
 .carousel-card.is-hidden{
