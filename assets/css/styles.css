@@ -1,1 +1,234 @@
-/* Styles will go here */
+/* Tidy Butt theme for Y Cam Cyntaf (GitHub Pages)
+   Colours sampled from provided screenshots:
+   Purple: #6038D0 | Orange: #F89818 | Blues: #5068D8–#5880D8
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+:root{
+  --tb-purple:#6038D0;
+  --tb-orange:#F89818;
+
+  --tb-blue-1:#5068D8;
+  --tb-blue-2:#5880D8;
+
+  --bg:#0b1020;
+  --panel:#111a33;
+  --panel-2:#0f1730;
+
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.78);
+  --border:rgba(255,255,255,0.14);
+
+  --focus:#ffffff;
+
+  --radius:18px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  --max: 1100px;
+}
+
+*{ box-sizing:border-box; }
+
+html, body{
+  margin:0;
+  padding:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(96,56,208,0.45), transparent 55%),
+              radial-gradient(900px 500px at 80% 10%, rgba(80,104,216,0.35), transparent 60%),
+              var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Accessibility */
+a{ color: var(--text); }
+a:focus, button:focus{
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip-link{
+  position:absolute;
+  left:-999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  position: static;
+  width:auto;
+  height:auto;
+  padding: .75rem 1rem;
+  background: var(--tb-orange);
+  color: #000;
+  display:inline-block;
+  margin: .75rem;
+  border-radius: .75rem;
+  font-weight: 700;
+}
+
+.container{
+  width: min(var(--max), 92vw);
+  margin: 0 auto;
+  padding: 1.25rem 0;
+}
+
+/* Top bar (orange help strip vibe) */
+.topbar{
+  background: var(--tb-orange);
+  color:#000;
+  font-weight: 700;
+  font-size: .95rem;
+}
+.topbar .container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.75rem;
+  padding:.55rem 0;
+}
+.topbar a{
+  color:#000;
+  text-decoration: underline;
+}
+
+/* Header */
+.site-header{
+  background: linear-gradient(90deg, var(--tb-purple), var(--tb-blue-2));
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap: .9rem;
+  min-width: 220px;
+}
+
+.brand img{
+  width: 64px;
+  height: auto;
+  display:block;
+}
+
+.brand-title{
+  margin:0;
+  font-family: Poppins, Inter, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+.brand-subtitle{
+  margin: .15rem 0 0 0;
+  color: rgba(255,255,255,0.9);
+  font-size: .95rem;
+}
+
+/* Nav */
+.nav{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap: .55rem;
+  justify-content:flex-end;
+}
+
+.nav a{
+  display:inline-block;
+  padding: .55rem .8rem;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 999px;
+  text-decoration:none;
+  background: rgba(0,0,0,0.12);
+  font-weight: 600;
+}
+
+.nav a:hover{
+  background: rgba(0,0,0,0.22);
+}
+
+/* Page sections */
+.callout{
+  background: rgba(17,26,51,0.78);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.15rem;
+  margin: 1.25rem 0 1.15rem 0;
+  box-shadow: var(--shadow);
+}
+
+.callout h1{
+  margin:0 0 .35rem 0;
+  font-family: Poppins, Inter, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.small{
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card{
+  background: rgba(17,26,51,0.78);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+.card h2{
+  margin:0 0 .45rem 0;
+  font-family: Poppins, Inter, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.button{
+  display:inline-block;
+  background: var(--tb-orange);
+  color:#000;
+  padding: .7rem 1rem;
+  border-radius: 14px;
+  text-decoration:none;
+  font-weight: 800;
+  margin-top: .6rem;
+}
+
+.button:focus{
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
+
+.button-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin-top:.25rem;
+}
+
+/* Footer */
+.site-footer{
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.20);
+}
