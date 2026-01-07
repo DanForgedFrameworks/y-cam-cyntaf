@@ -1,92 +1,65 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Session 2 | Y Cam Cyntaf</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <script src="../../assets/js/layout.js" defer></script>
+  <script src="../../assets/js/main.js" defer></script>
 </head>
 <body>
   <div id="site-shell"></div>
 
   <div data-page-content>
-    <div class="container">
-      <section class="card">
-        <h1>Session 2: Basic introductions and interactions</h1>
+    <div class="container" style="padding: 1.2rem 0 2rem 0;">
+      <h1 style="margin:0 0 .4rem 0; font-weight: 900;">Session 2: Basic introductions and interactions</h1>
 
-        <p><strong>Session aim:</strong> Feel comfortable greeting people and introducing yourself in a simple way.</p>
+      <p style="margin:0 0 1rem 0; color: rgba(233,237,255,.78); max-width: 90ch;">
+        <strong>How to use this page:</strong> Use the arrows to move through the steps. If your time or energy is low, do <strong>Get Ready</strong> only. That is enough.
+      </p>
 
-        <p><strong>How we’ll achieve this:</strong> We’ll practise short, repeatable phrases, and use friendly pair or group activities so you can try things out safely.</p>
-
-        <p><strong>What we’ll cover:</strong> greetings, simple introductions, basic replies, and keeping a short conversation going.</p>
-
-        <p><strong>Outcome:</strong> You’ll be able to introduce yourself and respond to others with a few simple Welsh phrases.</p>
-
-        <div class="tip-box" style="margin-top:1rem;">
-          <strong>How to use this page:</strong> Use the arrows to move through the steps for this session. We understand you are doing this in your own time, so engage with the resources as much as you can. They are here to help you and your peers get the most from the live session. If your time or energy is low, do <strong>Get Ready</strong> only, so everyone arrives ready. Even if you are not all on the same page, you will be in the same book.
+      <div style="display:grid; gap:.85rem; max-width: 90ch; margin-bottom: 1.2rem;">
+        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
+          <strong>Session aim:</strong> Build confidence introducing yourself and responding in simple ways.
         </div>
-      </section>
-
-      <section class="card" data-carousel tabindex="0" aria-label="Session 2 carousel">
-        <div class="carousel-header">
-          <button class="button" type="button" data-prev aria-label="Previous step">◀</button>
-          <p class="carousel-title">Session steps</p>
-          <button class="button" type="button" data-next aria-label="Next step">▶</button>
+        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
+          <strong>How we will achieve this:</strong> Short, repeatable phrases, lots of friendly practice, and pair or small-group support.
         </div>
+        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
+          <strong>What we will cover:</strong> Basic introductions, simple questions and answers, and easy conversation starters.
+        </div>
+        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
+          <strong>Outcome:</strong> You will be able to start and keep a short Welsh interaction going without feeling overwhelmed.
+        </div>
+      </div>
 
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <div class="carousel-slide">
-              <h2>Get Ready</h2>
-              <p><strong>Time:</strong> 10 minutes.</p>
-              <ul>
-                <li>Watch a short clip on greetings and introductions.</li>
-                <li>Pick one greeting you like and one “my name is…” phrase.</li>
-              </ul>
-            </div>
-
-            <div class="carousel-slide">
-              <h2>Live Session</h2>
-              <p><strong>Time:</strong> 60 to 90 minutes.</p>
-              <ul>
-                <li>Warm-up: easy greetings as a group.</li>
-                <li>Pair practice: introduce yourself and ask one simple question.</li>
-                <li>Group activity: short, supportive conversation loops.</li>
-              </ul>
-            </div>
-
-            <div class="carousel-slide">
-              <h2>After Session</h2>
-              <p><strong>Time:</strong> 5 minutes.</p>
-              <ul>
-                <li>Post a greeting in the group.</li>
-                <li>Reply to one other person.</li>
-              </ul>
-            </div>
-
-            <div class="carousel-slide">
-              <h2>Curiosity Thread</h2>
-              <p><strong>Optional:</strong> 5 to 15 minutes.</p>
-              <ul>
-                <li>Notice Welsh names or words in your area.</li>
-                <li>Share one you spotted or liked.</li>
-              </ul>
-            </div>
-          </div>
+      <div data-carousel style="max-width: 90ch;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:.8rem; margin-bottom:.65rem;">
+          <button type="button" data-prev style="padding:.65rem 1rem; border-radius:14px; border:1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.20); color: #fff; font-weight:800; cursor:pointer;">◀ Back</button>
+          <button type="button" data-next style="padding:.65rem 1rem; border-radius:14px; border:1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.20); color: #fff; font-weight:800; cursor:pointer;">Next ▶</button>
         </div>
 
-        <div class="carousel-steps" aria-label="Step chooser">
-          <button class="step-btn" type="button" data-step aria-current="true"><strong>Get Ready</strong><span>Choose your phrases</span></button>
-          <button class="step-btn" type="button" data-step><strong>Live Session</strong><span>Practice with others</span></button>
-          <button class="step-btn" type="button" data-step><strong>After Session</strong><span>Short group check-in</span></button>
-          <button class="step-btn" type="button" data-step><strong>Curiosity Thread</strong><span>Optional: notice and share</span></button>
+        <div data-carousel-track>
+          <section data-slide>
+            <h2 style="margin:.2rem 0 .3rem 0;">Get Ready</h2>
+            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Review the starter phrases and listen out for the sounds. That is enough.</p>
+          </section>
+          <section data-slide hidden>
+            <h2 style="margin:.2rem 0 .3rem 0;">Live session</h2>
+            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Practise introductions and simple interactions in a supportive way.</p>
+          </section>
+          <section data-slide hidden>
+            <h2 style="margin:.2rem 0 .3rem 0;">After the session</h2>
+            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Do one small recap and try one phrase in real life if you can.</p>
+          </section>
+          <section data-slide hidden>
+            <h2 style="margin:.2rem 0 .3rem 0;">Curiosity thread</h2>
+            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Optional: a light Welsh culture prompt for chatting with others.</p>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
   </div>
-
-  <script src="../../assets/js/basepath.js" defer></script>
-  <script src="../../assets/js/layout.js" defer></script>
-  <script src="../../assets/js/main.js" defer></script>
 </body>
 </html>
