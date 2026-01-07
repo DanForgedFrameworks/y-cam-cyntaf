@@ -1,4 +1,4 @@
-// =========================================================
+// ========================================================
 // layout.js (FULL FILE)
 // Injects shared topbar + header + sidebar nav + footer into #site-shell
 // Moves page content from [data-page-content] into the injected layout
