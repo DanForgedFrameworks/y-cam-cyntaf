@@ -1,38 +1,35 @@
 (function () {
-  function stripTrailingSlash(s) {
-    return s.endsWith("/") && s.length > 1 ? s.slice(0, -1) : s;
-  }
-
+  // --- Robust prefix for GitHub Pages PROJECT sites ---
+  // Example paths:
+  // /y-cam-cyntaf/                         -> prefix ""
+  // /y-cam-cyntaf/orientation/             -> prefix "../"
+  // /y-cam-cyntaf/sessions/session-1/      -> prefix "../../"
   function getPrefixFromCurrentPage() {
-    // Works on GitHub Pages and locally
-    // /y-cam-cyntaf/orientation/ -> depth 2 (y-cam-cyntaf, orientation) so prefix "../"
-    // /y-cam-cyntaf/sessions/session-1/ -> depth 3 so prefix "../../"
-    const parts = location.pathname.split("/").filter(Boolean);
-
-    // If we're on GitHub Pages project site, first part is repo name
-    // We want prefix from current file to repo root, not domain root
-    // So we subtract 1 part for repo name
-    const depthFromRepoRoot = Math.max(0, parts.length - 1 - 1);
-    return "../".repeat(depthFromRepoRoot);
+    const parts = location.pathname.split("/").filter(Boolean); // ["y-cam-cyntaf","sessions","session-1"]
+    const repo = parts[0] || ""; // "y-cam-cyntaf"
+    const afterRepo = parts.slice(1); // ["sessions","session-1"]
+    const depth = afterRepo.length; // 2 -> "../../"
+    return "../".repeat(depth);
   }
 
   const prefix = getPrefixFromCurrentPage();
-  const path = stripTrailingSlash(location.pathname);
+  const path = location.pathname;
 
+  // Show sidebar ONLY on these sections
   const showSidebar =
-    path.includes("/sessions/") || path.includes("/support") || path.includes("/downloads");
+    path.includes("/sessions/") || path.includes("/downloads/") || path.includes("/support/");
 
   function getActiveKey() {
     const p = path;
-    if (p.includes("/orientation")) return "orientation";
-    if (p.includes("/downloads")) return "downloads";
-    if (p.includes("/support")) return "support";
-    if (p.includes("/sessions/session-1")) return "session-1";
-    if (p.includes("/sessions/session-2")) return "session-2";
-    if (p.includes("/sessions/session-3")) return "session-3";
-    if (p.includes("/sessions/session-4")) return "session-4";
-    if (p.includes("/sessions/session-5")) return "session-5";
-    if (p.includes("/sessions/session-6")) return "session-6";
+    if (p.includes("/orientation/")) return "orientation";
+    if (p.includes("/downloads/")) return "downloads";
+    if (p.includes("/support/")) return "support";
+    if (p.includes("/sessions/session-1/")) return "session-1";
+    if (p.includes("/sessions/session-2/")) return "session-2";
+    if (p.includes("/sessions/session-3/")) return "session-3";
+    if (p.includes("/sessions/session-4/")) return "session-4";
+    if (p.includes("/sessions/session-5/")) return "session-5";
+    if (p.includes("/sessions/session-6/")) return "session-6";
     return "home";
   }
 
@@ -65,10 +62,10 @@
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <div class="topbar" role="region" aria-label="Course support strip">
-      <div class="container">
-        <span>Course support</span>
-        <span aria-hidden="true">•</span>
-        <a href="${prefix}support/">Support and contact</a>
+      <div class="container topbar-inner">
+        <span class="topbar-label">Course support</span>
+        <span aria-hidden="true" class="topbar-dot">•</span>
+        <a class="topbar-link" href="${prefix}support/">Support and contact</a>
       </div>
     </div>
 
@@ -76,7 +73,7 @@
       <div class="container header-inner">
         <div class="brand">
           <img src="${prefix}assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
-          <div>
+          <div class="brand-text">
             <p class="brand-title">Y Cam Cyntaf</p>
             <p class="brand-subtitle">First steps in Welsh</p>
           </div>
@@ -107,13 +104,13 @@
     <footer class="site-footer">
       <div class="container footer-inner">
         <div class="footer-grid">
-          <div>
+          <div class="footer-brand">
             <img src="${prefix}assets/img/tidybutt-logo.png" alt="Tidy Butt logo" class="footer-logo" />
             <p class="small">Registered Charity 1195392</p>
           </div>
 
           <div>
-            <p><strong>Navigation</strong></p>
+            <p class="footer-heading">Navigation</p>
             <ul class="footer-links">
               <li><a href="${prefix}orientation/">Orientation</a></li>
               <li><a href="${prefix}downloads/">Downloads</a></li>
@@ -122,7 +119,7 @@
           </div>
 
           <div>
-            <p><strong>Socials</strong></p>
+            <p class="footer-heading">Socials</p>
             <ul class="footer-links">
               <li><a href="https://www.facebook.com/tidybuttmat">Facebook</a></li>
               <li><a href="https://www.instagram.com/tidy_butt">Instagram</a></li>
@@ -137,6 +134,7 @@
     </footer>
   `;
 
+  // Move the page content into the layout
   const existing = document.querySelector("[data-page-content]");
   const target = document.getElementById("page-content");
   if (existing && target) target.appendChild(existing);
