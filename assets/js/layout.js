@@ -1,51 +1,76 @@
+// =========================================================
+// layout.js (FULL FILE)
+// Injects shared topbar + header + sidebar nav + footer into #site-shell
+// Moves page content from [data-page-content] into the injected layout
+// Adds aria-current="page" to the active nav link automatically
+// =========================================================
+
 (function () {
-  function pathPrefix() {
-    // Figures out how deep we are, so paths work from /, /support/, /sessions/session-1/, etc.
+  function stripTrailingSlash(s) {
+    return s.endsWith("/") && s.length > 1 ? s.slice(0, -1) : s;
+  }
+
+  function getPrefixFromCurrentPage() {
+    // Works for /, /support/, /downloads/, /sessions/session-1/, etc.
+    // Assumes the site is hosted from a repo root on GitHub Pages.
     const parts = location.pathname.split("/").filter(Boolean);
-    // If your repo name is in the path, we ignore it because GitHub Pages hosts as /<repo>/
-    // Example: /y-cam-cyntaf/sessions/session-1/ -> ignore first segment as repo root
-    // If you ever move to a custom domain, this still behaves fine.
-    const repo = parts[0]; 
-    const depth = Math.max(0, parts.length - 1); 
+
+    // If hosted at https://<user>.github.io/<repo>/..., then parts[0] is repo
+    // Example: /y-cam-cyntaf/sessions/session-1/ => parts = ["y-cam-cyntaf","sessions","session-1"]
+    // The "page depth" is parts.length - 1 (excluding repo segment)
+    const depth = Math.max(0, parts.length - 1);
+
     return "../".repeat(depth);
   }
 
-  const prefix = pathPrefix();
+  function normalisedPathname() {
+    // Normalise for matching (remove trailing slash)
+    return stripTrailingSlash(location.pathname);
+  }
 
-  // Page detection for active nav
-  const path = location.pathname.replace(/\/$/, "");
-  const isHome = path.endsWith("/y-cam-cyntaf") || path.endsWith("/y-cam-cyntaf/index.html") || path === "" || path.endsWith("/");
+  const prefix = getPrefixFromCurrentPage();
+  const path = normalisedPathname();
 
   const navItems = [
-    { href: `${prefix}`, label: "Home", match: /\/(index\.html)?$/ },
-    { href: `${prefix}orientation/`, label: "Orientation", match: /\/orientation(\/|$)/ },
-    { href: `${prefix}sessions/session-1/`, label: "Session 1", match: /\/sessions\/session-1(\/|$)/ },
-    { href: `${prefix}sessions/session-2/`, label: "Session 2", match: /\/sessions\/session-2(\/|$)/ },
-    { href: `${prefix}sessions/session-3/`, label: "Session 3", match: /\/sessions\/session-3(\/|$)/ },
-    { href: `${prefix}sessions/session-4/`, label: "Session 4", match: /\/sessions\/session-4(\/|$)/ },
-    { href: `${prefix}sessions/session-5/`, label: "Session 5", match: /\/sessions\/session-5(\/|$)/ },
-    { href: `${prefix}sessions/session-6/`, label: "Session 6", match: /\/sessions\/session-6(\/|$)/ },
-    { href: `${prefix}downloads/`, label: "Downloads", match: /\/downloads(\/|$)/ },
-    { href: `${prefix}support/`, label: "Support and contact", match: /\/support(\/|$)/ },
+    { href: `${prefix}`, label: "Home", key: "home" },
+    { href: `${prefix}orientation/`, label: "Orientation", key: "orientation" },
+    { href: `${prefix}sessions/session-1/`, label: "Session 1", key: "session-1" },
+    { href: `${prefix}sessions/session-2/`, label: "Session 2", key: "session-2" },
+    { href: `${prefix}sessions/session-3/`, label: "Session 3", key: "session-3" },
+    { href: `${prefix}sessions/session-4/`, label: "Session 4", key: "session-4" },
+    { href: `${prefix}sessions/session-5/`, label: "Session 5", key: "session-5" },
+    { href: `${prefix}sessions/session-6/`, label: "Session 6", key: "session-6" },
+    { href: `${prefix}downloads/`, label: "Downloads", key: "downloads" },
+    { href: `${prefix}support/`, label: "Support and contact", key: "support" },
   ];
 
-  let activeIndex = navItems.findIndex(n => n.match.test(path));
+  // Determine active key by pathname contents (robust on GitHub Pages)
+  function getActiveKey() {
+    // Home: repo root (usually /<repo>) or /<repo>/index.html
+    // We treat anything that doesn't match other keys as home.
+    const p = path;
 
-// If nothing matched (common on GitHub Pages root), force Home active
-if (activeIndex === -1) {
-  activeIndex = 0;
-}
+    if (p.includes("/orientation")) return "orientation";
+    if (p.includes("/sessions/session-1")) return "session-1";
+    if (p.includes("/sessions/session-2")) return "session-2";
+    if (p.includes("/sessions/session-3")) return "session-3";
+    if (p.includes("/sessions/session-4")) return "session-4";
+    if (p.includes("/sessions/session-5")) return "session-5";
+    if (p.includes("/sessions/session-6")) return "session-6";
+    if (p.includes("/downloads")) return "downloads";
+    if (p.includes("/support")) return "support";
 
-// Also force Home active when you're on the repo root (very common)
-const parts = location.pathname.split("/").filter(Boolean);
-if (parts.length === 1 || /\/index\.html$/.test(path)) {
-  activeIndex = 0;
-}
+    return "home";
+  }
 
-  const navHtml = navItems.map((n, i) => {
-    const current = i === activeIndex ? ` aria-current="page"` : "";
-    return `<li><a href="${n.href}"${current}>${n.label}</a></li>`;
-  }).join("");
+  const activeKey = getActiveKey();
+
+  const navHtml = navItems
+    .map((n) => {
+      const current = n.key === activeKey ? ` aria-current="page"` : "";
+      return `<li><a href="${n.href}"${current}>${n.label}</a></li>`;
+    })
+    .join("");
 
   const shell = document.getElementById("site-shell");
   if (!shell) return;
@@ -124,7 +149,7 @@ if (parts.length === 1 || /\/index\.html$/.test(path)) {
     </footer>
   `;
 
-  // Move the page's inline content into #page-content if it exists
+  // Move the page content into the injected layout
   const existing = document.querySelector("[data-page-content]");
   const target = document.getElementById("page-content");
   if (existing && target) {
