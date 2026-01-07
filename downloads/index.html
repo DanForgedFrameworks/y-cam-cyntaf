@@ -18,6 +18,20 @@
     </div>
   </div>
 
+  <!-- Header logo (top bar) -->
+  <header class="site-header" aria-label="Site header">
+    <div class="container" style="padding: 0.75rem 0;">
+      <div class="brand">
+        <img src="../assets/img/tidybutt-logo.png" alt="Tidy Butt logo" />
+        <div>
+          <p class="brand-title">Y Cam Cyntaf</p>
+          <p class="brand-subtitle">First steps in Welsh</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar + main -->
   <div class="container layout">
     <aside class="sidebar" aria-label="Course navigation">
       <div class="sidebar-inner">
@@ -39,7 +53,7 @@
             <li><a href="../sessions/session-4/">Session 4</a></li>
             <li><a href="../sessions/session-5/">Session 5</a></li>
             <li><a href="../sessions/session-6/">Session 6</a></li>
-            <li><a href="./">Downloads</a></li>
+            <li><a href="./" aria-current="page">Downloads</a></li>
             <li><a href="../support/">Support and contact</a></li>
           </ul>
         </nav>
@@ -61,7 +75,6 @@
           <ul>
             <li><a href="./Y-Cam-Cyntaf-Orientation.pdf">Orientation PDF</a> (add file)</li>
             <li><a href="./Session-1-Handout.pdf">Session 1 handout</a> (add file)</li>
-            <li><a href="./Distance-Travelled-Quiz.pdf">Distance Travelled quiz (print)</a> (add file)</li>
           </ul>
           <p class="small">If a link says “not found”, it simply means the PDF has not been uploaded yet.</p>
         </article>
@@ -72,41 +85,42 @@
           <a class="button" href="../support/">Support and contact</a>
         </article>
       </section>
-
-      <footer class="site-footer">
-        <div class="container footer-inner">
-          <div class="footer-grid">
-            <div>
-              <img src="../assets/img/tidybutt-logo.png" alt="Tidy Butt logo" style="width:140px;height:auto;" />
-              <p class="small">Registered Charity 1195392</p>
-            </div>
-
-            <div>
-              <p><strong>Navigation</strong></p>
-              <ul class="footer-links">
-                <li><a href="../">Home</a></li>
-                <li><a href="../orientation/">Orientation</a></li>
-                <li><a href="../support/">Support and contact</a></li>
-                <li><a href="https://www.tidybutt.co.uk/pages/get-help">Get help</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <p><strong>Socials</strong></p>
-              <ul class="footer-links">
-                <li><a href="https://www.facebook.com/tidybuttmat">Facebook</a></li>
-                <li><a href="https://www.instagram.com/tidy_butt">Instagram</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="footer-divider">
-            <p class="small">© Tidy Butt. If you notice anything incorrect, please contact Tidy Butt.</p>
-          </div>
-        </div>
-      </footer>
     </main>
   </div>
+
+  <!-- Full-width footer OUTSIDE the layout -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div>
+          <img src="../assets/img/tidybutt-logo.png" alt="Tidy Butt logo" style="width:140px;height:auto;" />
+          <p class="small">Registered Charity 1195392</p>
+        </div>
+
+        <div>
+          <p><strong>Navigation</strong></p>
+          <ul class="footer-links">
+            <li><a href="../orientation/">Orientation</a></li>
+            <li><a href="./">Downloads</a></li>
+            <li><a href="../support/">Support and contact</a></li>
+            <li><a href="https://www.tidybutt.co.uk/pages/get-help">Get help</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p><strong>Socials</strong></p>
+          <ul class="footer-links">
+            <li><a href="https://www.facebook.com/tidybuttmat">Facebook</a></li>
+            <li><a href="https://www.instagram.com/tidy_butt">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider">
+        <p class="small">© Tidy Butt. If you notice anything incorrect, please contact Tidy Butt.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="../assets/js/main.js" defer></script>
 </body>
