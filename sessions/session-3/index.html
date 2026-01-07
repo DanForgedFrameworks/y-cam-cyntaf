@@ -1,92 +1,68 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Session 3 | Y Cam Cyntaf</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <script src="../../assets/js/layout.js" defer></script>
+  <script src="../../assets/js/main.js" defer></script>
 </head>
 <body>
   <div id="site-shell"></div>
 
   <div data-page-content>
-    <div class="container">
-      <section class="card">
-        <h1>Session 3: Talking about yourself and wellbeing</h1>
+    <div style="padding: 1.2rem 0 2.2rem 0;">
+      <h1 style="margin:0 0 .5rem 0; font-weight: 950;">Session 3: Talking about yourself and wellbeing</h1>
 
-        <p><strong>Session aim:</strong> Be able to share how you are doing, and check in with others in a kind way.</p>
+      <p style="margin:0 0 1rem 0; color: rgba(233,237,255,.78); max-width: 85ch; line-height:1.55;">
+        <strong>How to use this page:</strong> Use the arrows to move through the steps. If your time or energy is low,
+        do <strong>Get Ready</strong> only. That is enough.
+      </p>
 
-        <p><strong>How we’ll achieve this:</strong> We’ll practise simple “how are you” phrases and gentle responses, with activities that prioritise comfort and choice.</p>
+      <div style="display:grid; gap:.85rem; max-width: 900px; margin-bottom: 1.2rem;">
+        <div class="card"><div class="card-body"><strong>Session aim:</strong> Talk about how you are doing and share simple personal details in Welsh.</div></div>
+        <div class="card"><div class="card-body"><strong>How we will achieve this:</strong> Friendly prompts, small chunks of language, and supportive practice with others.</div></div>
+        <div class="card"><div class="card-body"><strong>What we will cover:</strong> Talking about yourself, how you are feeling, and wellbeing-related phrases.</div></div>
+        <div class="card"><div class="card-body"><strong>Outcome:</strong> You will be able to share simple “about me” information and how you are doing, in a comfortable way.</div></div>
+      </div>
 
-        <p><strong>What we’ll cover:</strong> how you feel, simple wellbeing check-ins, supportive replies, and listening cues.</p>
-
-        <p><strong>Outcome:</strong> You’ll be able to say how you are doing and respond to someone else with a supportive phrase.</p>
-
-        <div class="tip-box" style="margin-top:1rem;">
-          <strong>How to use this page:</strong> Use the arrows to move through the steps for this session. We understand you are doing this in your own time, so engage with the resources as much as you can. They are here to help you and your peers get the most from the live session. If your time or energy is low, do <strong>Get Ready</strong> only, so everyone arrives ready. Even if you are not all on the same page, you will be in the same book.
-        </div>
-      </section>
-
-      <section class="card" data-carousel tabindex="0" aria-label="Session 3 carousel">
-        <div class="carousel-header">
-          <button class="button" type="button" data-prev aria-label="Previous step">◀</button>
-          <p class="carousel-title">Session steps</p>
-          <button class="button" type="button" data-next aria-label="Next step">▶</button>
+      <div class="carousel" data-carousel>
+        <div class="carousel-controls">
+          <button class="carousel-btn" type="button" data-prev>◀ Back</button>
+          <div class="carousel-status" data-status>Step</div>
+          <button class="carousel-btn" type="button" data-next>Next ▶</button>
         </div>
 
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <div class="carousel-slide">
-              <h2>Get Ready</h2>
-              <p><strong>Time:</strong> 10 minutes.</p>
-              <ul>
-                <li>Watch a short wellbeing check-in clip.</li>
-                <li>Pick one phrase to say how you are, and one phrase to check in with someone.</li>
-              </ul>
-            </div>
-
-            <div class="carousel-slide">
-              <h2>Live Session</h2>
-              <p><strong>Time:</strong> 60 to 90 minutes.</p>
-              <ul>
-                <li>Warm-up: short feelings words, no pressure to share personal detail.</li>
-                <li>Pair practice: check in, respond, swap.</li>
-                <li>Group activity: supportive replies and listening cues.</li>
-              </ul>
-            </div>
-
-            <div class="carousel-slide">
-              <h2>After Session</h2>
-              <p><strong>Time:</strong> 5 minutes.</p>
-              <ul>
-                <li>Post a short check-in in the group (or reply to someone else).</li>
-                <li>If you prefer, use an emoji plus one word.</li>
-              </ul>
-            </div>
-
-            <div class="carousel-slide">
-              <h2>Curiosity Thread</h2>
-              <p><strong>Optional:</strong> 5 to 15 minutes.</p>
-              <ul>
-                <li>Explore a Welsh word linked to feelings, calm, or nature.</li>
-                <li>Share the one you liked most.</li>
-              </ul>
-            </div>
-          </div>
+        <div class="carousel-slide" data-slide>
+          <h2 style="margin:.1rem 0 .35rem 0;">Get Ready</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Pick two phrases you like and practise saying them once or twice. That is enough.
+          </p>
         </div>
 
-        <div class="carousel-steps" aria-label="Step chooser">
-          <button class="step-btn" type="button" data-step aria-current="true"><strong>Get Ready</strong><span>Pick your phrases</span></button>
-          <button class="step-btn" type="button" data-step><strong>Live Session</strong><span>Kind check-ins together</span></button>
-          <button class="step-btn" type="button" data-step><strong>After Session</strong><span>Short group check-in</span></button>
-          <button class="step-btn" type="button" data-step><strong>Curiosity Thread</strong><span>Optional: wellbeing words</span></button>
+        <div class="carousel-slide" data-slide hidden>
+          <h2 style="margin:.1rem 0 .35rem 0;">Live session</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            You will practise talking about yourself and how you are feeling, using supportive prompts.
+          </p>
         </div>
-      </section>
+
+        <div class="carousel-slide" data-slide hidden>
+          <h2 style="margin:.1rem 0 .35rem 0;">After the session</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Do one tiny recap. If you want, share a phrase in the WhatsApp group.
+          </p>
+        </div>
+
+        <div class="carousel-slide" data-slide hidden>
+          <h2 style="margin:.1rem 0 .35rem 0;">Curiosity thread</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Optional: a wellbeing-friendly Welsh word or phrase to explore and share.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
-
-  <script src="../../assets/js/basepath.js" defer></script>
-  <script src="../../assets/js/layout.js" defer></script>
-  <script src="../../assets/js/main.js" defer></script>
 </body>
 </html>
