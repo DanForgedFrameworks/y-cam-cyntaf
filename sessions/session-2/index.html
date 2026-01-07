@@ -12,51 +12,54 @@
   <div id="site-shell"></div>
 
   <div data-page-content>
-    <div class="container" style="padding: 1.2rem 0 2rem 0;">
-      <h1 style="margin:0 0 .4rem 0; font-weight: 900;">Session 2: Basic introductions and interactions</h1>
+    <div style="padding: 1.2rem 0 2.2rem 0;">
+      <h1 style="margin:0 0 .5rem 0; font-weight: 950;">Session 2: Basic introductions and interactions</h1>
 
-      <p style="margin:0 0 1rem 0; color: rgba(233,237,255,.78); max-width: 90ch;">
-        <strong>How to use this page:</strong> Use the arrows to move through the steps. If your time or energy is low, do <strong>Get Ready</strong> only. That is enough.
+      <p style="margin:0 0 1rem 0; color: rgba(233,237,255,.78); max-width: 85ch; line-height:1.55;">
+        <strong>How to use this page:</strong> Use the arrows to move through the steps. If your time or energy is low,
+        do <strong>Get Ready</strong> only. That is enough.
       </p>
 
-      <div style="display:grid; gap:.85rem; max-width: 90ch; margin-bottom: 1.2rem;">
-        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
-          <strong>Session aim:</strong> Build confidence introducing yourself and responding in simple ways.
-        </div>
-        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
-          <strong>How we will achieve this:</strong> Short, repeatable phrases, lots of friendly practice, and pair or small-group support.
-        </div>
-        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
-          <strong>What we will cover:</strong> Basic introductions, simple questions and answers, and easy conversation starters.
-        </div>
-        <div style="padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06);">
-          <strong>Outcome:</strong> You will be able to start and keep a short Welsh interaction going without feeling overwhelmed.
-        </div>
+      <div style="display:grid; gap:.85rem; max-width: 900px; margin-bottom: 1.2rem;">
+        <div class="card"><div class="card-body"><strong>Session aim:</strong> Build confidence introducing yourself and responding in simple ways.</div></div>
+        <div class="card"><div class="card-body"><strong>How we will achieve this:</strong> Short, repeatable phrases, friendly practice, and support from pairs and small groups.</div></div>
+        <div class="card"><div class="card-body"><strong>What we will cover:</strong> Basic introductions, simple questions and answers, and easy conversation starters.</div></div>
+        <div class="card"><div class="card-body"><strong>Outcome:</strong> You will be able to start and keep a short Welsh interaction going without feeling overwhelmed.</div></div>
       </div>
 
-      <div data-carousel style="max-width: 90ch;">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:.8rem; margin-bottom:.65rem;">
-          <button type="button" data-prev style="padding:.65rem 1rem; border-radius:14px; border:1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.20); color: #fff; font-weight:800; cursor:pointer;">◀ Back</button>
-          <button type="button" data-next style="padding:.65rem 1rem; border-radius:14px; border:1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.20); color: #fff; font-weight:800; cursor:pointer;">Next ▶</button>
+      <div class="carousel" data-carousel>
+        <div class="carousel-controls">
+          <button class="carousel-btn" type="button" data-prev>◀ Back</button>
+          <div class="carousel-status" data-status>Step</div>
+          <button class="carousel-btn" type="button" data-next>Next ▶</button>
         </div>
 
-        <div data-carousel-track>
-          <section data-slide>
-            <h2 style="margin:.2rem 0 .3rem 0;">Get Ready</h2>
-            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Review the starter phrases and listen out for the sounds. That is enough.</p>
-          </section>
-          <section data-slide hidden>
-            <h2 style="margin:.2rem 0 .3rem 0;">Live session</h2>
-            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Practise introductions and simple interactions in a supportive way.</p>
-          </section>
-          <section data-slide hidden>
-            <h2 style="margin:.2rem 0 .3rem 0;">After the session</h2>
-            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Do one small recap and try one phrase in real life if you can.</p>
-          </section>
-          <section data-slide hidden>
-            <h2 style="margin:.2rem 0 .3rem 0;">Curiosity thread</h2>
-            <p style="color: rgba(233,237,255,.78); line-height:1.55;">Optional: a light Welsh culture prompt for chatting with others.</p>
-          </section>
+        <div class="carousel-slide" data-slide>
+          <h2 style="margin:.1rem 0 .35rem 0;">Get Ready</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Skim the starter phrases and listen out for the sounds. That is enough.
+          </p>
+        </div>
+
+        <div class="carousel-slide" data-slide hidden>
+          <h2 style="margin:.1rem 0 .35rem 0;">Live session</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Practise introductions and simple interactions in a supportive way.
+          </p>
+        </div>
+
+        <div class="carousel-slide" data-slide hidden>
+          <h2 style="margin:.1rem 0 .35rem 0;">After the session</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Do one small recap. If you want, try one phrase in a real conversation.
+          </p>
+        </div>
+
+        <div class="carousel-slide" data-slide hidden>
+          <h2 style="margin:.1rem 0 .35rem 0;">Curiosity thread</h2>
+          <p style="margin:0; color: rgba(233,237,255,.78); line-height:1.55;">
+            Optional: a light Welsh culture prompt for chatting with others.
+          </p>
         </div>
       </div>
     </div>
