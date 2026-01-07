@@ -1,46 +1,53 @@
-// Simple carousel + step button logic for session pages
+(function () {
+  function initCarousel(root) {
+    const track = root.querySelector("[data-carousel-track]");
+    const cards = Array.from(root.querySelectorAll("[data-carousel-card]"));
+    const btnPrev = root.querySelector("[data-carousel-prev]");
+    const btnNext = root.querySelector("[data-carousel-next]");
+    const stepButtons = Array.from(root.querySelectorAll("[data-carousel-step]"));
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-carousel]").forEach(setupCarousel);
-});
+    if (!track || cards.length === 0 || !btnPrev || !btnNext) return;
 
-function setupCarousel(root) {
-  const cards = Array.from(root.querySelectorAll("[data-carousel-card]"));
-  const prevBtn = root.querySelector("[data-carousel-prev]");
-  const nextBtn = root.querySelector("[data-carousel-next]");
+    let index = 0;
 
-  if (!cards.length) return;
+    function render() {
+      cards.forEach((c, i) => {
+        c.classList.toggle("is-active", i === index);
+        c.classList.toggle("is-left", i === index - 1);
+        c.classList.toggle("is-right", i === index + 1);
+        c.classList.toggle("is-hidden", Math.abs(i - index) > 1);
+      });
 
-  const sessionRoot = root.closest("[data-session-page]");
-  const stepButtons = sessionRoot
-    ? Array.from(sessionRoot.querySelectorAll("[data-step-btn]"))
-    : [];
+      stepButtons.forEach((b) => {
+        const k = Number(b.getAttribute("data-carousel-step"));
+        b.classList.toggle("is-active", k === index);
+        b.setAttribute("aria-current", k === index ? "true" : "false");
+      });
 
-  let index = 0;
+      btnPrev.disabled = index === 0;
+      btnNext.disabled = index === cards.length - 1;
+    }
 
-  function update() {
-    cards.forEach((card, i) => {
-      card.classList.toggle("is-active", i === index);
+    function goTo(i) {
+      index = Math.max(0, Math.min(cards.length - 1, i));
+      render();
+    }
+
+    btnPrev.addEventListener("click", () => goTo(index - 1));
+    btnNext.addEventListener("click", () => goTo(index + 1));
+
+    stepButtons.forEach((b) => {
+      b.addEventListener("click", () => goTo(Number(b.getAttribute("data-carousel-step"))));
     });
-    stepButtons.forEach((btn, i) => {
-      btn.classList.toggle("is-active", i === index);
-    });
+
+    render();
   }
 
-  function go(delta) {
-    index = (index + delta + cards.length) % cards.length;
-    update();
+  function initAll() {
+    document.querySelectorAll("[data-carousel]").forEach(initCarousel);
   }
 
-  prevBtn && prevBtn.addEventListener("click", () => go(-1));
-  nextBtn && nextBtn.addEventListener("click", () => go(1));
-
-  stepButtons.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-      index = i;
-      update();
-    });
-  });
-
-  update();
-}
+  // Run once now, and again after layout has injected
+  initAll();
+  window.addEventListener("layout:ready", initAll);
+})();
