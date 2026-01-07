@@ -1,11 +1,11 @@
 (function () {
   function initCarousel(root) {
-    const track = root.querySelector("[data-carousel-track]");
     const slides = Array.from(root.querySelectorAll("[data-slide]"));
     const prev = root.querySelector("[data-prev]");
     const next = root.querySelector("[data-next]");
+    const status = root.querySelector("[data-status]");
 
-    if (!track || slides.length === 0 || !prev || !next) return;
+    if (!slides.length || !prev || !next) return;
 
     let index = 0;
 
@@ -13,8 +13,11 @@
       slides.forEach((s, i) => {
         s.hidden = i !== index;
       });
+
       prev.disabled = index === 0;
       next.disabled = index === slides.length - 1;
+
+      if (status) status.textContent = `Step ${index + 1} of ${slides.length}`;
     }
 
     prev.addEventListener("click", () => {
