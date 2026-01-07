@@ -928,3 +928,165 @@ a:focus-visible, button:focus-visible{
     padding: 1rem;
   }
 }
+
+/* =========================================================
+   Sidebar + stacking fixes (stop carousel going behind it)
+   ========================================================= */
+
+.sidebar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.main--with-sidebar{
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* hard stop for anything trying to slide under the sidebar */
+}
+
+/* =========================================================
+   Carousel layout and controls
+   ========================================================= */
+
+.carousel-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* arrows to either side */
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.carousel-title{
+  margin: 0;
+  font-weight: 900;
+}
+
+.carousel-viewport{
+  overflow: hidden; /* keep slides inside content area */
+  width: 100%;
+}
+
+.carousel-track{
+  transition: transform 220ms ease;
+  gap: 18px; /* matches JS */
+}
+
+.carousel-slide{
+  border-radius: 18px;
+  transition: transform 220ms ease, opacity 220ms ease, filter 220ms ease;
+  opacity: 0.72;
+  transform: scale(0.96);
+  filter: saturate(0.96);
+}
+
+.carousel-slide.is-active{
+  opacity: 1;
+  transform: scale(1);
+  filter: saturate(1);
+}
+
+.carousel-slide.is-prev,
+.carousel-slide.is-next{
+  opacity: 0.82;
+  transform: scale(0.98);
+}
+
+/* =========================================================
+   Step buttons under carousel (more detail)
+   ========================================================= */
+
+.carousel-steps{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.step-btn{
+  text-align: left;
+  padding: 0.85rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+}
+
+.step-btn:hover{
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-1px);
+}
+
+.step-btn:active{
+  transform: translateY(2px);
+}
+
+.step-btn[aria-current="true"]{
+  background: rgba(248,152,24,0.18);
+  border-color: rgba(248,152,24,0.35);
+}
+
+.step-btn strong{
+  display: block;
+  font-weight: 900;
+  margin-bottom: 0.15rem;
+}
+
+.step-btn span{
+  display: block;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Mobile steps wrap */
+@media (max-width: 900px){
+  .carousel-steps{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   Support page CTAs (big, bold, obvious)
+   ========================================================= */
+
+.support-actions{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.support-cta{
+  display: block;
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  font-weight: 900;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+}
+
+.support-cta:hover{
+  background: rgba(255,255,255,0.10);
+  transform: translateY(-1px);
+}
+
+.support-cta:active{
+  transform: translateY(2px);
+}
+
+.support-cta small{
+  display: block;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 900px){
+  .support-actions{
+    grid-template-columns: 1fr;
+  }
+}
+
