@@ -5,147 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Y Cam Cyntaf | Session 1</title>
   <link rel="stylesheet" href="/y-cam-cyntaf/assets/css/styles.css" />
-
-  <!-- Small local CSS to guarantee transitions (safe even if styles.css already has these) -->
-  <style>
-    /* Only affects Session 1’s carousel cards */
-    .carousel-card{
-      transition: transform 280ms ease, opacity 280ms ease;
-      will-change: transform, opacity;
-    }
-  </style>
 </head>
 <body>
-  <div data-page-content data-sidebar="true" data-active="session-1">
+  <div id="site-shell" class="pageshell">
+    <div data-page-content data-sidebar="true" data-active="session-1">
+      <div class="pagepanel">
+        <div class="pagepanel-inner">
 
-    <h1>Session 1: First steps and the social start</h1>
+          <h1>Session 1: First steps and the social start</h1>
 
-    <div class="session-summary">
-      <p><strong>Session aim:</strong> Get set up, feel welcome, and take your first relaxed step into Welsh.</p>
-      <p><strong>How we’ll do this:</strong> Light, low-pressure digital prep, a few playful phrases, and gentle WhatsApp check-ins so you know you are not alone.</p>
-      <p><strong>What we’ll cover:</strong> Popti Ping, Hoffi Coffi, platform basics, and saying “shwmae” in the group.</p>
-      <p><strong>Outcome (plain English):</strong> You will feel confident enough to say a couple of Welsh words and know how to take part in the group in a way that feels comfortable for you.</p>
-      <p class="small"><strong>How to use this page:</strong> Use Previous and Next to move through the steps. If your time or energy is low, just complete <strong>Get Ready</strong>. That is enough for now.</p>
-    </div>
+          <div class="session-summary">
+            <p><strong>Session aim:</strong> Get set up, feel welcome, and take your first relaxed step into Welsh.</p>
+            <p><strong>How we’ll do this:</strong> Light, low-pressure digital prep, a few playful phrases, and gentle WhatsApp check-ins so you know you are not alone.</p>
+            <p><strong>What we’ll cover:</strong> Popti Ping, Hoffi Coffi, platform basics, and saying “shwmae” in the group.</p>
+            <p><strong>Outcome (plain English):</strong> You will feel confident enough to say a couple of Welsh words and know how to take part in the group in a way that feels comfortable for you.</p>
+            <p class="small"><strong>How to use this page:</strong> Use Previous and Next to move through the steps. If your time or energy is low, just complete <strong>Get Ready</strong>. That is enough for now.</p>
+          </div>
 
-    <div class="carousel" id="carousel">
-      <div class="carousel-top">
-        <button class="carousel-btn" id="btnPrev" type="button">◀ Previous</button>
-        <button class="carousel-btn" id="btnNext" type="button">Next ▶</button>
+          <div class="carousel" data-carousel tabindex="0" aria-label="Session steps carousel">
+            <div class="carousel-top">
+              <button class="carousel-btn" type="button" data-carousel-prev aria-label="Previous step">◀ Previous</button>
+              <button class="carousel-btn" type="button" data-carousel-next aria-label="Next step">Next ▶</button>
+            </div>
+
+            <div class="carousel-track" data-carousel-track>
+              <div class="carousel-card" data-carousel-card data-step-label="Get Ready">
+                <h3>Step 1: Get Ready</h3>
+                <p>Post one simple check-in in the WhatsApp group. A single “Shwmae” is perfect. This is just to help you feel less alone before the session.</p>
+              </div>
+
+              <div class="carousel-card" data-carousel-card data-step-label="More Get Ready">
+                <h3>Step 2: More Get Ready</h3>
+                <p>Watch the short “Popti Ping &amp; Hoffi Coffi” video (link from your facilitator). Notice the sounds. No test. If you want, jot down one phrase you like.</p>
+              </div>
+
+              <div class="carousel-card" data-carousel-card data-step-label="Live session">
+                <h3>Step 3: Live session</h3>
+                <p>Bring your chosen phrase to the session if you feel up to it. You can participate quietly. Listening still counts as learning.</p>
+              </div>
+
+              <div class="carousel-card" data-carousel-card data-step-label="After the session">
+                <h3>Step 4: After the session</h3>
+                <p>After the live session, send one tiny reflection: one word you recognised, one moment you enjoyed, or one thing you want to try again.</p>
+              </div>
+
+              <div class="carousel-card" data-carousel-card data-step-label="Downloads">
+                <h3>Step 5: Downloads</h3>
+                <p>If you prefer offline: use Downloads for printable versions as they are added. You can also Print → Save as PDF from your browser.</p>
+                <p><a href="/y-cam-cyntaf/downloads/">Go to Downloads</a></p>
+              </div>
+
+              <div class="carousel-card" data-carousel-card data-step-label="Curiosity thread">
+                <h3>Step 6: Curiosity thread (optional)</h3>
+                <p>Optional: explore a Welsh place-name or story shared by the facilitator. This is only if you want a little extra interest between sessions.</p>
+              </div>
+            </div>
+
+            <div class="stepbar" role="tablist" aria-label="Jump to a step">
+              <button class="stepchip" type="button" data-stepchip>Get Ready</button>
+              <button class="stepchip" type="button" data-stepchip>More Get Ready</button>
+              <button class="stepchip" type="button" data-stepchip>Live session</button>
+              <button class="stepchip" type="button" data-stepchip>After the session</button>
+              <button class="stepchip" type="button" data-stepchip>Downloads</button>
+              <button class="stepchip" type="button" data-stepchip>Curiosity thread</button>
+            </div>
+          </div>
+
+          <div class="cta-row" aria-label="Useful links">
+            <a class="cta" href="/y-cam-cyntaf/downloads/">Downloads</a>
+            <a class="cta" href="/y-cam-cyntaf/support/">Support and contact</a>
+          </div>
+
+        </div>
       </div>
-
-      <div class="carousel-track" id="track" aria-live="polite"></div>
-
-      <div class="stepbar" id="stepbar" role="tablist" aria-label="Steps"></div>
     </div>
-
   </div>
-
-  <script>
-    (function(){
-      const steps = [
-        {
-          key: "get-ready",
-          label: "Get Ready",
-          title: "Step 1: Get Ready",
-          body: "Post one simple check-in in the WhatsApp group. A single “Shwmae” is perfect. This is just to help you feel less alone before the session."
-        },
-        {
-          key: "more-get-ready",
-          label: "More Get Ready",
-          title: "Step 2: More Get Ready",
-          body: "Watch the short “Popti Ping & Hoffi Coffi” video (link from your facilitator). Notice the sounds. No test. If you want, jot down one phrase you like."
-        },
-        {
-          key: "live-session",
-          label: "Live session",
-          title: "Step 3: Live session",
-          body: "Bring your chosen phrase to the session if you feel up to it. You can participate quietly. Listening still counts as learning."
-        },
-        {
-          key: "after-session",
-          label: "After the session",
-          title: "Step 4: After the session",
-          body: "After the live session, send one tiny reflection: one word you recognised, one moment you enjoyed, or one thing you want to try again."
-        },
-        {
-          key: "downloads",
-          label: "Downloads",
-          title: "Step 5: Downloads",
-          body: "If you prefer offline: use Downloads for printable versions as they are added. You can also Print → Save as PDF from your browser."
-        },
-        {
-          key: "curiosity",
-          label: "Curiosity thread",
-          title: "Step 6: Curiosity thread",
-          body: "Optional: explore a Welsh place-name or story shared by the facilitator. This is only if you want a little extra interest between sessions."
-        }
-      ];
-
-      const track = document.getElementById("track");
-      const stepbar = document.getElementById("stepbar");
-      const btnPrev = document.getElementById("btnPrev");
-      const btnNext = document.getElementById("btnNext");
-
-      let i = 0;
-      const cards = [];
-      const chips = [];
-
-      function buildOnce(){
-        // Build cards once
-        steps.forEach((s, idx) => {
-          const card = document.createElement("div");
-          card.className = "carousel-card";
-          card.setAttribute("data-step", s.key);
-
-          const h = document.createElement("h3");
-          h.textContent = s.title;
-
-          const p = document.createElement("p");
-          p.textContent = s.body;
-
-          card.appendChild(h);
-          card.appendChild(p);
-          track.appendChild(card);
-          cards.push(card);
-
-          const chip = document.createElement("button");
-          chip.type = "button";
-          chip.className = "stepchip";
-          chip.textContent = s.label;
-          chip.setAttribute("role","tab");
-          chip.addEventListener("click", () => { i = idx; updateUI(); });
-          stepbar.appendChild(chip);
-          chips.push(chip);
-        });
-      }
-
-      function updateUI(){
-        const left = (i - 1 + steps.length) % steps.length;
-        const right = (i + 1) % steps.length;
-
-        cards.forEach((card, idx) => {
-          card.classList.remove("is-active","is-left","is-right","is-hidden");
-          if(idx === i) card.classList.add("is-active");
-          else if(idx === left) card.classList.add("is-left");
-          else if(idx === right) card.classList.add("is-right");
-          else card.classList.add("is-hidden");
-        });
-
-        chips.forEach((chip, idx) => {
-          const active = idx === i;
-          chip.classList.toggle("is-active", active);
-          chip.setAttribute("aria-selected", active ? "true" : "false");
-        });
-      }
-
-      btnPrev.addEventListener("click", () => { i = (i - 1 + steps.length) % steps.length; updateUI(); });
-      btnNext.addEventListener("click", () => { i = (i + 1) % steps.length; updateUI(); });
-
-      buildOnce();
-      updateUI();
-    })();
-  </script>
 
   <script src="/y-cam-cyntaf/assets/js/layout.js"></script>
   <script src="/y-cam-cyntaf/assets/js/main.js"></script>
