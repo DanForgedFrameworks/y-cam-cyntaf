@@ -968,3 +968,81 @@ li{margin:0 0 6px 0}
     </ul>
   </div>
 </div>
+
+/* =========================================================
+   Session carousel: bigger cards, less opacity, centred text
+   ========================================================= */
+
+/* Make the carousel area feel roomier */
+.carousel{
+  padding: 18px;
+}
+
+/* Taller track so cards have more vertical plane */
+.carousel-track{
+  min-height: 340px; /* was ~210; adjust to taste */
+}
+
+/* All cards share same sizing */
+.carousel-card{
+  width: min(820px, 96%);
+  min-height: 300px;            /* taller card */
+  padding: 24px;
+  background: rgba(16,26,53,0.92);  /* less transparent than 0.75 */
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Active card: slightly “lifted” and most readable */
+.carousel-card.is-active{
+  opacity: 1;
+  background: rgba(16,26,53,0.96);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.60);
+}
+
+/* Side cards: keep them consistent size, just reduce opacity */
+.carousel-card.is-left,
+.carousel-card.is-right{
+  opacity: 0.28;
+}
+
+/* Centre content inside the card */
+.carousel-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical centre */
+  align-items: center;      /* horizontal centre */
+  text-align: center;
+}
+
+/* Keep headings + text tidy */
+.carousel-card h3{
+  font-size: 18px;
+  margin: 0 0 12px 0;
+  max-width: 62ch;
+}
+.carousel-card p{
+  margin: 0;
+  max-width: 62ch;
+}
+
+/* If you have lists inside cards, keep them readable and centred */
+.carousel-card ul{
+  margin: 10px 0 0 0;
+  padding-left: 0;
+  list-style-position: inside;
+  max-width: 62ch;
+  text-align: left; /* optional: lists usually read better left aligned */
+}
+
+/* =========================================================
+   Mobile: keep the single-card behaviour and ensure height works
+   ========================================================= */
+@media (max-width: 700px){
+  .carousel-track{ min-height: 0; }
+  .carousel-card{
+    min-height: 0;
+    padding: 20px 16px;
+    text-align: center;
+  }
+}
+
