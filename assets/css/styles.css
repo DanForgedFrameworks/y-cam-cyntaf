@@ -317,13 +317,15 @@ li{margin:0 0 6px 0}
 }
 .session-summary p{margin-bottom:8px}
 
-/* Carousel */
+/* =========================================================
+   Carousel
+   ========================================================= */
 .carousel{
   margin-top:14px;
   background: rgba(255,255,255,0.02);
   border:1px solid rgba(255,255,255,0.10);
   border-radius: 18px;
-  padding:16px;
+  padding:18px;
 }
 .carousel-top{
   display:flex;
@@ -350,35 +352,47 @@ li{margin:0 0 6px 0}
 .carousel-track{
   position:relative;
   margin-top:12px;
-  min-height: 210px;
+  min-height: 340px; /* taller track */
 }
+
 .carousel-card{
   position:absolute;
   top:0;
   left:50%;
-  width: min(720px, 96%);
+  width: min(820px, 96%);
+  min-height: 300px;
   transform: translateX(-50%) scale(0.92);
   opacity:0;
   pointer-events:none;
   transition: transform 180ms ease, opacity 180ms ease;
-  background: rgba(16,26,53,0.75);
-  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(16,26,53,0.92);
+  border:1px solid rgba(255,255,255,0.12);
   border-radius: 18px;
-  padding:20px;
+  padding:24px;
+
+  /* centred content */
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
 .carousel-card.is-active{
   opacity:1;
   pointer-events:auto;
   transform: translateX(-50%) scale(1);
   z-index:3;
+  background: rgba(16,26,53,0.96);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.60);
 }
 .carousel-card.is-left{
-  opacity:0.35;
+  opacity:0.28;
   transform: translateX(calc(-50% - 260px)) scale(0.90);
   z-index:2;
 }
 .carousel-card.is-right{
-  opacity:0.35;
+  opacity:0.28;
   transform: translateX(calc(-50% + 260px)) scale(0.90);
   z-index:2;
 }
@@ -388,11 +402,23 @@ li{margin:0 0 6px 0}
 }
 
 .carousel-card h3{
-  margin:0 0 8px 0;
-  font-size:16px;
+  margin:0 0 12px 0;
+  font-size:18px;
   color:#fff;
+  max-width: 62ch;
 }
-.carousel-card p{margin:0; color:rgba(255,255,255,0.80)}
+.carousel-card p{
+  margin:0;
+  color:rgba(255,255,255,0.80);
+  max-width: 62ch;
+}
+.carousel-card ul{
+  margin: 10px 0 0 0;
+  padding-left: 0;
+  list-style-position: inside;
+  max-width: 62ch;
+  text-align: left;
+}
 
 .stepbar{
   display:flex;
@@ -449,7 +475,160 @@ li{margin:0 0 6px 0}
 }
 .cta.help:hover{filter:none; background: rgba(255,90,90,0.10)}
 
-/* Footer */
+/* Hide bottom-page "Need help now?" CTA everywhere */
+.cta-row .cta.help{
+  display:none !important;
+}
+
+/* =========================================================
+   Orientation: video block
+   ========================================================= */
+.orient-video { margin-top: 10px; }
+.video-frame{
+  margin-top: 10px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+}
+.video-frame iframe{
+  display:block;
+  width:100%;
+  aspect-ratio: 16 / 9;
+  border:0;
+  background: rgba(0,0,0,0.25);
+}
+
+/* Orientation: softer dividers */
+.soft-divider{
+  margin: 18px 0;
+  border: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.10);
+}
+
+/* Screen-reader helper heading */
+.sr-heading{
+  position:absolute;
+  left:-9999px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+/* =========================================================
+   Orientation: reveal cards (single source of truth)
+   ========================================================= */
+.reveal-grid{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.reveal-card{
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(16,26,53,0.55);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 190px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Both faces fill the card */
+.reveal-front,
+.reveal-back{
+  position: absolute;
+  inset: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+/* FRONT: centre fully */
+.reveal-front{
+  justify-content: center;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-front h3{
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.reveal-front .hint{
+  margin: 0;
+  color: rgba(255,255,255,0.70);
+  font-size: 14px;
+}
+
+/* BACK: vertically centred, scroll if needed */
+.reveal-back{
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.reveal-back-inner{
+  width: 100%;
+  max-width: 44ch;
+  max-height: 100%;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.reveal-back ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
+}
+
+.reveal-back li{ margin: 0 0 10px 0; }
+.reveal-back li:last-child{ margin-bottom: 0; }
+
+/* Reveal on hover OR focus */
+.reveal-card:hover .reveal-front,
+.reveal-card:focus .reveal-front,
+.reveal-card:focus-within .reveal-front{
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.reveal-card:hover .reveal-back,
+.reveal-card:focus .reveal-back,
+.reveal-card:focus-within .reveal-back{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Focus ring */
+.reveal-card:focus{
+  box-shadow: 0 0 0 3px rgba(245,154,35,0.35), var(--shadow);
+  border-color: rgba(245,154,35,0.45);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .reveal-front, .reveal-back{ transition:none; }
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
 .sitefooter{
   margin-top:26px;
   background: rgba(16,26,53,0.70);
@@ -487,7 +666,9 @@ li{margin:0 0 6px 0}
   border-top:1px solid rgba(255,255,255,0.10);
 }
 
-/* Responsive */
+/* =========================================================
+   Responsive
+   ========================================================= */
 @media (max-width: 980px){
   .pagelayout.has-sidebar{grid-template-columns: 1fr}
   .coursehub{position:relative; top:auto}
@@ -504,243 +685,8 @@ li{margin:0 0 6px 0}
     padding-left:16px;
     padding-right:16px;
   }
-}
 
-/* Hide bottom-page "Need help now?" CTA everywhere */
-.cta-row .cta.help{
-
-  /* Orientation: video block */
-.orient-video { margin-top: 10px; }
-.video-frame{
-  margin-top: 10px;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.03);
-}
-.video-frame iframe{
-  display:block;
-  width:100%;
-  aspect-ratio: 16 / 9;
-  border:0;
-  background: rgba(0,0,0,0.25);
-}
-
-/* Orientation: softer dividers */
-.soft-divider{
-  margin: 18px 0;
-  border: 0;
-  height: 1px;
-  background: rgba(255,255,255,0.10);
-}
-
-/* Screen-reader helper heading (keeps structure without visual noise) */
-.sr-heading{
-  position:absolute;
-  left:-9999px;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-}
-
-/* Orientation: reveal cards */
-.reveal-grid{
-  margin-top: 12px;
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.reveal-card{
-  position: relative;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(16,26,53,0.55);
-  box-shadow: var(--shadow);
-  padding: 16px;
-  min-height: 180px;
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
-}
-
-.reveal-card h3{
-  margin:0 0 8px 0;
-  font-size: 18px;
-}
-
-.reveal-front{
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-
-.reveal-back{
-  position:absolute;
-  inset: 16px;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 180ms ease, transform 180ms ease;
-  pointer-events:none;
-}
-
-.reveal-back ul{
-  margin: 0;
-  padding-left: 18px;
-}
-
-.reveal-card:hover .reveal-front,
-.reveal-card:focus .reveal-front{
-  opacity: 0;
-  transform: translateY(-6px);
-}
-
-.reveal-card:hover .reveal-back,
-.reveal-card:focus .reveal-back{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events:auto;
-}
-
-/* Focus visibility */
-.reveal-card:focus{
-  box-shadow: 0 0 0 3px rgba(245,154,35,0.35), var(--shadow);
-  border-color: rgba(245,154,35,0.45);
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .reveal-front, .reveal-back{ transition:none; }
-}
-
-/* Responsive */
-@media (max-width: 980px){
-  .reveal-grid{ grid-template-columns: 1fr; }
-  .reveal-card{ min-height: 0; }
-  .reveal-back{ position: static; inset:auto; opacity: 1; transform:none; pointer-events:auto; }
-  .reveal-front{ opacity: 1; transform:none; }
-  .reveal-card:hover .reveal-front,
-  .reveal-card:focus .reveal-front{
-    opacity: 1;
-    transform:none;
-  }
-}
-/* =========================================================
-   Mobile fix: carousel + chips overlapping
-   Make carousel single-card (no overlap) on small screens
-   ========================================================= */
-
-@media (max-width: 700px){
-
-  /* Give the whole carousel some breathing room */
-  .carousel{
-    padding: 14px;
-  }
-
-  /* Ensure the top controls always sit above anything */
-  .carousel-top{
-    position: relative;
-    z-index: 10;
-    gap: 10px;
-  }
-
-  /* Buttons: full clarity on mobile */
-  .carousel-btn{
-    padding: 12px 14px;
-    min-width: 120px;
-  }
-
-  /* Stop the absolute-position “stack” on mobile */
-  .carousel-track{
-    position: relative;
-    min-height: 0;          /* important: stop reserving weird space */
-    margin-top: 12px;
-  }
-
-  /* Convert cards to normal document flow */
-  .carousel-card{
-    position: static;
-    top: auto;
-    left: auto;
-    width: 100%;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-    margin: 0;
-    z-index: auto;
-  }
-
-  /* Only show the active card on mobile */
-  .carousel-card.is-left,
-  .carousel-card.is-right,
-  .carousel-card.is-hidden{
-    display: none;
-  }
-
-  .carousel-card.is-active{
-    display: block;
-  }
-
-  /* Make sure long card content doesn’t visually spill */
-  .carousel-card{
-    overflow: hidden;
-  }
-
-  /* Chips: keep them below the card, and make them readable */
-  .stepbar{
-    position: relative;
-    z-index: 5;
-    margin-top: 14px;
-    gap: 10px;
-
-    /* optional but helps: a neat 2-column layout */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .stepchip{
-    width: 100%;
-    text-align: center;
-    padding: 10px 12px;
-    border-radius: 999px;
-
-    /* more solid background so they do not look “ghosted” */
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.18);
-  }
-
-  .stepchip.is-active{
-    background: rgba(245,154,35,0.22);
-    border-color: rgba(245,154,35,0.70);
-  }
-
-  /* Bottom CTAs on mobile: stack nicely */
-  .cta-row{
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cta{
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Smaller phones: chips become 1 column */
-@media (max-width: 420px){
-  .stepbar{
-    grid-template-columns: 1fr;
-  }
-}
-
-  display:none !important;
-}
-
-
-/* =========================================================
-   Mobile carousel: stop absolute cards overlapping content below
-   ========================================================= */
-@media (max-width: 980px){
-
-  /* Let carousel content take up real height in the page flow */
+  /* Mobile carousel: single-card (no overlap) */
   .carousel-track{
     position: relative;
     min-height: 0;
@@ -749,44 +695,31 @@ li{margin:0 0 6px 0}
     padding-bottom: 8px;
   }
 
-  /* Turn the stacked/absolute cards into a normal card that doesn't overlap other UI */
   .carousel-card{
     position: relative;
     left: auto;
     top: auto;
     width: 100%;
+    min-height: 0;
     transform: none !important;
     opacity: 1 !important;
     pointer-events: auto;
     margin: 0;
+    display: block; /* back to normal flow */
+    text-align: left;
   }
 
-  /* Hide non-active cards in mobile (simple, readable carousel) */
   .carousel-card.is-left,
   .carousel-card.is-right,
   .carousel-card.is-hidden{
     display: none !important;
   }
 
-  /* Keep the active card visible */
   .carousel-card.is-active{
     display: block !important;
+    box-shadow: none;
   }
 
-  /* Ensure the step chips row sits above any card visuals */
-  .stepbar{
-    position: relative;
-    z-index: 5;
-    margin-top: 14px;
-  }
-
-  /* If you have CTAs directly under the carousel, keep them on top too */
-  .cta-row{
-    position: relative;
-    z-index: 5;
-  }
-
-  /* Make the top buttons a bit more stable on small screens */
   .carousel-top{
     flex-wrap: wrap;
     gap: 10px;
@@ -796,144 +729,42 @@ li{margin:0 0 6px 0}
     min-width: 140px;
     justify-content: center;
   }
-}
 
-/* =========================================================
-   Orientation: hover / tap reveal cards (single source of truth)
-   Requirements:
-   - Front: horizontally + vertically centred
-   - Back: vertically centred (not justified), horizontally centred
-   - No clipping: back scrolls if content is long
-   - Mobile: tap toggles via focus (hover not required)
-   ========================================================= */
-
-.reveal-grid{
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  align-items: stretch;
-}
-
-.reveal-card{
-  position: relative;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(16,26,53,0.55);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  min-height: 190px;
-  cursor: pointer;
-  outline: none;
-}
-
-/* Make both faces fill the card */
-.reveal-front,
-.reveal-back{
-  position: absolute;
-  inset: 0;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* horizontal centring */
-  text-align: center;
-  transition: opacity 160ms ease, transform 160ms ease;
-}
-
-/* FRONT: centre it fully */
-.reveal-front{
-  justify-content: center;   /* vertical centring */
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-front h3{
-  margin: 0 0 8px 0;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.reveal-front .hint{
-  margin: 0;
-  color: rgba(255,255,255,0.70);
-  font-size: 14px;
-}
-
-/* BACK: vertically centred but NOT justified */
-.reveal-back{
-  justify-content: center;   /* vertical centring */
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-}
-
-/* Make long back content scroll rather than clip */
-.reveal-back-inner{
-  width: 100%;
-  max-width: 44ch;
-  max-height: 100%;
-  overflow: auto;
-  padding-right: 6px; /* gives scrollbar space */
-}
-
-/* Bullet list: natural spacing (not justified) */
-.reveal-back ul{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: rgba(255,255,255,0.82);
-  line-height: 1.55;
-}
-
-.reveal-back li{
-  margin: 0 0 10px 0;
-}
-
-.reveal-back li:last-child{
-  margin-bottom: 0;
-}
-
-/* Reveal on hover OR keyboard focus */
-.reveal-card:hover .reveal-front,
-.reveal-card:focus .reveal-front,
-.reveal-card:focus-within .reveal-front{
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-.reveal-card:hover .reveal-back,
-.reveal-card:focus .reveal-back,
-.reveal-card:focus-within .reveal-back{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-/* Strong focus ring */
-.reveal-card:focus{
-  box-shadow: 0 0 0 3px rgba(245,154,35,0.35), var(--shadow);
-  border-color: rgba(245,154,35,0.45);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .reveal-front, .reveal-back{ transition: none; }
-}
-
-/* Mobile: 1 column, and show BOTH states without hover dependency
-   (front stays visible, back shown beneath it)
-*/
-@media (max-width: 980px){
-  .reveal-grid{
-    grid-template-columns: 1fr;
+  .stepbar{
+    position: relative;
+    z-index: 5;
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .reveal-card{
-    min-height: 0;
-    cursor: default;
+  .stepchip{
+    width: 100%;
+    text-align: center;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.18);
   }
 
+  .stepchip.is-active{
+    background: rgba(245,154,35,0.22);
+    border-color: rgba(245,154,35,0.70);
+  }
+
+  .cta-row{
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    z-index: 5;
+  }
+  .cta{
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Reveal cards: 1 column, both states visible (no hover dependency) */
+  .reveal-grid{ grid-template-columns: 1fr; }
+  .reveal-card{ min-height: 0; cursor: default; }
   .reveal-front,
   .reveal-back{
     position: relative;
@@ -942,107 +773,16 @@ li{margin:0 0 6px 0}
     opacity: 1 !important;
     pointer-events: auto !important;
   }
-
-  .reveal-front{
-    padding-bottom: 10px;
-  }
-
-  .reveal-back{
-    padding-top: 0;
-  }
-
-  .reveal-front .hint{
-    display: none;
-  }
-
+  .reveal-front{ padding-bottom: 10px; }
+  .reveal-back{ padding-top: 0; }
+  .reveal-front .hint{ display: none; }
   .reveal-back-inner{
     max-height: none;
     overflow: visible;
     padding-right: 0;
   }
 }
-<div class="reveal-back">
-  <div class="reveal-back-inner">
-    <ul>
-      <li>...</li>
-    </ul>
-  </div>
-</div>
 
-/* =========================================================
-   Session carousel: bigger cards, less opacity, centred text
-   ========================================================= */
-
-/* Make the carousel area feel roomier */
-.carousel{
-  padding: 18px;
+@media (max-width: 420px){
+  .stepbar{ grid-template-columns: 1fr; }
 }
-
-/* Taller track so cards have more vertical plane */
-.carousel-track{
-  min-height: 340px; /* was ~210; adjust to taste */
-}
-
-/* All cards share same sizing */
-.carousel-card{
-  width: min(820px, 96%);
-  min-height: 300px;            /* taller card */
-  padding: 24px;
-  background: rgba(16,26,53,0.92);  /* less transparent than 0.75 */
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-/* Active card: slightly “lifted” and most readable */
-.carousel-card.is-active{
-  opacity: 1;
-  background: rgba(16,26,53,0.96);
-  box-shadow: 0 18px 55px rgba(0,0,0,0.60);
-}
-
-/* Side cards: keep them consistent size, just reduce opacity */
-.carousel-card.is-left,
-.carousel-card.is-right{
-  opacity: 0.28;
-}
-
-/* Centre content inside the card */
-.carousel-card{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* vertical centre */
-  align-items: center;      /* horizontal centre */
-  text-align: center;
-}
-
-/* Keep headings + text tidy */
-.carousel-card h3{
-  font-size: 18px;
-  margin: 0 0 12px 0;
-  max-width: 62ch;
-}
-.carousel-card p{
-  margin: 0;
-  max-width: 62ch;
-}
-
-/* If you have lists inside cards, keep them readable and centred */
-.carousel-card ul{
-  margin: 10px 0 0 0;
-  padding-left: 0;
-  list-style-position: inside;
-  max-width: 62ch;
-  text-align: left; /* optional: lists usually read better left aligned */
-}
-
-/* =========================================================
-   Mobile: keep the single-card behaviour and ensure height works
-   ========================================================= */
-@media (max-width: 700px){
-  .carousel-track{ min-height: 0; }
-  .carousel-card{
-    min-height: 0;
-    padding: 20px 16px;
-    text-align: center;
-  }
-}
-
