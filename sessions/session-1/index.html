@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Y Cam Cyntaf | Session 1</title>
   <link rel="stylesheet" href="/y-cam-cyntaf/assets/css/styles.css" />
+
+  <!-- Small local CSS to guarantee transitions (safe even if styles.css already has these) -->
+  <style>
+    /* Only affects Session 1’s carousel cards */
+    .carousel-card{
+      transition: transform 280ms ease, opacity 280ms ease;
+      will-change: transform, opacity;
+    }
+  </style>
 </head>
 <body>
   <div data-page-content data-sidebar="true" data-active="session-1">
@@ -79,21 +88,15 @@
       const btnNext = document.getElementById("btnNext");
 
       let i = 0;
+      const cards = [];
+      const chips = [];
 
-      function render(){
-        track.innerHTML = "";
-        stepbar.innerHTML = "";
-
-        const left = (i - 1 + steps.length) % steps.length;
-        const right = (i + 1) % steps.length;
-
+      function buildOnce(){
+        // Build cards once
         steps.forEach((s, idx) => {
           const card = document.createElement("div");
           card.className = "carousel-card";
-          if(idx === i) card.classList.add("is-active");
-          else if(idx === left) card.classList.add("is-left");
-          else if(idx === right) card.classList.add("is-right");
-          else card.classList.add("is-hidden");
+          card.setAttribute("data-step", s.key);
 
           const h = document.createElement("h3");
           h.textContent = s.title;
@@ -104,22 +107,43 @@
           card.appendChild(h);
           card.appendChild(p);
           track.appendChild(card);
+          cards.push(card);
 
           const chip = document.createElement("button");
           chip.type = "button";
-          chip.className = "stepchip" + (idx === i ? " is-active" : "");
+          chip.className = "stepchip";
           chip.textContent = s.label;
           chip.setAttribute("role","tab");
-          chip.setAttribute("aria-selected", idx === i ? "true" : "false");
-          chip.addEventListener("click", () => { i = idx; render(); });
+          chip.addEventListener("click", () => { i = idx; updateUI(); });
           stepbar.appendChild(chip);
+          chips.push(chip);
         });
       }
 
-      btnPrev.addEventListener("click", () => { i = (i - 1 + steps.length) % steps.length; render(); });
-      btnNext.addEventListener("click", () => { i = (i + 1) % steps.length; render(); });
+      function updateUI(){
+        const left = (i - 1 + steps.length) % steps.length;
+        const right = (i + 1) % steps.length;
 
-      render();
+        cards.forEach((card, idx) => {
+          card.classList.remove("is-active","is-left","is-right","is-hidden");
+          if(idx === i) card.classList.add("is-active");
+          else if(idx === left) card.classList.add("is-left");
+          else if(idx === right) card.classList.add("is-right");
+          else card.classList.add("is-hidden");
+        });
+
+        chips.forEach((chip, idx) => {
+          const active = idx === i;
+          chip.classList.toggle("is-active", active);
+          chip.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      }
+
+      btnPrev.addEventListener("click", () => { i = (i - 1 + steps.length) % steps.length; updateUI(); });
+      btnNext.addEventListener("click", () => { i = (i + 1) % steps.length; updateUI(); });
+
+      buildOnce();
+      updateUI();
     })();
   </script>
 
