@@ -1563,7 +1563,9 @@
         }
 
         var json = JSON.stringify(payload);
-        var blob = new Blob([json], { type: "application/json" });
+
+// IMPORTANT: send as text/plain to avoid CORS/preflight issues
+        var blob = new Blob([json], { type: "text/plain;charset=UTF-8" });
 
         var ok = navigator.sendBeacon(APPS_SCRIPT_URL, blob);
 
