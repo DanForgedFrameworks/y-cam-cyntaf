@@ -7,7 +7,10 @@
 
   const path = normalisePath(window.location.pathname);
 
-  const isHome = path === SITE_ROOT || path === "/y-cam-cyntaf/" || path === "/y-cam-cyntaf/index.html";
+  const isHome =
+    path === SITE_ROOT ||
+    path === "/y-cam-cyntaf/" ||
+    path === "/y-cam-cyntaf/index.html";
 
   const navItems = [
     { href: SITE_ROOT, label: "Home", key: "home" },
@@ -18,9 +21,9 @@
     { href: SITE_ROOT + "sessions/session-4/", label: "Session 4", key: "s4" },
     { href: SITE_ROOT + "sessions/session-5/", label: "Session 5", key: "s5" },
     { href: SITE_ROOT + "sessions/session-6/", label: "Session 6", key: "s6" },
+    { href: SITE_ROOT + "benchmark/", label: "Distance travelled", key: "benchmark" },
     { href: SITE_ROOT + "downloads/", label: "Downloads", key: "downloads" },
     { href: SITE_ROOT + "support/", label: "Support and contact", key: "support" },
-    { href: SITE_ROOT + "benchmark/", label: "Distance travelled", key: "benchmark" },
   ];
 
   function getActiveKey() {
@@ -56,7 +59,9 @@
                 .map((n) => {
                   const isActive = n.key === activeKey;
                   return `<li>
-                    <a class="coursehub-link ${isActive ? "is-active" : ""}" href="${n.href}" ${isActive ? 'aria-current="page"' : ""}>
+                    <a class="coursehub-link ${isActive ? "is-active" : ""}" href="${n.href}" ${
+                      isActive ? 'aria-current="page"' : ""
+                    }>
                       ${n.label}
                     </a>
                   </li>`;
@@ -97,6 +102,7 @@
           <nav class="topnav" aria-label="Top navigation">
             <a class="topnav-pill ${activeKey === "home" ? "is-active" : ""}" href="${SITE_ROOT}">Home</a>
             <a class="topnav-pill ${activeKey === "downloads" ? "is-active" : ""}" href="${SITE_ROOT}downloads/">Downloads</a>
+            <a class="topnav-pill ${activeKey === "benchmark" ? "is-active" : ""}" href="${SITE_ROOT}benchmark/">Distance travelled</a>
             <a class="topnav-pill ${activeKey === "support" ? "is-active" : ""}" href="${SITE_ROOT}support/">Support and contact</a>
           </nav>
         `
@@ -118,8 +124,8 @@
             <p><strong>Navigation</strong></p>
             <ul class="footerlinks">
               <li><a href="${SITE_ROOT}orientation/">Orientation</a></li>
-              <li><a href="${SITE_ROOT}downloads/">Downloads</a></li>
               <li><a href="${SITE_ROOT}benchmark/">Distance travelled</a></li>
+              <li><a href="${SITE_ROOT}downloads/">Downloads</a></li>
               <li><a href="${SITE_ROOT}support/">Support and contact</a></li>
             </ul>
           </div>
