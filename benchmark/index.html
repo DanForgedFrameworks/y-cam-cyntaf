@@ -1563,9 +1563,9 @@
         }
 
         var json = JSON.stringify(payload);
-        var blob = new Blob([json], { type: "application/json" });
-
+        var blob = new Blob([json], { type: "text/plain;charset=utf-8" });
         var ok = navigator.sendBeacon(APPS_SCRIPT_URL, blob);
+
 
         if (ok) {
           var sentAt = nowISO();
