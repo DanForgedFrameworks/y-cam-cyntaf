@@ -6,7 +6,10 @@
     const nextBtn = root.querySelector("[data-carousel-next]");
     const chips = Array.from(root.querySelectorAll("[data-stepchip]"));
 
-    if (!track || cards.length === 0) return;
+    if (!track || cards.length === 0) {
+      console.warn("[carousel] Missing track or cards in:", root);
+      return;
+    }
 
     let index = 0;
 
@@ -46,28 +49,19 @@
       render();
     }
 
-    function next() {
-      goTo(index + 1);
-    }
-
-    function prev() {
-      goTo(index - 1);
-    }
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
 
     if (prevBtn) prevBtn.addEventListener("click", prev);
     if (nextBtn) nextBtn.addEventListener("click", next);
 
-    chips.forEach((chip, i) => {
-      chip.addEventListener("click", () => goTo(i));
-    });
+    chips.forEach((chip, i) => chip.addEventListener("click", () => goTo(i)));
 
-    // Keyboard support
     root.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     });
 
-    // Initial paint
     render();
   }
 
@@ -75,12 +69,17 @@
     document.querySelectorAll("[data-carousel]").forEach(initCarousel);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAll);
-  } else {
+  function initAllSoon() {
     initAll();
+    setTimeout(initAll, 50);
+    setTimeout(initAll, 250);
   }
 
-  // Re-init when layout.js injects the shell
-  window.addEventListener("layout:ready", initAll);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAllSoon);
+  } else {
+    initAllSoon();
+  }
+
+  window.addEventListener("layout:ready", initAllSoon);
 })();
