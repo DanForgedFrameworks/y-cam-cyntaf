@@ -1196,3 +1196,112 @@ a.btn-orange:focus-visible {
   border-color: rgba(17,24,39,0.10);
   cursor: default;
 }
+
+/* =========================================================
+   Global CTA styling (orange buttons) + Home centring
+   Uses layout.js: .pageshell[data-page-key="..."]
+   ========================================================= */
+
+:root{
+  --tidy-orange: #ff981d;
+  --tidy-orange-ink: #1b1205;
+}
+
+/* Never touch nav / sidebar / top strip pills */
+.topnav .topnav-pill,
+.coursehub .coursehub-link,
+.topstrip a{
+  background: unset;
+  box-shadow: unset;
+  border-radius: unset;
+}
+
+/* ---------
+   HOME: centre-align the welcome intro text
+   --------- */
+.pageshell[data-page-key="home"] .pagepanel-inner{
+  text-align: center;
+}
+
+/* Keep long body text readable if you have big paragraphs */
+.pageshell[data-page-key="home"] .pagepanel-inner p{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 75ch;
+}
+
+/* ---------
+   HOME: make Session buttons orange
+   This targets links pointing to /sessions/session-*/ on the HOME page only.
+   --------- */
+.pageshell[data-page-key="home"] .pagepanel-inner a[href*="/sessions/session-"]{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: var(--tidy-orange);
+  color: var(--tidy-orange-ink);
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(17,24,39,0.10);
+}
+
+.pageshell[data-page-key="home"] .pagepanel-inner a[href*="/sessions/session-"]:hover{
+  filter: brightness(0.98);
+}
+
+.pageshell[data-page-key="home"] .pagepanel-inner a[href*="/sessions/session-"]:focus-visible{
+  outline: 3px solid rgba(255,152,29,0.35);
+  outline-offset: 2px;
+}
+
+/* ---------
+   SUPPORT: make CTA buttons orange (Contact Tidy Butt, Emergency contacts, etc.)
+   This avoids turning normal text links orange by targeting "button-like" links only.
+   Works if those CTAs are <a> tags and are the main action in a card.
+   --------- */
+.pageshell[data-page-key="support"] .pagepanel-inner a{
+  /* no global changes to all support links */
+}
+
+/* CTA-like links inside the main content panel */
+.pageshell[data-page-key="support"] .pagepanel-inner a.btn,
+.pageshell[data-page-key="support"] .pagepanel-inner a.button,
+.pageshell[data-page-key="support"] .pagepanel-inner a.cta,
+.pageshell[data-page-key="support"] .pagepanel-inner a[role="button"],
+.pageshell[data-page-key="support"] .pagepanel-inner .card a:where(:first-child),
+.pageshell[data-page-key="support"] .pagepanel-inner .panel a:where(:first-child){
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--tidy-orange);
+  color: var(--tidy-orange-ink);
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(17,24,39,0.10);
+}
+
+/* Hover + focus */
+.pageshell[data-page-key="support"] .pagepanel-inner a.btn:hover,
+.pageshell[data-page-key="support"] .pagepanel-inner a.button:hover,
+.pageshell[data-page-key="support"] .pagepanel-inner a.cta:hover,
+.pageshell[data-page-key="support"] .pagepanel-inner a[role="button"]:hover{
+  filter: brightness(0.98);
+}
+
+.pageshell[data-page-key="support"] .pagepanel-inner a.btn:focus-visible,
+.pageshell[data-page-key="support"] .pagepanel-inner a.button:focus-visible,
+.pageshell[data-page-key="support"] .pagepanel-inner a.cta:focus-visible,
+.pageshell[data-page-key="support"] .pagepanel-inner a[role="button"]:focus-visible{
+  outline: 3px solid rgba(255,152,29,0.35);
+  outline-offset: 2px;
+}
+
