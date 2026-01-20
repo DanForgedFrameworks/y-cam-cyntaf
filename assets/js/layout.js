@@ -20,12 +20,14 @@
     { href: SITE_ROOT + "sessions/session-6/", label: "Session 6", key: "s6" },
     { href: SITE_ROOT + "downloads/", label: "Downloads", key: "downloads" },
     { href: SITE_ROOT + "support/", label: "Support and contact", key: "support" },
+    { href: SITE_ROOT + "benchmark/", label: "Distance travelled", key: "benchmark" },
   ];
 
   function getActiveKey() {
     if (path.includes("/orientation/")) return "orientation";
     if (path.includes("/downloads/")) return "downloads";
     if (path.includes("/support/")) return "support";
+    if (path.includes("/benchmark/")) return "benchmark";
     if (path.includes("/sessions/session-1/")) return "s1";
     if (path.includes("/sessions/session-2/")) return "s2";
     if (path.includes("/sessions/session-3/")) return "s3";
@@ -50,7 +52,7 @@
           <nav aria-label="Primary">
             <ul class="coursehub-list">
               ${navItems
-                .filter((n) => n.key !== "home") // home is still available via top bar logo
+                .filter((n) => n.key !== "home")
                 .map((n) => {
                   const isActive = n.key === activeKey;
                   return `<li>
@@ -117,6 +119,7 @@
             <ul class="footerlinks">
               <li><a href="${SITE_ROOT}orientation/">Orientation</a></li>
               <li><a href="${SITE_ROOT}downloads/">Downloads</a></li>
+              <li><a href="${SITE_ROOT}benchmark/">Distance travelled</a></li>
               <li><a href="${SITE_ROOT}support/">Support and contact</a></li>
             </ul>
           </div>
@@ -152,14 +155,11 @@
     ${footerHtml}
   `;
 
-  // Move page content into shell
   const target = shell.querySelector("#pagepanel-inner");
   target.appendChild(pageContentEl);
 
-  // Replace body
   document.body.innerHTML = "";
   document.body.appendChild(shell);
 
-  // Signal ready for other scripts (carousel)
   window.dispatchEvent(new Event("layout:ready"));
 })();
