@@ -148,6 +148,9 @@
 
   const shell = document.createElement("div");
   shell.className = "pageshell";
+  shell.setAttribute("data-page-key", activeKey);
+  shell.setAttribute("data-is-home", isHome ? "true" : "false");
+
   shell.innerHTML = `
     ${headerHtml}
     <main id="main" class="pagemain">
