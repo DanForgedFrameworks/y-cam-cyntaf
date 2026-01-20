@@ -148,6 +148,8 @@
 
   const shell = document.createElement("div");
   shell.className = "pageshell";
+
+  /* Key attributes so CSS can target the current page */
   shell.setAttribute("data-page-key", activeKey);
   shell.setAttribute("data-is-home", isHome ? "true" : "false");
 
@@ -170,6 +172,5 @@
   document.body.innerHTML = "";
   document.body.appendChild(shell);
 
-  window.__yccLayoutReady = true;
   window.dispatchEvent(new Event("layout:ready"));
 })();
