@@ -164,8 +164,12 @@
   const target = shell.querySelector("#pagepanel-inner");
   target.appendChild(pageContentEl);
 
-  document.body.innerHTML = "";
+   document.body.innerHTML = "";
   document.body.appendChild(shell);
 
+  // Make layout readiness detectable for any page scripts.
+  window.__yccLayoutReady = true;
+
   window.dispatchEvent(new Event("layout:ready"));
+
 })();
