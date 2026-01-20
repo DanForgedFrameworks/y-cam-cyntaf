@@ -1090,3 +1090,30 @@ a[href*="/sessions/session-6/"]:hover{
   filter: brightness(0.98);
 }
 
+/* Generic orange CTA class */
+.btn-orange,
+a.btn-orange {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--tidy-orange);
+  color: #1b1205;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(17,24,39,0.10);
+}
+
+.btn-orange:hover,
+a.btn-orange:hover {
+  filter: brightness(0.98);
+}
+
+.btn-orange:focus-visible,
+a.btn-orange:focus-visible {
+  outline: 3px solid rgba(255,152,29,0.35);
+  outline-offset: 2px;
+}
