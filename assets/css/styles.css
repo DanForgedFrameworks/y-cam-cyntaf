@@ -285,6 +285,22 @@ li{margin:0 0 6px 0}
   max-width: 75ch;
 }
 
+
+/* HOME: centre hero + make the supporting text wider */
+.pageshell[data-page-key="home"] .hero{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pageshell[data-page-key="home"] .hero .tagline,
+.pageshell[data-page-key="home"] .hero .intro,
+.pageshell[data-page-key="home"] .hero .tip{
+  max-width: 92ch; /* wider than before */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Home hero base */
 .hero{
   padding:22px 18px 10px;
