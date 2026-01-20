@@ -1,434 +1,509 @@
-<!doctype html>
-<html lang="en-GB">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tidy Butt: Y Cam Cyntaf | Distance Travelled (Confidence Check-in)</title>
+:root{
+  --tidy-orange:#ff981d;
+  --tidy-purple:#6b20d2;
+  --tidy-blue:#43a7e3;
 
-  <link rel="stylesheet" href="/y-cam-cyntaf/assets/css/styles.css" />
-</head>
+  --bg:#f5f5f5;
+  --panel:#ffffff;
 
-<body>
-  <div data-page-content data-sidebar="true">
-    <h1>Distance Travelled</h1>
-    <p class="small">
-      A private confidence check-in you can use in Session 1 and Session 6. This is not graded and you cannot fail.
-    </p>
+  --text:#111827;
+  --muted:#4b5563;
 
-    <!-- Distance Travelled component styling (light theme, only affects dt-* classes) -->
-    <style>
-      .dt-container{ width: min(1100px, 100%); margin: 0 auto; }
-      .dt-card{
-        background:#fff;
-        border: 1px solid rgba(67,167,227,0.22);
-        border-radius: 26px;
-        box-shadow: 0 0 0 1px rgba(67,167,227,0.18), 0 18px 55px rgba(67,167,227,0.14);
-        overflow:hidden;
-      }
-      .dt-header{
-        padding: 22px;
-        background: linear-gradient(90deg, rgba(107,32,210,0.10), rgba(67,167,227,0.10));
-        border-bottom: 1px solid rgba(17,24,39,0.10);
-      }
-      .dt-title{ margin:0 0 10px 0; font-size: 28px; line-height: 1.15; }
-      .dt-intro{ margin:0; color: rgba(17,24,39,0.72); line-height:1.6; max-width: 80ch; }
-      .dt-reassure{
-        margin-top: 12px;
-        padding: 12px 14px;
-        border-radius: 16px;
-        background: rgba(255,152,29,0.14);
-        border: 1px solid rgba(255,152,29,0.22);
-        color: rgba(17,24,39,0.86);
-      }
-      .dt-body{ padding: 22px; display:grid; gap: 14px; }
+  --line: rgba(17,24,39,0.12);
 
-      .dt-row{ display:grid; grid-template-columns: 1fr; gap: 12px; align-items:start; }
-      @media (min-width: 920px){
-        .dt-row{ grid-template-columns: 1.45fr 1fr; gap: 14px; }
-      }
+  --pill-purple:#5439b8;
+  --pill-blue:#279eca;
 
-      .dt-panel{
-        background:#fff;
-        border: 1px solid rgba(17,24,39,0.10);
-        border-radius: 20px;
-        padding: 16px;
-        box-shadow: 0 10px 24px rgba(17,24,39,0.06);
-      }
-      .dt-panel h2{ margin:0 0 8px 0; font-size: 16px; }
-      .dt-small, .dt-hint, .dt-message, .dt-footer-note{
-        margin:0;
-        color: rgba(17,24,39,0.68);
-        font-size: 13px;
-        line-height: 1.55;
-      }
-      .dt-hint{ margin-top: 8px; }
+  --radius:26px;
+  --shadow: 0 18px 40px rgba(17,24,39,0.10);
+  --glow: 0 0 0 1px rgba(67,167,227,0.22), 0 18px 55px rgba(67,167,227,0.18);
 
-      /* mode selector (keep subtle) */
-      .dt-seg{
-        display:inline-flex;
-        border: 1px solid rgba(17,24,39,0.12);
-        border-radius: 999px;
-        overflow:hidden;
-        background: rgba(17,24,39,0.03);
-      }
-      .dt-seg button{
-        appearance:none;
-        border:0;
-        background: transparent;
-        color: rgba(17,24,39,0.90);
-        padding: 10px 12px;
-        cursor:pointer;
-        font-weight: 800;
-        letter-spacing: 0.2px;
-        min-width: 140px;
-      }
-      .dt-seg button[aria-pressed="true"]{
-        background: rgba(84,57,184,0.14);
-      }
+  --header-offset: 160px;
+}
 
-      /* items */
-      fieldset.dt-item{
-        border: 1px solid rgba(17,24,39,0.10);
-        border-radius: 20px;
-        padding: 14px;
-        margin: 0;
-        background: rgba(17,24,39,0.02);
-      }
-      fieldset.dt-item:nth-of-type(odd){
-        background: rgba(67,167,227,0.06);
-        border-color: rgba(67,167,227,0.16);
-      }
-      fieldset.dt-item:nth-of-type(even){
-        background: rgba(255,152,29,0.08);
-        border-color: rgba(255,152,29,0.16);
-      }
-      .dt-legend{ padding:0 6px; font-weight: 900; line-height: 1.35; color: rgba(17,24,39,0.94); }
-      .dt-why{ margin: 8px 0 10px 0; color: rgba(17,24,39,0.72); font-size: 13px; line-height: 1.5; }
-      .dt-tag{
-        display:inline-flex;
-        align-items:center;
-        gap: 6px;
-        font-size: 12px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        border: 1px solid rgba(17,24,39,0.10);
-        background:#fff;
-        color: rgba(17,24,39,0.70);
-        margin-top: 6px;
-        width: fit-content;
-      }
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Aptos, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
 
-      .dt-scale-row{ display:grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
-      @media (max-width: 640px){ .dt-scale-row{ grid-template-columns: 1fr; } }
+a{color: var(--pill-blue)}
+a:hover{color:#1f7fb8}
+a:focus{outline:2px solid rgba(255,152,29,0.80); outline-offset:3px}
 
-      .dt-choice{
-        position: relative;
-        border: 1px solid rgba(17,24,39,0.10);
-        border-radius: 16px;
-        padding: 10px 10px 12px;
-        background: #fff;
-        min-height: 64px;
-        display:flex;
-        flex-direction:column;
-        gap: 6px;
-        justify-content: space-between;
-        box-shadow: 0 10px 18px rgba(17,24,39,0.05);
-      }
-      .dt-choice input{ position:absolute; inset:0; opacity:0; cursor:pointer; }
-      .dt-choice .dt-num{ font-size: 12px; color: rgba(17,24,39,0.55); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-      .dt-choice .dt-anchor{ font-weight: 900; font-size: 13px; line-height: 1.25; color: rgba(17,24,39,0.92); }
+.skip-link{
+  position:absolute;
+  left:-9999px; top:auto;
+  width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{
+  left:16px; top:12px;
+  width:auto; height:auto;
+  padding:10px 12px;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  z-index:9999;
+}
 
-      .dt-choice:has(input:checked){
-        border-color: rgba(255,152,29,0.55);
-        background: rgba(255,152,29,0.14);
-      }
-      .dt-choice:has(input:focus-visible){
-        outline: 3px solid rgba(255,152,29,0.35);
-        outline-offset: 2px;
-      }
+.pageshell{min-height:100vh; display:flex; flex-direction:column}
 
-      textarea.dt-textarea{
-        width:100%;
-        resize: vertical;
-        min-height: 74px;
-        max-height: 240px;
-        padding: 10px 10px;
-        border-radius: 16px;
-        border: 1px solid rgba(17,24,39,0.10);
-        background:#fff;
-        color: rgba(17,24,39,0.92);
-        font-family: inherit;
-        line-height: 1.45;
-      }
-      textarea.dt-textarea:focus-visible{
-        outline: 3px solid rgba(255,152,29,0.35);
-        outline-offset: 2px;
-      }
+.topstrip{
+  background: linear-gradient(90deg, var(--tidy-orange), #ffb24a);
+  color:#fff;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+.topstrip-inner{
+  max-width: 1400px;
+  margin:0 auto;
+  padding:10px 20px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  font-weight:800;
+}
+.topstrip a{
+  color:#fff;
+  text-decoration:none;
+  border-bottom:2px solid transparent;
+}
+.topstrip a:hover{border-bottom-color:#fff}
 
-      /* progress bar */
-      .dt-bar{
-        height: 12px;
-        border-radius: 999px;
-        background: rgba(17,24,39,0.08);
-        border: 1px solid rgba(17,24,39,0.10);
-        overflow: hidden;
-      }
-      .dt-bar > span{
-        display:block;
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, rgba(255,152,29,0.85), rgba(67,167,227,0.75));
-        border-radius: 999px;
-        transition: width 240ms ease;
-      }
+.siteheader{
+  background: linear-gradient(90deg, var(--tidy-purple), var(--tidy-blue));
+  box-shadow: 0 16px 38px rgba(17,24,39,0.18);
+  position: sticky;
+  top: 40px;
+  z-index: 1900;
+}
+.siteheader-inner{
+  max-width: 1400px;
+  margin:0 auto;
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:22px;
+}
 
-      /* action buttons = ORANGE */
-      .dt-actions, .dt-bottom-actions{
-        display:flex;
-        flex-wrap:wrap;
-        gap:10px;
-        align-items:center;
-        justify-content:flex-start;
-      }
-      .dt-btn{
-        appearance:none;
-        border: 1px solid rgba(0,0,0,0.10);
-        background: var(--tidy-orange);
-        color: #1b1205;
-        padding: 10px 12px;
-        border-radius: 999px;
-        cursor: pointer;
-        font-weight: 900;
-        letter-spacing: 0.2px;
-        font-size: 13px;
-        box-shadow: 0 10px 22px rgba(17,24,39,0.10);
-      }
-      .dt-btn.primary{ background: var(--tidy-orange); }
-      .dt-btn.danger{
-        background: #fff;
-        color: #b91c1c;
-        border-color: rgba(185,28,28,0.22);
-      }
-      .dt-btn:focus-visible{
-        outline: 3px solid rgba(255,152,29,0.35);
-        outline-offset: 2px;
-      }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:#fff;
+  flex: 0 0 auto;
+}
+.brand-logo{
+  width:82px;
+  height:82px;
+  border-radius:22px;
+  background: rgba(255,255,255,0.18);
+  padding:12px;
+  box-shadow: 0 14px 34px rgba(17,24,39,0.22);
+}
+.brand-title{font-size:28px; font-weight:900; letter-spacing:0.2px; color:#fff;}
+.brand-subtitle{font-size:15px; font-weight:800; opacity:0.92; color:#fff;}
 
-      .dt-status{ min-height: 1.2em; color: rgba(17,24,39,0.70); font-size: 13px; line-height: 1.4; }
-      .dt-status strong{ color: rgba(17,24,39,0.92); }
+.topnav{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-left: 18px;
+}
 
-      /* summary */
-      .dt-summary-grid{ display:grid; gap: 10px; margin-top: 10px; }
-      .dt-summary-box{
-        border: 1px solid rgba(17,24,39,0.10);
-        border-radius: 20px;
-        padding: 12px;
-        background:#fff;
-        box-shadow: 0 10px 20px rgba(17,24,39,0.06);
-      }
-      @media (min-width: 920px){
-        .dt-summary-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      }
+/* TOP NAV = PURPLE */
+.topnav-pill{
+  text-decoration:none;
+  color:#fff;
+  font-weight:900;
+  padding:12px 16px;
+  border-radius:999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(84,57,184,0.92);
+  box-shadow: 0 10px 26px rgba(17,24,39,0.18);
+  transition: transform 120ms ease, filter 120ms ease, background 120ms ease;
+}
+.topnav-pill:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+.topnav-pill:active{transform: translateY(0)}
+.topnav-pill.is-active{
+  background: rgba(84,57,184,1);
+  border-color: rgba(255,255,255,0.30);
+}
 
-      /* modal */
-      .dt-modal-overlay{
-        position: fixed;
-        inset: 0;
-        background: rgba(17,24,39,0.55);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 18px;
-        z-index: 9999;
-      }
-      .dt-modal-overlay[data-open="true"]{ display:flex; }
-      .dt-modal{
-        width: min(680px, 100%);
-        background: #fff;
-        border: 1px solid rgba(17,24,39,0.12);
-        border-radius: 20px;
-        box-shadow: 0 18px 40px rgba(17,24,39,0.16);
-        padding: 16px;
-      }
-      .dt-modal h3{ margin:0 0 8px 0; font-size: 16px; color: rgba(17,24,39,0.92); }
-      .dt-modal p{ margin:0 0 10px 0; color: rgba(17,24,39,0.70); font-size: 13px; line-height: 1.55; }
-      .dt-modal .dt-modal-box{
-        border: 1px solid rgba(17,24,39,0.10);
-        border-radius: 16px;
-        background: rgba(17,24,39,0.02);
-        padding: 12px;
-        margin-top: 10px;
-      }
-      .dt-modal-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; justify-content:flex-end; }
-    </style>
+.pagemain{flex:1}
+.pagelayout{
+  max-width: 1400px;
+  margin:0 auto;
+  padding:24px 20px 46px;
+  display:grid;
+  gap:22px;
+}
+.pagelayout.no-sidebar{grid-template-columns: 1fr}
+.pagelayout.has-sidebar{
+  grid-template-columns: 320px minmax(0, 1fr);
+  align-items:start;
+}
 
-    <main class="dt-container" id="dtMain">
-      <!-- Your existing markup unchanged -->
-      <section id="distance-travelled" class="dt-card" aria-labelledby="dt-title">
-        <header class="dt-header">
-          <h2 id="dt-title" class="dt-title">Distance Travelled: a private confidence check-in</h2>
+.pagepanel{
+  width:100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.pagepanel-inner{padding:34px}
 
-          <p class="dt-intro">
-            This is a gentle way to notice your progress. You can use it twice: once at the start (Session 1) and again at the end (Session 6).
-            It focuses on what you have <strong>noticed</strong>, <strong>tried</strong>, and <strong>recognised</strong>.
-          </p>
+.coursehub{
+  position: sticky;
+  top: calc(40px + 110px);
+  align-self:start;
+  height: fit-content;
+}
+.coursehub-inner{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:16px;
+}
+.coursehub-title{
+  margin:0 0 10px 0;
+  color: var(--muted);
+  font-weight:900;
+}
+.coursehub-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
 
-          <div class="dt-reassure" role="note" aria-label="Reassurance">
-            <strong>This is private, not graded, and you cannot fail.</strong>
-            Nothing is sent anywhere unless you choose to send it. If you save, it stays on this device only.
-          </div>
-        </header>
+/* SIDEBAR NAV = PURPLE */
+.coursehub-link{
+  display:block;
+  padding:12px 12px;
+  border-radius:16px;
+  text-decoration:none;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.18);
+  background: rgba(84,57,184,0.92);
+  box-shadow: 0 10px 22px rgba(17,24,39,0.12);
+  transition: transform 120ms ease, filter 120ms ease, border-color 120ms ease;
+}
+.coursehub-link:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.28);
+}
+.coursehub-link:active{transform: translateY(0)}
+.coursehub-link.is-active{
+  border-color: rgba(255,152,29,0.65);
+  box-shadow: 0 0 0 3px rgba(255,152,29,0.22), 0 10px 22px rgba(17,24,39,0.12);
+}
 
-        <div class="dt-body">
-          <div class="dt-row">
-            <section class="dt-panel dt-controls" aria-labelledby="dt-setup-title">
-              <h2 id="dt-setup-title">Choose your checkpoint</h2>
+h1{margin:0 0 12px 0; font-size:44px; letter-spacing:-0.3px}
+h2{margin:22px 0 12px 0; font-size:28px; letter-spacing:-0.2px}
+h3{margin:0 0 10px 0; font-size:20px}
+p{margin:0 0 14px 0; color: var(--muted); line-height:1.65; font-size: 16px}
+.small{font-size:14px; color: var(--muted)}
+ul{margin:0 0 12px 18px; color: var(--muted)}
+li{margin:0 0 6px 0}
 
-              <div class="dt-mode" aria-label="Checkpoint mode selector">
-                <span><strong>I'm doing:</strong></span>
-                <div class="dt-seg" role="group" aria-label="Start or End checkpoint">
-                  <button type="button" id="dtModeStart" aria-pressed="true">Start of course</button>
-                  <button type="button" id="dtModeEnd" aria-pressed="false">End of course</button>
-                </div>
-              </div>
+:target{ scroll-margin-top: var(--header-offset); }
 
-              <p class="dt-hint" id="dt-mode-hint"></p>
+.hero{padding: 26px 0 10px;}
+.hero .tagline{margin:0 0 12px 0; font-weight:900; color: rgba(17,24,39,0.70); font-size:18px;}
+.hero .intro{max-width: 88ch; font-size: 17px;}
+.hero .tip{max-width: 88ch; color: rgba(17,24,39,0.60);}
 
-              <p class="dt-small">
-                How to use the scale: pick the statement that matches how you feel <strong>today</strong>.
-                If you are unsure between two, choose the lower one. That keeps this low pressure.
-              </p>
+/* Tiles */
+.tilegrid{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:18px;
+}
+.tile{
+  position:relative;
+  border-radius: 26px;
+  overflow:hidden;
+  border:1px solid rgba(67,167,227,0.22);
+  box-shadow: var(--glow);
+  text-decoration:none;
+  color: var(--text);
+  min-height: 320px;
+  background: #fff;
+}
+.tile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform: scale(1.03);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+.tile::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(17,24,39,0.06) 0%, rgba(17,24,39,0.55) 70%, rgba(17,24,39,0.72) 100%);
+}
+.tile:hover img{transform: scale(1.07)}
+.tiletext{position:absolute; left:18px; right:18px; bottom:16px; z-index:2;}
+.tiletext .title{font-size:20px; font-weight:900; margin:0 0 6px; color:#fff}
+.tiletext .desc{margin:0; color:rgba(255,255,255,0.90); line-height:1.35; font-size:15px}
 
-              <p class="dt-footer-note">
-                Tip: If you want to keep this entirely offline with no saved data, you can still fill it in and use Print to save a PDF.
-              </p>
-            </section>
+/* Session links (LINK BUTTONS) = ORANGE */
+.sessionsblock{
+  margin-top:18px;
+  padding-top:16px;
+  border-top: 1px solid rgba(17,24,39,0.10);
+}
+.sessionlinks{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+}
+.sessionlinks a{
+  text-decoration:none;
+  font-weight:900;
+  border-radius: 18px;
+  padding:14px 14px;
+  background: var(--tidy-orange);
+  color:#1b1205;
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 12px 24px rgba(17,24,39,0.10);
+  transition: transform 120ms ease, filter 120ms ease;
+}
+.sessionlinks a:hover{transform: translateY(-1px); filter: brightness(1.03)}
+.sessionlinks a:active{transform: translateY(0)}
 
-            <section class="dt-panel dt-progress" aria-labelledby="dt-progress-title">
-              <h2 id="dt-progress-title">Your progress view</h2>
+/* Session summary blocks */
+.session-summary{
+  padding:22px 22px 18px;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid rgba(67,167,227,0.22);
+  box-shadow: var(--glow);
+}
 
-              <div class="dt-scoreline">
-                <div class="dt-score" id="dtScoreText">Overall: <strong>0</strong> out of <strong>0</strong></div>
-                <div class="dt-score" id="dtScorePct">0%</div>
-              </div>
+/* Carousel wrapper */
+.carousel{margin-top:16px; background: transparent; border: 0; padding: 0;}
+.carousel-top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 12px;}
 
-              <div class="dt-bar" aria-label="Overall progress bar">
-                <span id="dtBarFill"></span>
-              </div>
+/* CAROUSEL BUTTONS = ORANGE */
+.carousel-btn{
+  appearance:none;
+  border:none;
+  cursor:pointer;
+  border-radius:999px;
+  padding:12px 18px;
+  font-weight:900;
+  background: var(--tidy-orange);
+  color:#1b1205;
+  box-shadow: 0 12px 26px rgba(17,24,39,0.18);
+  transition: transform 120ms ease, filter 120ms ease;
+}
+.carousel-btn:hover{filter: brightness(1.04); transform: translateY(-1px)}
+.carousel-btn:active{transform: translateY(0)}
+.carousel-btn:disabled{opacity:0.40; cursor:not-allowed; transform:none}
 
-              <p class="dt-message" id="dtSupportMessage">
-                Small changes count. Even noticing a word in the wild is real progress.
-              </p>
+.carousel-track{position:relative; min-height: 420px;}
 
-              <div class="dt-actions" aria-label="Actions">
-                <button class="dt-btn primary" type="button" id="dtSaveBtn">Save on this device</button>
-                <button class="dt-btn" type="button" id="dtCopyBtn">Copy summary</button>
-                <button class="dt-btn" type="button" id="dtDocBtn">Download Word document</button>
-                <button class="dt-btn" type="button" id="dtPrintBtn">Print or Save as PDF</button>
-                <button class="dt-btn" type="button" id="dtSendBtn">Send to Tidy Butt</button>
-                <button class="dt-btn danger" type="button" id="dtResetBtn">Reset</button>
-              </div>
+.carousel-card{
+  position:absolute;
+  top:0;
+  left:50%;
+  width: min(980px, 96%);
+  min-height: 380px;
+  transform: translateX(-50%) scale(0.92);
+  opacity:0;
+  pointer-events:none;
+  transition: transform 200ms ease, opacity 200ms ease;
+  background:#fff;
+  border: 2px solid rgba(67,167,227,0.30);
+  border-radius: 26px;
+  padding: 30px;
+  box-shadow: var(--glow);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.carousel-card.is-active{opacity:1; pointer-events:auto; transform: translateX(-50%) scale(1); z-index:3;}
+.carousel-card.is-left{opacity:0.35; transform: translateX(calc(-50% - 310px)) scale(0.90); z-index:2;}
+.carousel-card.is-right{opacity:0.35; transform: translateX(calc(-50% + 310px)) scale(0.90); z-index:2;}
+.carousel-card.is-hidden{opacity:0; z-index:1;}
+.carousel-card h3{margin:0 0 12px 0; font-size:22px; color: var(--text); max-width: 68ch;}
+.carousel-card p{margin:0; color: rgba(17,24,39,0.72); max-width: 68ch; font-size: 17px;}
+.carousel-card ul{margin: 14px 0 0 0; padding-left: 0; list-style-position: inside; max-width: 68ch; text-align:left; color: rgba(17,24,39,0.70); font-size:16px;}
 
-              <div class="dt-status" id="dtStatus" aria-live="polite"></div>
-              <p class="dt-footer-note" id="dtLastSentNote"></p>
-            </section>
-          </div>
+/* Step chips = ORANGE emphasis */
+.stepbar{display:flex; flex-wrap:wrap; gap:12px; margin-top:16px;}
+.stepchip{
+  border:1px solid rgba(17,24,39,0.14);
+  background: rgba(17,24,39,0.04);
+  color: var(--text);
+  border-radius:999px;
+  padding:10px 14px;
+  font-weight:900;
+  cursor:pointer;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+.stepchip:hover{transform: translateY(-1px); border-color: rgba(255,152,29,0.45)}
+.stepchip.is-active{
+  background: rgba(255,152,29,0.18);
+  border-color: rgba(255,152,29,0.65);
+}
 
-          <form id="dtForm" class="dt-items" novalidate></form>
+/* CTAs (link buttons) = ORANGE */
+.cta-row{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid rgba(17,24,39,0.10);
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-decoration:none;
+  font-weight:900;
+  border-radius:999px;
+  padding:12px 18px;
+  border:1px solid rgba(0,0,0,0.08);
+  background: var(--tidy-orange);
+  color:#1b1205;
+  box-shadow: 0 12px 26px rgba(17,24,39,0.14);
+  transition: transform 120ms ease, filter 120ms ease;
+}
+.cta:hover{transform: translateY(-1px); filter: brightness(1.03)}
+.cta:active{transform: translateY(0)}
+.cta.help{display:none !important}
 
-          <div class="dt-bottom-actions" aria-label="After questions actions">
-            <button class="dt-btn primary" type="button" id="dtSaveBottomBtn">Save on this device</button>
-            <button class="dt-btn" type="button" id="dtTopBtn">Go to top of page</button>
-          </div>
+/* Reveal cards */
+.reveal-grid{margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch;}
+.reveal-card{
+  position: relative;
+  border-radius: 26px;
+  border: 1px solid rgba(67,167,227,0.22);
+  background: #fff;
+  box-shadow: var(--glow);
+  overflow: hidden;
+  min-height: 230px;
+  cursor: pointer;
+  outline: none;
+}
+.reveal-front,.reveal-back{
+  position:absolute; inset:0;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.reveal-front{justify-content:center; opacity:1; transform: translateY(0);}
+.reveal-front h3{margin:0 0 10px 0; color: var(--text); font-size:20px; font-weight:900;}
+.reveal-front .hint{margin:0; color: rgba(17,24,39,0.55); font-size:14px; font-weight:800;}
+.reveal-back{justify-content:center; opacity:0; transform: translateY(8px); pointer-events:none;}
+.reveal-back-inner{width:100%; max-width:48ch; max-height:100%; overflow:auto; padding-right:6px;}
+.reveal-back ul{margin:0; padding:0; list-style:none; color: rgba(17,24,39,0.70); line-height:1.65;}
+.reveal-back li{margin:0 0 12px 0;}
+.reveal-card:hover .reveal-front,
+.reveal-card:focus .reveal-front,
+.reveal-card:focus-within .reveal-front{opacity:0; transform: translateY(-8px);}
+.reveal-card:hover .reveal-back,
+.reveal-card:focus .reveal-back,
+.reveal-card:focus-within .reveal-back{opacity:1; transform: translateY(0); pointer-events:auto;}
+.reveal-card:focus{
+  box-shadow: 0 0 0 3px rgba(255,152,29,0.30), var(--glow);
+  border-color: rgba(255,152,29,0.55);
+}
 
-          <section class="dt-panel dt-summary" aria-labelledby="dtSummaryTitle">
-            <h2 id="dtSummaryTitle">Your checkpoint summary</h2>
-            <p class="dt-small" id="dtSummaryIntro">
-              This summary is private to you. It is designed to help you notice progress, not to judge you.
-            </p>
+@media (prefers-reduced-motion: reduce){
+  .reveal-front, .reveal-back{ transition:none; }
+}
 
-            <div class="dt-summary-grid" role="group" aria-label="Summary scores">
-              <div class="dt-summary-box" aria-label="Start score box">
-                <div class="dt-summary-label">Start of course</div>
-                <div class="dt-summary-value" id="dtSummaryStartValue">Not saved yet</div>
-                <div class="dt-summary-sub" id="dtSummaryStartSub">Complete and save your Start checkpoint to capture a baseline.</div>
-              </div>
+/* Footer */
+.sitefooter{
+  margin-top:28px;
+  background: linear-gradient(90deg, var(--tidy-purple), var(--tidy-blue));
+  border-top:1px solid rgba(255,255,255,0.18);
+}
+.sitefooter-inner{
+  max-width: 1400px;
+  margin:0 auto;
+  padding:22px 20px 26px;
+  color:#fff;
+}
+.footergrid{display:grid; grid-template-columns: 1.2fr 1fr 1fr; gap:18px; align-items:start;}
+.footerlogo{width:150px; height:auto; display:block; margin-bottom:10px; filter: drop-shadow(0 10px 22px rgba(17,24,39,0.25));}
+.footerlinks{list-style:none; padding:0; margin:0}
+.footerlinks li{margin:0 0 10px 0}
+.footerlinks a{color:rgba(255,255,255,0.92); text-decoration:none; border-bottom:2px solid transparent; font-weight:800;}
+.footerlinks a:hover{border-bottom-color: rgba(255,255,255,0.75)}
+.footerfineprint{margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.18);}
 
-              <div class="dt-summary-box" aria-label="End score box">
-                <div class="dt-summary-label">End of course</div>
-                <div class="dt-summary-value" id="dtSummaryEndValue">Not saved yet</div>
-                <div class="dt-summary-sub" id="dtSummaryEndSub">Complete and save your End checkpoint to see distance travelled.</div>
-              </div>
+@media (max-width: 980px){
+  .pagelayout.has-sidebar{grid-template-columns: 1fr}
+  .coursehub{position:relative; top:auto}
+  .tilegrid{grid-template-columns: 1fr}
+  .sessionlinks{grid-template-columns: 1fr}
+  .footergrid{grid-template-columns: 1fr}
+  .siteheader-inner{flex-direction:column; align-items:flex-start}
+  .topnav{margin-left:0; flex-wrap:wrap}
 
-              <div class="dt-summary-box" aria-label="Distance travelled box">
-                <div class="dt-summary-label">Distance travelled</div>
-                <div class="dt-summary-value" id="dtSummaryDistanceValue">Save both checkpoints to compare.</div>
-                <div class="dt-summary-sub" id="dtSummaryDistanceSub">Small changes count, including noticing and trying.</div>
-              </div>
-            </div>
+  .carousel-track{position: relative; min-height: 0; height: auto; margin-top: 12px; padding-bottom: 8px;}
+  .carousel-card{
+    position: relative;
+    left:auto; top:auto;
+    width: 100%;
+    min-height: 0;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+    display:block;
+    text-align:left;
+  }
+  .carousel-card.is-left,
+  .carousel-card.is-right,
+  .carousel-card.is-hidden{ display:none !important; }
 
-            <div class="dt-summary-guidance" aria-label="Guidance">
-              <h3 class="dt-summary-h3" id="dtGuidanceTitle">Support and next steps</h3>
-              <p class="dt-message" id="dtGuidanceMessage"></p>
+  .carousel-top{flex-wrap: wrap; gap: 10px;}
+  .carousel-btn{width:48%; min-width:140px; justify-content:center;}
 
-              <div class="dt-summary-lists" id="dtGuidanceLists" hidden>
-                <div class="dt-summary-list">
-                  <h4 class="dt-summary-h4">Strengths you can lean on</h4>
-                  <ul class="dt-summary-ul" id="dtStrengthsList"></ul>
-                </div>
+  .stepbar{margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr;}
+  .stepchip{width:100%; text-align:center; padding:10px 12px;}
 
-                <div class="dt-summary-list">
-                  <h4 class="dt-summary-h4">Confidence to expand next</h4>
-                  <ul class="dt-summary-ul" id="dtNextStepsList"></ul>
-                </div>
-              </div>
+  .cta-row{flex-direction:column; align-items:stretch;}
+  .cta{width:100%; justify-content:center;}
 
-              <p class="dt-footer-note" id="dtGuidanceFooter">
-                Reminder: this is private, not graded, and you cannot fail. Your scores are simply a way to notice what is changing over time.
-              </p>
-            </div>
-          </section>
-        </div>
-      </section>
-    </main>
+  .reveal-grid{ grid-template-columns: 1fr; }
+  .reveal-card{ min-height: 0; cursor: default; }
+  .reveal-front,.reveal-back{
+    position: relative;
+    inset:auto;
+    transform:none !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+  }
+  .reveal-front{ padding-bottom: 10px; }
+  .reveal-back{ padding-top: 0; }
+  .reveal-front .hint{ display:none; }
+  .reveal-back-inner{max-height:none; overflow:visible; padding-right:0;}
+}
 
-    <div class="dt-modal-overlay" id="dtModalOverlay" data-open="false">
-      <div class="dt-modal" role="dialog" aria-modal="true" aria-labelledby="dtModalTitle">
-        <h3 id="dtModalTitle">Send your checkpoint scores to Tidy Butt</h3>
-        <p>
-          This is optional. It helps us evaluate the course.
-          Please do not include personal data such as names, contact details, addresses, or anything that identifies you or someone else.
-        </p>
-
-        <div class="dt-modal-box">
-          <label for="dtConsent">
-            <input type="checkbox" id="dtConsent" />
-            <span>
-              I understand this sends my scores and notes from this tool.
-              I will not include personal data.
-            </span>
-          </label>
-        </div>
-
-        <div class="dt-modal-actions">
-          <button class="dt-btn" type="button" id="dtModalCancel">Cancel</button>
-          <button class="dt-btn primary" type="button" id="dtModalSend">Send now</button>
-        </div>
-
-        <p class="dt-footer-note" style="margin-top:10px;">
-          If sending fails, you can download the Word document and send it later if you choose.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <script src="/y-cam-cyntaf/assets/js/layout.js"></script>
-
-  <!-- Your existing script (unchanged) -->
-  <script>
-    /* PASTE YOUR EXISTING SCRIPT HERE EXACTLY AS-IS
-       (I’ve left it out to avoid duplicating thousands of lines in this message.)
-       You already provided it; keep it unchanged beneath this comment. */
-  </script>
-</body>
-</html>
+@media (max-width: 420px){
+  .stepbar{ grid-template-columns: 1fr; }
+}
