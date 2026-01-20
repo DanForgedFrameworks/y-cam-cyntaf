@@ -1117,3 +1117,82 @@ a.btn-orange:focus-visible {
   outline: 3px solid rgba(255,152,29,0.35);
   outline-offset: 2px;
 }
+/* =========================================================
+   GLOBAL ORANGE CTA BUTTONS
+   Applies to content-panel buttons/links everywhere,
+   WITHOUT changing top nav pills or the top support strip.
+   ========================================================= */
+
+/* Base token if not already set */
+:root{
+  --tidy-orange: #ff981d;
+}
+
+/* CONTENT AREA: make primary action links/buttons orange */
+.pagepanel-inner a.btn,
+.pagepanel-inner a.button,
+.pagepanel-inner a.cta,
+.pagepanel-inner button.btn,
+.pagepanel-inner button.button,
+.pagepanel-inner button.cta{
+  background: var(--tidy-orange);
+  color: #1b1205;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 10px 22px rgba(17,24,39,0.10);
+}
+
+.pagepanel-inner a.btn:hover,
+.pagepanel-inner a.button:hover,
+.pagepanel-inner a.cta:hover,
+.pagepanel-inner button.btn:hover,
+.pagepanel-inner button.button:hover,
+.pagepanel-inner button.cta:hover{
+  filter: brightness(0.98);
+}
+
+.pagepanel-inner a.btn:focus-visible,
+.pagepanel-inner a.button:focus-visible,
+.pagepanel-inner a.cta:focus-visible,
+.pagepanel-inner button.btn:focus-visible,
+.pagepanel-inner button.button:focus-visible,
+.pagepanel-inner button.cta:focus-visible{
+  outline: 3px solid rgba(255,152,29,0.35);
+  outline-offset: 2px;
+}
+
+/* Keep NAV pills exactly as they are */
+.topnav .topnav-pill,
+.coursehub .coursehub-link,
+.topstrip a{
+  background: unset;
+  box-shadow: unset;
+  border-radius: unset;
+  padding: unset;
+}
+
+/* Benchmark component buttons (dt-btn) stay orange as designed */
+.pagepanel-inner .dt-btn{
+  background: var(--tidy-orange);
+  color: #1b1205;
+  border: 1px solid rgba(0,0,0,0.10);
+  font-weight: 900;
+}
+.pagepanel-inner .dt-btn.danger{
+  background: #fff;
+  color: #b91c1c;
+  border-color: rgba(185,28,28,0.22);
+}
+.pagepanel-inner .dt-btn.is-queued{
+  background: rgba(17,24,39,0.06);
+  color: rgba(17,24,39,0.60);
+  border-color: rgba(17,24,39,0.10);
+  cursor: default;
+}
