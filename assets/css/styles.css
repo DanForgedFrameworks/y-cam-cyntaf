@@ -1055,4 +1055,38 @@ li{margin:0 0 6px 0}
   box-shadow:0 10px 20px rgba(17,24,39,0.06);
 }
 @media (min-width:9
+/* Home page session buttons to orange */
+.topnav-pill,
+.coursehub-link,
+a.topnav-pill,
+a.coursehub-link {
+  border-color: rgba(0,0,0,0.10);
+}
+
+.topnav-pill.is-active,
+.coursehub-link.is-active {
+  border-color: rgba(0,0,0,0.12);
+}
+
+/* If your home page uses dedicated session buttons, force orange */
+a[href*="/sessions/session-1/"],
+a[href*="/sessions/session-2/"],
+a[href*="/sessions/session-3/"],
+a[href*="/sessions/session-4/"],
+a[href*="/sessions/session-5/"],
+a[href*="/sessions/session-6/"]{
+  background: var(--tidy-orange);
+  color: #1b1205;
+  border: 1px solid rgba(0,0,0,0.10);
+  font-weight: 900;
+}
+
+a[href*="/sessions/session-1/"]:hover,
+a[href*="/sessions/session-2/"]:hover,
+a[href*="/sessions/session-3/"]:hover,
+a[href*="/sessions/session-4/"]:hover,
+a[href*="/sessions/session-5/"]:hover,
+a[href*="/sessions/session-6/"]:hover{
+  filter: brightness(0.98);
+}
 
